@@ -12,5 +12,10 @@ namespace DataAccessObject.Infrastructure
         public string SearchCPF { get; set; }
         public DateTime SearchDate { get; set; }
         public int SearchID { get; set; }
+        public string SearchNumberRoom { get; set; }
+        public string SearchDescription { get; set; }
+        public string SearchGuestNumber { get; set; }
+        public string SearchCompanyName { get; set; }
+        public string SearchCNPJ { get; set; }
     }
 }
