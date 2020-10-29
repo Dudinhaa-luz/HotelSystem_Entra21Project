@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 namespace DataAccessObject {
     public class RoomDAO {
 
-        public Response Insert(Room room) {
-            Response response = new Response();
+        public SingleResponse<int> Insert(Room room) {
+            SingleResponse<int> response = new SingleResponse<int>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO ROOMS (ISOCUPADO, NUMEROQUARTO, IDROOMS_TYPE) VALUES(@ISOCUPADO, @NUMEROQUARTO, @IDROOMS_TYPE)";
+                "INSERT INTO ROOMS (ISOCUPADO, NUMEROQUARTO, IDROOMS_TYPE) VALUES(@ISOCUPADO, @NUMEROQUARTO, @IDROOMS_TYPE) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@ISOCUPADO", room.IsAvailable);
             command.Parameters.AddWithValue("@NUMEROQUARTO", room.NumberRoom);
             command.Parameters.AddWithValue("@IDROOMS_TYPE", room.IDRoomType);
@@ -28,9 +28,10 @@ namespace DataAccessObject {
 
             try {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Adicionado com sucesso.";
+                response.Data = idGerado;
             } catch (Exception ex) {
                 response.Success = false;
                 response.Message = "Erro no banco de dados, contate o administrador.";

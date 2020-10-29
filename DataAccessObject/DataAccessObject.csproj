@@ -57,7 +57,6 @@
     <Compile Include="RoomTypeDAO.cs" />
     <Compile Include="StorageDAO.cs" />
     <Compile Include="SupplierDAO.cs" />
-    <Compile Include="Teste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

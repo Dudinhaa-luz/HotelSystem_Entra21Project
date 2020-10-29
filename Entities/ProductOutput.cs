@@ -13,5 +13,7 @@ namespace Entities
         public int EmployeeID { get; set; }
         public double TotalValue { get; set; }
         public int ClientID { get; set; }
+        public List<CheckoutClient> Items { get; set; }
+
     }
 }

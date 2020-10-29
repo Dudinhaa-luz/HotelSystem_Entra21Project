@@ -13,9 +13,9 @@ namespace DataAccessObject
 {
     class ProductOutputDAO
     {
-        public Response Insert(ProductOutput productOutput)
+        public SingleResponse<int> Insert(ProductOutput productOutput)
         {
-            Response response = new Response();
+            SingleResponse<int> response = new SingleResponse<int>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -23,7 +23,7 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO PRODUCTS_OUTPUT (DATASAIDA, IDFUNCIONARIO, VALORTOTAL, IDCLIENTE) VALUES (@DATASAIDA, @IDFUNCIONARIO, @VALORTOTAL, @IDCLIENTE)";
+            "INSERT INTO PRODUCTS_OUTPUT (DATASAIDA, IDFUNCIONARIO, VALORTOTAL, IDCLIENTE) VALUES (@DATASAIDA, @IDFUNCIONARIO, @VALORTOTAL, @IDCLIENTE) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@DATASAIDA", productOutput.ExitDate);
             command.Parameters.AddWithValue("@IDFUNCIONARIO", productOutput.EmployeeID);
             command.Parameters.AddWithValue("@VALORTOTAL", productOutput.TotalValue);
@@ -34,9 +34,11 @@ namespace DataAccessObject
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
+
             }
             catch (Exception ex)
             {

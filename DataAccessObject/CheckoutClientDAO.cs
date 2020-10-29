@@ -7,11 +7,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
+
 
 namespace DataAccessObject {
     class CheckoutClientDAO {
-        public Response Insert(CheckoutClient checkoutClient) {
-            Response response = new Response();
+        public SingleResponse<int> Insert(CheckoutClient checkoutClient) {
+            SingleResponse<int> response = new SingleResponse<int>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -19,7 +21,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO CHECKOUT_CLIENTS (SAIDANOPRAZO, MULTA, IDCHECKIN, IDEMPLOYEES) VALUES (@SAIDANOPRAZO, @MULTA, @IDCHECKIN, @IDEMPLOYEES)";
+            "INSERT INTO CHECKOUT_CLIENTS (SAIDANOPRAZO, MULTA, IDCHECKIN, IDEMPLOYEES) VALUES (@SAIDANOPRAZO, @MULTA, @IDCHECKIN, @IDEMPLOYEES) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@SAIDANOPRAZO", checkoutClient.ExitOnTime);
             command.Parameters.AddWithValue("@MULTA", checkoutClient.Penalty);
             command.Parameters.AddWithValue("@IDCHECKIN", checkoutClient.IDCheckin);
@@ -29,9 +31,10 @@ namespace DataAccessObject {
 
             try {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
             } catch (Exception ex) {
                 response.Success = false;
                 response.Message = "Erro no banco de dados, contate o administrador.";

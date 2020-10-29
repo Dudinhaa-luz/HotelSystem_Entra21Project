@@ -12,5 +12,7 @@ namespace Entities {
         public double Penalty { get; set; }
         public int IDCheckin { get; set; }
         public int IDEmployee { get; set; }
+        public List<ProductOutput> Items { get; set; }
+
     }
 }

@@ -13,6 +13,6 @@ namespace Entities
         public int EmployeesID { get; set; }
         public double TotalValue { get; set; }
         public int SuppliersID { get; set; }
-        public List<ProductsIncomeDetail> Items { get; set; }
+        public List<ProductIncomeDetail> Items { get; set; }
     }
 }

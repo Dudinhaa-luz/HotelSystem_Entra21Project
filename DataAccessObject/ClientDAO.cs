@@ -12,9 +12,9 @@ namespace DataAccessObject
 {
     public class ClientDAO
     {
-        public Response Insert(Client client)
+        public SingleResponse<int> Insert(Client client)
         {
-            Response response = new Response();
+            SingleResponse<int> response = new SingleResponse<int>();
             
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -22,7 +22,7 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL,@ATIVO)";
+            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL,@ATIVO) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@NOME", client.Name);
             command.Parameters.AddWithValue("@CPF", client.CPF);
             command.Parameters.AddWithValue("@RG", client.RG);
@@ -36,9 +36,10 @@ namespace DataAccessObject
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
             }
             catch (Exception ex)
             {
@@ -46,6 +47,7 @@ namespace DataAccessObject
                 response.Message = "Erro no banco de dados, contate o administrador.";
                 response.StackTrace = ex.StackTrace;
                 response.ExceptionError = ex.Message;
+
             }
             finally
             {

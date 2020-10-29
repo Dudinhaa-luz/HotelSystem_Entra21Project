@@ -13,5 +13,7 @@ namespace Entities {
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
+        public List<Product> Items { get; set; }
+
     }
 }

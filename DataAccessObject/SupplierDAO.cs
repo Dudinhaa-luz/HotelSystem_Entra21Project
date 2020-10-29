@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject {
     class SupplierDAO {
-        public Response Insert(Supplier supplier) {
-            Response response = new Response();
+        public SingleResponse<int> Insert(Supplier supplier) {
+            SingleResponse<int> response = new SingleResponse<int>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO SUPPLIERS (RAZAOSOCIAL, CNPJ, NOMECONTATO, TELEFONE, EMAIL, ISATIVO) VALUES(@RAZAOSOCIAL, @CNPJ, @NOMECONTATO, @TELEFONE, @EMAIL, @ISATIVO)";
+                "INSERT INTO SUPPLIERS (RAZAOSOCIAL, CNPJ, NOMECONTATO, TELEFONE, EMAIL, ISATIVO) VALUES(@RAZAOSOCIAL, @CNPJ, @NOMECONTATO, @TELEFONE, @EMAIL, @ISATIVO) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@RAZAOSOCIAL", supplier.CompanyName);
             command.Parameters.AddWithValue("@CNPJ", supplier.CNPJ);
             command.Parameters.AddWithValue("@NOMECONTATO", supplier.ContactName);
@@ -30,9 +30,10 @@ namespace DataAccessObject {
 
             try {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
             } catch (Exception ex) {
                 response.Success = false;
                 response.Message = "Erro no banco de dados, contate o administrador.";
