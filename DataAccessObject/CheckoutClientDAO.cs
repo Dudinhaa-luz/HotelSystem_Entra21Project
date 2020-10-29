@@ -1,5 +1,6 @@
 ﻿using Common;
 using DataAccessObject.Infrastructure;
+using Entities;
 using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
@@ -111,7 +112,7 @@ namespace DataAccessObject {
                 "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
                 "R.NUMEROQUARTO, E.ID, E.NOME FROM CHECKOUT_CLIENTS CH INNER JOIN CLIENTS C ON CH.IDCLIENTS = C.ID" +
                 "INNER JOIN ROOMS R ON CHIN.IDROOMS = R.ID INNER JOIN EMPLOYEES E ON CH.IDEMPLOYEES = E.ID WHERE CH.DATASAIDA = @DATASAIDA";
-            command.Parameters.AddWithValue("@DATASAIDA", search.SearchExitDate);
+            command.Parameters.AddWithValue("@DATASAIDA", search.SearchDate);
             command.Connection = connection;
             try {
                 connection.Open();

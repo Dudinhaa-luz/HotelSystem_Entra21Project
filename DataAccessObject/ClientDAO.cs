@@ -290,7 +290,7 @@ namespace DataAccessObject
 
         }
 
-        public QueryResponse<Client> GetAllEmployeesByName(SearchObject search)
+        public QueryResponse<Client> GetAllClientByName(SearchObject search)
         {
 
             QueryResponse<Client> response = new QueryResponse<Client>();
@@ -342,7 +342,7 @@ namespace DataAccessObject
             }
         }
 
-        public QueryResponse<Client> GetAllEmployeesByCPF(SearchObject search)
+        public QueryResponse<Client> GetAllClientByCPF(SearchObject search)
         {
 
             QueryResponse<Client> response = new QueryResponse<Client>();
@@ -394,7 +394,7 @@ namespace DataAccessObject
             }
         }
 
-        public SingleResponse<Client> GetById(int id)
+        public SingleResponse<Client> GetByID(int id)
         {
             SingleResponse<Client> response = new SingleResponse<Client>();
 
@@ -471,7 +471,7 @@ namespace DataAccessObject
                 else
                 {
                     response.Success = true;
-                    response.Message = "CPF unico";
+                    response.Message = "CPF único";
                 }
 
                 return response;
