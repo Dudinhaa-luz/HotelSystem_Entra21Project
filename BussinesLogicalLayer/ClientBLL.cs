@@ -1,6 +1,7 @@
 ﻿using BussinesLogicalLayer.Extensions;
 using Common;
 using DataAccessObject;
+using DataAccessObject.Infrastructure;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace BussinesLogicalLayer
     public class ClientBLL : BaseValidator<Client>
     {
         private ClientDAO clientDAO = new ClientDAO();
-
         public Response Insert(Client item)
         {
             Response response = new Response();
@@ -31,12 +31,19 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
-
+        public Response UpdateActiveClient(Client item)
+        {
+            Response response = new Response();
+            if (response.Success)
+            {
+                return clientDAO.Update(item);
+            }
+            return response;
+        }
         public Response Delete(Client item)
         {
             return clientDAO.Delete(item);
         }
-
         public QueryResponse<Client> GetAllClientsByActive()
         {
             QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
@@ -56,7 +63,7 @@ namespace BussinesLogicalLayer
 
         public QueryResponse<Client> GetAllClientsByInactive()
         {
-            QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
+            QueryResponse<Client> responseClients = clientDAO.GetAllClientsByInactive();
             List<Client> temp = responseClients.Data;
             foreach (Client item in temp)
             {
@@ -71,9 +78,9 @@ namespace BussinesLogicalLayer
             return responseClients;
         }
 
-        public QueryResponse<Client> GetAllClientsByName()
+        public QueryResponse<Client> GetAllClientsByName(SearchObject search)
         {
-            QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
+            QueryResponse<Client> responseClients = clientDAO.GetAllClientByName(search);
             List<Client> temp = responseClients.Data;
             foreach (Client item in temp)
             {
@@ -87,9 +94,9 @@ namespace BussinesLogicalLayer
             }
             return responseClients;
         }
-        public QueryResponse<Client> GetAllClientsByCPF()
+        public QueryResponse<Client> GetAllClientsByCPF(SearchObject search)
         {
-            QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
+            QueryResponse<Client> responseClients = clientDAO.GetAllClientByCPF(search);
             List<Client> temp = responseClients.Data;
             foreach (Client item in temp)
             {
@@ -103,21 +110,18 @@ namespace BussinesLogicalLayer
             }
             return responseClients;
         }
+        public SingleResponse<Client> GetClientsByID(int id)
+        {
+            SingleResponse<Client> responseClients = clientDAO.GetByID(id);
+            Client idgerado = responseClients.Data;
 
-        public QueryResponse<Client> GetClientsByID()
-        {
-            QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
-            List<Client> temp = responseClients.Data;
-            foreach (Client item in temp)
-            {
-                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
-                item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
-                if (item.PhoneNumber2 != null)
+                idgerado.CPF = idgerado.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                idgerado.RG = idgerado.RG.Insert(1, ".").Insert(4, ".");
+                idgerado.PhoneNumber1 = idgerado.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                if (idgerado.PhoneNumber2 != null)
                 {
-                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                idgerado.PhoneNumber2 = idgerado.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
                 }
-            }
             return responseClients;
         }
 
