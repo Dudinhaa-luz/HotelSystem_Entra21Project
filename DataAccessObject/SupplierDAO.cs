@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessObject {
-    class SupplierDAO {
+    public class SupplierDAO {
         public SingleResponse<int> Insert(Supplier supplier) {
             SingleResponse<int> response = new SingleResponse<int>();
 
@@ -110,6 +110,10 @@ namespace DataAccessObject {
                 connection.Close();
             }
             return response;
+        }
+
+        public Response IsCNPJUnique(string cNPJ) {
+            throw new NotImplementedException();
         }
 
         public Response UpdateActiveSupplier(Supplier supplier) {
