@@ -50,6 +50,7 @@ namespace BussinesLogicalLayer.Extensions
 		}
         public static string IsValidPhoneNumber (this string phonenumber)
 		{
+			phonenumber.Replace("+", "").Replace("(", "").Replace(")", "").Replace("-","");
 			Regex regex = new Regex(@"^(\([0 - 9]{ 2 }\))\s([9]{ 1})?([0 - 9]{ 4})-([0 - 9]{ 4})$");
             if (regex.IsMatch(phonenumber))
             {
@@ -59,7 +60,6 @@ namespace BussinesLogicalLayer.Extensions
 		}
         public static string IsValidEmail (this string email)
         {
-			
 				Regex regex = new Regex(@"\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}");
             if (regex.IsMatch(email))
             {

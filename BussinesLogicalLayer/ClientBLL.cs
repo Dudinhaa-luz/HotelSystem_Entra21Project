@@ -21,7 +21,6 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
-
         public Response Update(Client item)
         {
             Response response = new Response();
@@ -60,7 +59,6 @@ namespace BussinesLogicalLayer
             }
             return responseClients;
         }
-
         public QueryResponse<Client> GetAllClientsByInactive()
         {
             QueryResponse<Client> responseClients = clientDAO.GetAllClientsByInactive();
@@ -77,7 +75,6 @@ namespace BussinesLogicalLayer
             }
             return responseClients;
         }
-
         public QueryResponse<Client> GetAllClientsByName(SearchObject search)
         {
             QueryResponse<Client> responseClients = clientDAO.GetAllClientByName(search);
@@ -124,9 +121,16 @@ namespace BussinesLogicalLayer
                 }
             return responseClients;
         }
-
         public override Response Validate(Client item)
         {
+            AddError(item.PhoneNumber1.IsValidPhoneNumber());
+
+            AddError(item.PhoneNumber2.IsValidPhoneNumber());
+
+            AddError(item.CPF.IsValidCPF());
+
+            AddError(item.Email.IsValidEmail());
+
             if (string.IsNullOrWhiteSpace(item.Name))
             {
                 AddError("O nome deve ser informado.");
@@ -172,14 +176,6 @@ namespace BussinesLogicalLayer
                     AddError("RG deve contêr apenas números.");
                 }
             }
-            
-            AddError(item.PhoneNumber1.IsValidPhoneNumber());
-
-            AddError(item.PhoneNumber2.IsValidPhoneNumber());
-
-            AddError(item.CPF.IsValidCPF());
-
-            AddError(item.Email.IsValidEmail());
 
             Response responseCPF = clientDAO.IsCPFUnique(item.CPF);
             if (!responseCPF.Success)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    class ProductDAO
+    public class ProductDAO
     {
         public Response Insert(Product product)
         {

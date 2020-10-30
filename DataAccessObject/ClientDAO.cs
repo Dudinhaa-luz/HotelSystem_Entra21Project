@@ -55,7 +55,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response Update(Client client)
         {
             Response response = new Response();
@@ -100,7 +99,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response UpdateActiveClient(Client client)
         {
             Response response = new Response();
@@ -142,7 +140,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response Delete(Client client)
         {
             Response response = new Response();
@@ -183,7 +180,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public QueryResponse<Client> GetAllClientsByActive()
         {
             QueryResponse<Client> response = new QueryResponse<Client>();
@@ -236,7 +232,6 @@ namespace DataAccessObject
             }
 
         }
-
         public QueryResponse<Client> GetAllClientsByInactive()
         {
             QueryResponse<Client> response = new QueryResponse<Client>();
@@ -289,7 +284,6 @@ namespace DataAccessObject
             }
 
         }
-
         public QueryResponse<Client> GetAllClientByName(SearchObject search)
         {
 
@@ -341,7 +335,6 @@ namespace DataAccessObject
                 connection.Close();
             }
         }
-
         public QueryResponse<Client> GetAllClientByCPF(SearchObject search)
         {
 
@@ -393,7 +386,6 @@ namespace DataAccessObject
                 connection.Close();
             }
         }
-
         public SingleResponse<Client> GetByID(int id)
         {
             SingleResponse<Client> response = new SingleResponse<Client>();
@@ -443,7 +435,6 @@ namespace DataAccessObject
                 connection.Close();
             }
         }
-
         public Response IsCPFUnique(string cpf)
         {
             QueryResponse<Client> response = new QueryResponse<Client>();

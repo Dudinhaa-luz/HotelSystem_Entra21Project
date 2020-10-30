@@ -1,5 +1,7 @@
-﻿using Common;
+﻿using BussinesLogicalLayer.Extensions;
+using Common;
 using DataAccessObject;
+using DataAccessObject.Infrastructure;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -55,7 +57,7 @@ namespace BussinesLogicalLayer
         }
         public QueryResponse<Employee> GetAllEmployeesByInactive()
         {
-            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByActive();
+            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByInactive();
             List<Employee> temp = responseEmployees.Data;
             foreach (Employee item in temp)
             {
@@ -65,9 +67,9 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
-        public QueryResponse<Employee> GetAllEmployeesByName()
+        public QueryResponse<Employee> GetAllEmployeesByName(SearchObject search)
         {
-            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByActive();
+            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByName(search);
             List<Employee> temp = responseEmployees.Data;
             foreach (Employee item in temp)
             {
@@ -77,9 +79,9 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
-        public QueryResponse<Employee> GetAllEmployeesByCPF()
+        public QueryResponse<Employee> GetAllEmployeesByCPF(SearchObject search)
         {
-            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByActive();
+            QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByCPF(search);
             List<Employee> temp = responseEmployees.Data;
             foreach (Employee item in temp)
             {
@@ -89,6 +91,80 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
+        public SingleResponse<Employee> GetClientsByID(int id)
+        {
+            SingleResponse<Employee> responseEmployees = employeeDAO.GetById(id);
+            Employee idgerado = responseEmployees.Data;
 
+            idgerado.CPF = idgerado.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+            idgerado.RG = idgerado.RG.Insert(1, ".").Insert(4, ".");
+            idgerado.PhoneNumber = idgerado.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            return responseEmployees;
+        }
+        public Response IsADM(Employee item)
+        {
+            Response response = new Response();
+            if (!item.IsAdm)
+            {
+                response.Success = false;
+            }
+            response.Success = true;
+            return response;
+        }
+        public override Response Validate(Employee item)
+        {
+
+            AddError(item.PhoneNumber.IsValidPhoneNumber());
+
+            AddError(item.CPF.IsValidCPF());
+
+            AddError(item.Email.IsValidEmail());
+
+            if (string.IsNullOrWhiteSpace(item.Name))
+            {
+                AddError("O nome deve ser informado.");
+            }
+            else if (item.Name.Length < 3 || item.Name.Length < 80)
+            {
+                AddError("O nome deve conter entre 3 e 80 caracteres.");
+            }
+            for (int i = 0; i < item.Name.Length; i++)
+            {
+                if (!char.IsLetter(item.Name[i]))
+                {
+                    AddError("O nome deve contêr apenas letras.");
+                }
+            }
+            if (string.IsNullOrWhiteSpace(item.PhoneNumber))
+            {
+                AddError("O telefone deve ser informado!");
+            }
+            else if (item.PhoneNumber.Length < 12)
+            {
+                AddError("O telefone deve contêr 12 caracteres");
+            }
+            if (string.IsNullOrWhiteSpace(item.RG))
+            {
+                AddError("O RG deve ser informado!");
+            }
+            else if (item.RG.Length != 7)
+            {
+                AddError("O RG deve contêr 7 caracteres.");
+            }
+            for (int i = 0; i < item.RG.Length; i++)
+            {
+                if (char.IsLetter(item.RG[i]))
+                {
+                    AddError("RG deve contêr apenas números.");
+                }
+            }
+
+            Response responseCPF = employeeDAO.IsCPFUnique(item.CPF);
+            if (!responseCPF.Success)
+            {
+                AddError(responseCPF.Message);
+            }
+            return base.Validate(item);
+        }
     }
 }

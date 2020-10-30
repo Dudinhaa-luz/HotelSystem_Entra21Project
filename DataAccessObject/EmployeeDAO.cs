@@ -376,7 +376,7 @@ namespace DataAccessObject {
             }
         }
 
-        public Response IsCpfUnique(string cpf) {
+        public Response IsCPFUnique(string cpf) {
             QueryResponse<Employee> response = new QueryResponse<Employee>();
 
             SqlConnection connection = new SqlConnection();
