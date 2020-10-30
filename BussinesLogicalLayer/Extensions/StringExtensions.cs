@@ -48,10 +48,17 @@ namespace BussinesLogicalLayer.Extensions
 			}
 			return "CPF inválido.";
 		}
-        
+        public static string IsValidPhoneNumber (this string phonenumber)
+		{
+			Regex regex = new Regex(@"^(\([0 - 9]{ 2 }\))\s([9]{ 1})?([0 - 9]{ 4})-([0 - 9]{ 4})$");
+            if (regex.IsMatch(phonenumber))
+            {
+				return "";
+            }
+			return "Telefone inválido";
+		}
         public static string IsValidEmail (this string email)
         {
-			
 				Regex regex = new Regex(@"\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}");
             if (regex.IsMatch(email))
             {
