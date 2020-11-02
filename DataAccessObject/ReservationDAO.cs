@@ -1,6 +1,7 @@
 ﻿using Common;
 using DataAccessObject.Infrastructure;
 using Entities;
+using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    class ReservationDAO
+    public class ReservationDAO
     {
         public Response Insert(Reservation reservation)
         {

@@ -14,5 +14,7 @@ namespace Common
     public class SingleResponse<T> : Response
     {
         public T Data { get; set; }
+        public double Quantity { get; set; }
     }
+
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    class StorageDAO
+    public class StorageDAO
     {
         public Response Insert(Storage storage)
         {
@@ -48,8 +48,7 @@ namespace DataAccessObject
             }
             return response;
         }
-
-        public Response UpdateAdd(Storage client)
+        public Response Update(Storage storage)
         {
             Response response = new Response();
             SqlConnection connection = new SqlConnection();
@@ -57,12 +56,9 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE STORAGE SET NOME = @NOME, TELEFONE1 = @TELEFONE1, TELEFONE2 = @TELEFONE2, EMAIL = @EMAIL WHERE ID = @ID";
-            command.Parameters.AddWithValue("@NOME", client.Name);
-            command.Parameters.AddWithValue("@TELEFONE1", client.PhoneNumber1);
-            command.Parameters.AddWithValue("@TELEFONE2", client.PhoneNumber2);
-            command.Parameters.AddWithValue("@EMAIL", client.Email);
-            command.Parameters.AddWithValue("@ID", client.ID);
+                "UPDATE STORAGE SET QUANTIDADE = @QUANTIDADE WHERE IDPRODUCTS = @IDPRODUCTS";
+            command.Parameters.AddWithValue("@QUANTIDADE", storage.Quantity);
+            command.Parameters.AddWithValue("@IDPRODUCTS", storage.ProductsID);
 
             command.Connection = connection;
 
@@ -93,99 +89,15 @@ namespace DataAccessObject
             }
             return response;
         }
-
-        public Response UpdateActiveClient(Storage client)
+        public QueryResponse<Storage> GetAllStorage()
         {
-            Response response = new Response();
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "UPDATE CLIENTS SET ISATIVO = @ISATIVO WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ISATIVO", client.IsActive);
-            command.Parameters.AddWithValue("@ID", client.ID);
-
-            command.Connection = connection;
-
-            try
-            {
-                connection.Open();
-                int nLinhasAfetadas = command.ExecuteNonQuery();
-                if (nLinhasAfetadas != 1)
-                {
-                    response.Success = false;
-                    response.Message = "Registro não encontrado!";
-                    return response;
-                }
-
-                response.Success = true;
-                response.Message = "Atualizado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return response;
-        }
-
-        public Response Delete(Storage client)
-        {
-            Response response = new Response();
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "DELETE FROM CLIENTS WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", client.ID);
-
-            command.Connection = connection;
-
-            try
-            {
-                connection.Open();
-                int nLinhasAfetadas = command.ExecuteNonQuery();
-                if (nLinhasAfetadas != 1)
-                {
-                    response.Success = false;
-                    response.Message = "Registro não encontrado!";
-                    return response;
-                }
-
-                response.Success = true;
-                response.Message = "Excluído com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return response;
-        }
-
-        public QueryResponse<Storage> GetAllClientsByActive()
-        {
-            QueryResponse<Client> response = new QueryResponse<Client>();
+            QueryResponse<Storage> response = new QueryResponse<Storage>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM CLIENTS WHERE ATIVO = 1";
+            command.CommandText = "SELECT * FROM STORAGE";
 
             command.Connection = connection;
 
@@ -195,24 +107,19 @@ namespace DataAccessObject
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Client> clients = new List<Client>();
+                List<Storage> storages = new List<Storage>();
 
                 while (reader.Read())
                 {
-                    Client client = new Client();
-                    client.ID = (int)reader["ID"];
-                    client.Name = (string)reader["NOME"];
-                    client.CPF = (string)reader["CPF"];
-                    client.RG = (string)reader["RG"];
-                    client.PhoneNumber1 = (string)reader["TELEFONE1"];
-                    client.PhoneNumber2 = (string)reader["TELEFONE2"];
-                    client.Email = (string)reader["EMAIL"];
-                    client.IsActive = (bool)reader["ISATIVO"];
-                    clients.Add(client);
+                    Storage storage = new Storage();
+                    storage.ID = (int)reader["ID"];
+                    storage.ProductsID = (int)reader["IDPRODUCTS"];
+                    storage.Quantity = (double)reader["QUANTIDADE"];
+                    storages.Add(storage);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso.";
-                response.Data = clients;
+                response.Data = storages;
                 return response;
             }
             catch (Exception ex)
@@ -229,16 +136,15 @@ namespace DataAccessObject
             }
 
         }
-
-        public QueryResponse<Storage> GetAllClientsByInactive()
+        public QueryResponse<Storage> GetAllStorageByIDProducts()
         {
-            QueryResponse<Client> response = new QueryResponse<Client>();
+            QueryResponse<Storage> response = new QueryResponse<Storage>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM CLIENTS WHERE ATIVO = 0";
+            command.CommandText = "SELECT * FROM STORAGE WHERE IDPRODUCTS = @IDPRODUCTS";
 
             command.Connection = connection;
 
@@ -248,24 +154,19 @@ namespace DataAccessObject
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Client> clients = new List<Client>();
+                List<Storage> storages = new List<Storage>();
 
                 while (reader.Read())
                 {
-                    Client client = new Client();
-                    client.ID = (int)reader["ID"];
-                    client.Name = (string)reader["NOME"];
-                    client.CPF = (string)reader["CPF"];
-                    client.RG = (string)reader["RG"];
-                    client.PhoneNumber1 = (string)reader["TELEFONE1"];
-                    client.PhoneNumber2 = (string)reader["TELEFONE2"];
-                    client.Email = (string)reader["EMAIL"];
-                    client.IsActive = (bool)reader["ISATIVO"];
-                    clients.Add(client);
+                    Storage storage = new Storage();
+                    storage.ID = (int)reader["ID"];
+                    storage.ProductsID = (int)reader["IDPRODUCTS"];
+                    storage.Quantity = (double)reader["QUANTIDADE"];
+                    storages.Add(storage);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso.";
-                response.Data = clients;
+                response.Data = storages;
                 return response;
             }
             catch (Exception ex)
@@ -282,49 +183,41 @@ namespace DataAccessObject
             }
 
         }
-
-        public QueryResponse<Storage> GetAllEmployeesByName(SearchObject search)
+        public SingleResponse<Storage> GetQuantityByIDProducts(ProductIncomeDetail productIncomeDetail)
         {
-
-            QueryResponse<Client> response = new QueryResponse<Client>();
-
+            SingleResponse<Storage> response = new SingleResponse<Storage>();
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
             SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "SELECT * FROM CLIENTS WHERE NOME LIKE %NOME% = @NOME";
-            command.Parameters.AddWithValue("@NOME", search.SearchName);
+            command.CommandText = "SELECT QUANTIDADE FROM STORAGE WHERE IDPRODUCTS = @IDPRODUCTS";
+            command.Parameters.AddWithValue("@IDPRODUCTS", productIncomeDetail.IDProduct);
+
             command.Connection = connection;
+
             try
             {
                 connection.Open();
+
                 SqlDataReader reader = command.ExecuteReader();
-
-                List<Client> clients = new List<Client>();
-
+                Storage storage = new Storage();
+                if (!reader.Read())
+                {
+                    response.Quantity = 0;
+                    return response;
+                }
                 while (reader.Read())
                 {
-                    Client client = new Client();
-                    client.ID = (int)reader["ID"];
-                    client.Name = (string)reader["NOME"];
-                    client.CPF = (string)reader["CPF"];
-                    client.RG = (string)reader["RG"];
-                    client.PhoneNumber1 = (string)reader["TELEFONE1"];
-                    client.PhoneNumber2 = (string)reader["TELEFONE2"];
-                    client.Email = (string)reader["EMAIL"];
-                    client.IsActive = (bool)reader["ISATIVO"];
-
-                    clients.Add(client);
+                    response.Quantity = (double)reader["QUANTIDADE"];
                 }
                 response.Success = true;
-                response.Message = "Dados selecionados com sucesso";
-                response.Data = clients;
+                response.Message = "Dados selecionados com sucesso.";
                 return response;
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = "Erro no banco de dados, contate o adm.";
+                response.Message = "Erro no banco de dados contate o adm.";
                 response.ExceptionError = ex.Message;
                 response.StackTrace = ex.StackTrace;
                 return response;
@@ -333,69 +226,17 @@ namespace DataAccessObject
             {
                 connection.Close();
             }
+
         }
-
-        public QueryResponse<Storage> GetAllEmployeesByCPF(SearchObject search)
-        {
-
-            QueryResponse<Client> response = new QueryResponse<Client>();
-
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "SELECT FROM CLIENTS WHERE CPF = @CPF";
-            command.Parameters.AddWithValue("@CPF", search.SearchCPF);
-            command.Connection = connection;
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<Client> clients = new List<Client>();
-
-                while (reader.Read())
-                {
-                    Client client = new Client();
-                    client.ID = (int)reader["ID"];
-                    client.Name = (string)reader["NOME"];
-                    client.CPF = (string)reader["CPF"];
-                    client.RG = (string)reader["RG"];
-                    client.PhoneNumber1 = (string)reader["TELEFONE1"];
-                    client.PhoneNumber2 = (string)reader["TELEFONE2"];
-                    client.Email = (string)reader["EMAIL"];
-                    client.IsActive = (bool)reader["ISATIVO"];
-
-                    clients.Add(client);
-                }
-                response.Success = true;
-                response.Message = "Dados selecionados com sucesso";
-                response.Data = clients;
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o adm.";
-                response.ExceptionError = ex.Message;
-                response.StackTrace = ex.StackTrace;
-                return response;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
         public SingleResponse<Storage> GetById(int id)
         {
-            SingleResponse<Client> response = new SingleResponse<Client>();
+            SingleResponse<Storage> response = new SingleResponse<Storage>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  CLIENTS WHERE ID = @ID";
+                "SELECT * FROM  STORAGE WHERE ID = @ID";
             command.Parameters.AddWithValue("@ID", id);
             command.Connection = connection;
             try
@@ -405,21 +246,16 @@ namespace DataAccessObject
 
                 if (reader.Read())
                 {
-                    Client client = new Client();
-                    client.ID = (int)reader["ID"];
-                    client.Name = (string)reader["NOME"];
-                    client.CPF = (string)reader["CPF"];
-                    client.RG = (string)reader["RG"];
-                    client.PhoneNumber1 = (string)reader["TELEFONE1"];
-                    client.PhoneNumber2 = (string)reader["TELEFONE2"];
-                    client.Email = (string)reader["EMAIL"];
-                    client.IsActive = (bool)reader["ISATIVO"];
+                    Storage storage = new Storage();
+                    storage.ID = (int)reader["ID"];
+                    storage.ProductsID = (int)reader["IDPRODUCTS"];
+                    storage.Quantity = (double)reader["QUANTIDADE"];
                     response.Message = "Dados selecionados com sucesso.";
                     response.Success = true;
-                    response.Data = client;
+                    response.Data = storage;
                     return response;
                 }
-                response.Message = "Funcionário não encontrado.";
+                response.Message = "Estoque não encontrado.";
                 response.Success = false;
                 return response;
             }
@@ -435,53 +271,6 @@ namespace DataAccessObject
             {
                 connection.Close();
             }
-        }
-
-        public Response IsCPFUnique(string cpf)
-        {
-            QueryResponse<Client> response = new QueryResponse<Client>();
-
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT ID FROM CLIENTS WHERE CPF = @CPF";
-            command.Parameters.AddWithValue("@CPF", cpf);
-
-            command.Connection = connection;
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    response.Success = false;
-                    response.Message = "CPF já cadastrado.";
-                }
-                else
-                {
-                    response.Success = true;
-                    response.Message = "CPF unico";
-                }
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados contate o adm.";
-                response.ExceptionError = ex.Message;
-                response.StackTrace = ex.StackTrace;
-                return response;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
         }
     }
 }
