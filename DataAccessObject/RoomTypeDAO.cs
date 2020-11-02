@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessObject {
-    class RoomTypeDAO {
+    public class RoomTypeDAO {
         public Response Insert(RoomType roomType) {
             Response response = new Response();
 
@@ -298,5 +298,43 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
+        public SingleResponse<RoomType> GetIDByDescription(string description) {
+            SingleResponse<RoomType> response = new SingleResponse<RoomType>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT ID FROM  ROOMS_TYPE WHERE DESCRICAO = @DESCRICAO";
+            command.Parameters.AddWithValue("@DESCRICAO", description);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    RoomType roomType = new RoomType();
+                    roomType.ID = (int)reader["ID"];
+
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = roomType;
+                    return response;
+                }
+                response.Message = "Tipo de quarto não encontrado.";
+                response.Success = false;
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
     }
 }

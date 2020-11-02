@@ -11,8 +11,7 @@ namespace Entities
         public int ID { get; set; }
         public bool IsAvailable { get; set; }
         public string NumberRoom { get; set; }
+        public string Description { get; set; }
         public int IDRoomType { get; set; }
-        public List<Client> Items { get; set; }
-
     }
 }

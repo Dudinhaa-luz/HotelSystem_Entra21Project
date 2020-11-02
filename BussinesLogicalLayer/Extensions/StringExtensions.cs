@@ -67,14 +67,6 @@ namespace BussinesLogicalLayer.Extensions
 				return "Email inválido";
 		}
 
-		public static string IsValidPhoneNumber(this string phonenumber) {
-			Regex regex = new Regex(@"^(\([0 - 9]{ 2 }\))\s([9]{ 1})?([0 - 9]{ 4})-([0 - 9]{ 4})$");
-			if (regex.IsMatch(phonenumber)) {
-				return "";
-			}
-			return "Telefone inválido";
-		}
-
 		public static string IsValidCNPJ(this string cnpj) {
 
 				int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };

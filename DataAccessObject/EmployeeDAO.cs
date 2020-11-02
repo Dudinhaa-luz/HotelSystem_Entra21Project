@@ -376,6 +376,40 @@ namespace DataAccessObject {
             }
         }
 
+        public SingleResponse<Employee> GetPasswordByEmail(int id) {
+            SingleResponse<Employee> response = new SingleResponse<Employee>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT SENHA FROM  EMPLOYEES WHERE EMAIL = @EMAIL";
+            command.Parameters.AddWithValue("@EMAIL", id);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    Employee employee = new Employee();
+                    employee.Password = (string)reader["SENHA"];
+                   
+                    return response;
+                }
+                response.Message = "E-mail incorreto";
+                response.Success = false;
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
         public Response IsCPFUnique(string cpf) {
             QueryResponse<Employee> response = new QueryResponse<Employee>();
 
@@ -397,6 +431,41 @@ namespace DataAccessObject {
                 } else {
                     response.Success = true;
                     response.Message = "CPF único.";
+                }
+
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
+        public Response IsEmailUnique(string cpf) {
+            QueryResponse<Employee> response = new QueryResponse<Employee>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT ID FROM EMPLOYEES WHERE EMAIL = @EMAIL";
+            command.Parameters.AddWithValue("@EMAIL", cpf);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    response.Success = false;
+                    response.Message = "Email já cadastrado!";
+
+                } else {
+                    response.Success = true;
+                    response.Message = "";
                 }
 
                 return response;
