@@ -1,5 +1,6 @@
 ﻿using Common;
 using DataAccessObject;
+using DataAccessObject.Infrastructure;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,37 @@ namespace BussinesLogicalLayer
             List<Product> temp = responseProducts.Data;
             foreach (Product item in temp)
             {
-                item.Price.ToString("C2"); 
+                item.Price.ToString("C2");
             }
             return responseProducts;
         }
+        public QueryResponse<Product> GetAllProductsByInactive()
+        {
+            QueryResponse<Product> responseProducts = producteDAO.GetAllProductsByInactive();
+            List<Product> temp = responseProducts.Data;
+            foreach (Product item in temp)
+            {
+                item.Price.ToString("C2");
+            }
+            return responseProducts;
+        }
+        public QueryResponse<Product> GetAllProductsByName(SearchObject search)
+        {
+            QueryResponse<Product> responseProducts = producteDAO.GetAllProductsByName(search);
+            List<Product> temp = responseProducts.Data;
+            foreach (Product item in temp)
+            {
+                item.Price.ToString("C2");
+            }
+            return responseProducts;
+        }
+        public SingleResponse<Product> GetAllProductsByID(int id)
+        {
+            SingleResponse<Product> responseProducts = producteDAO.GetById(id);
+            Product idgerado = responseProducts.Data;
 
+            idgerado.Price.ToString("C2");
+            return responseProducts;
+        }
     }
 }
