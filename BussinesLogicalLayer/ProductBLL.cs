@@ -55,6 +55,7 @@ namespace BussinesLogicalLayer
             foreach (Product item in temp)
             {
                 item.Price.ToString("C2");
+                Convert.ToString(item.ProfitMargin + "%");
             }
             return responseProducts;
         }
@@ -65,6 +66,7 @@ namespace BussinesLogicalLayer
             foreach (Product item in temp)
             {
                 item.Price.ToString("C2");
+                Convert.ToString(item.ProfitMargin + "%");
             }
             return responseProducts;
         }
@@ -75,6 +77,7 @@ namespace BussinesLogicalLayer
             foreach (Product item in temp)
             {
                 item.Price.ToString("C2");
+                Convert.ToString(item.ProfitMargin + "%");
             }
             return responseProducts;
         }
@@ -84,7 +87,49 @@ namespace BussinesLogicalLayer
             Product idgerado = responseProducts.Data;
 
             idgerado.Price.ToString("C2");
+            Convert.ToString(idgerado.ProfitMargin + "%");
+
             return responseProducts;
+        }
+        public override Response Validate(Product item)
+        {
+            if (string.IsNullOrWhiteSpace(item.Name))
+            {
+                AddError("O nome deve ser informado.");
+            }
+            else if (item.Name.Length < 2 || item.Name.Length < 100)
+            {
+                AddError("O nome deve conter entre 2 e 100 caracteres.");
+            }
+            for (int i = 0; i < item.Name.Length; i++)
+            {
+                if (!char.IsLetter(item.Name[i]))
+                {
+                    AddError("O nome deve contêr apenas letras.");
+                }
+            }
+            if (string.IsNullOrWhiteSpace(item.Description))
+            {
+                AddError("A descrição deve ser informada!");
+            }
+            else if (item.Description.Length < 150)
+            {
+                AddError("A descrição pode contêr no máximo 150 caracteres");
+            }
+            if (string.IsNullOrWhiteSpace(Convert.ToString(item.Storage)))
+            {
+                AddError("O estoque deve ser informado!");
+            }
+            if (string.IsNullOrWhiteSpace(Convert.ToString(item.ProfitMargin)))
+            {
+                AddError("A margem de lucro deve ser informada!");
+            }
+            if (string.IsNullOrWhiteSpace(Convert.ToString(item.Price)))
+            {
+                AddError("O preço deve ser informado!");
+            }
+
+            return base.Validate(item);
         }
     }
 }

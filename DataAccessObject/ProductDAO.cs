@@ -53,7 +53,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response Update(Product product)
         {
             Response response = new Response();
@@ -98,7 +97,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response UpdateActiveProduct(Product product)
         {
             Response response = new Response();
@@ -140,7 +138,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public Response Delete(Product product)
         {
             Response response = new Response();
@@ -181,7 +178,6 @@ namespace DataAccessObject
             }
             return response;
         }
-
         public QueryResponse<Product> GetAllProductsByActive()
         {
             QueryResponse<Product> response = new QueryResponse<Product>();
@@ -234,7 +230,6 @@ namespace DataAccessObject
             }
 
         }
-
         public QueryResponse<Product> GetAllProductsByInactive()
         {
             QueryResponse<Product> response = new QueryResponse<Product>();
@@ -287,7 +282,6 @@ namespace DataAccessObject
             }
 
         }
-
         public QueryResponse<Product> GetAllProductsByName(SearchObject search)
         {
 
@@ -340,7 +334,6 @@ namespace DataAccessObject
                 connection.Close();
             }
         }
-
         public SingleResponse<Product> GetById(int id)
         {
             SingleResponse<Product> response = new SingleResponse<Product>();
