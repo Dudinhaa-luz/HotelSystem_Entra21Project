@@ -11,7 +11,7 @@ using Entities.QueryModel;
 
 namespace DataAccessObject
 {
-    class ProductIncomeDAO
+    public class ProductsIncomeDAO
     {
         public Response Insert(ProductIncome productIncome)
         {
