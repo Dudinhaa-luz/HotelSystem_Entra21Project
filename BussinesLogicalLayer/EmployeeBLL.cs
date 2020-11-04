@@ -191,22 +191,30 @@ namespace BussinesLogicalLayer
             return sb.ToString();
         }
 
-        public bool CheckPassword(string senhaDigitada, string senhaCadastrada) {
-            if (string.IsNullOrEmpty(senhaCadastrada))
+        public QueryResponse<Employee> CheckPassword(string senha, string email) {
+
+            QueryResponse<Employee> response = new QueryResponse<Employee>();
+            EmployeeDAO employee = new EmployeeDAO();
+
+            if (string.IsNullOrEmpty(senha))
                 throw new NullReferenceException("Cadastre uma senha.");
 
-            var encryptedPassword = _algoritmo.ComputeHash(Encoding.UTF8.GetBytes(senhaDigitada));
+            var encryptedPassword = _algoritmo.ComputeHash(Encoding.UTF8.GetBytes(senha));
 
             var sb = new StringBuilder();
+
             foreach (var caractere in encryptedPassword) {
                 sb.Append(caractere.ToString("X2"));
             }
 
-            if (sb.ToString() == senhaCadastrada) {
-                return true;
-            }
 
-            return false;
+            if (employee.GetEmployeeByLogin(email, senha).Success) {
+
+                SystemParameter.CurrentEmploye = employee.GetEmployeeByLogin(email, senha).Data;
+            }
+            response.Message = "Senha incorreta";
+
+            return response;
         }
     }
 

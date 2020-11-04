@@ -1,6 +1,8 @@
 ﻿using Common;
 using DataAccessObject;
+using DataAccessObject.Infrastructure;
 using Entities;
+using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,31 +34,30 @@ namespace BussinesLogicalLayer
         {
             return reservationDAO.Delete(item);
         }
-        public QueryResponse<Reservation> GetAllReservations()
+        public QueryResponse<ReservationQueryModel> GetAllReservations()
         {
-            QueryResponse<Reservation> responseReservations = reservationDAO.GetAllReservations();
-            List<Reservation> temp = responseReservations.Data;
+            QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservations();
+            List<ReservationQueryModel> temp = responseReservations.Data;
             return responseReservations;
         }
-        public QueryResponse<Reservation> GetAllReservationsbyReservationDate()
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyReservationDate(SearchObject search)
         {
-            QueryResponse<Reservation> responseReservations = reservationDAO.GetAllReservationsbyReservationDate();
-            List<Reservation> temp = responseReservations.Data;
+            QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyReservationDate(search);
+            List<ReservationQueryModel> temp = responseReservations.Data;
             return responseReservations;
         }
-        public SingleResponse<Reservation> GetAllProductOutputbyEmployeeID(int id)
+        public QueryResponse<ReservationQueryModel> GetAllProductOutputbyEmployeeID(SearchObject search)
         {
-            SingleResponse<Reservation> responseReservations = reservationDAO.GetAllProductOutputbyEmployeeID(id);
-            Reservation idgerado = responseReservations.Data;
+            QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsByRoomsNumber(search);
+            List<ReservationQueryModel> temp = responseReservations.Data;
             return responseReservations;
         }
-        public SingleResponse<Reservation> GetAllProductOutputbyClientID(int id)
+        public QueryResponse<ReservationQueryModel> GetAllProductOutputbyClientID(SearchObject search)
         {
-            SingleResponse<Reservation> responseReservations = reservationDAO.GetAllProductOutputbyClientID(id);
-            Reservation idgerado = responseReservations.Data;
+            QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyClientCPF(search);
+            List<ReservationQueryModel> temp = responseReservations.Data;
             return responseReservations;
         }
 
         }
     }
-}

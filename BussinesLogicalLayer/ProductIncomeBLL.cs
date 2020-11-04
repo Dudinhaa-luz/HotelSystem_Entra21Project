@@ -14,13 +14,33 @@ namespace BussinesLogicalLayer
     public class ProductIncomeBLL : BaseValidator<ProductIncome>
     {
         private ProductsIncomeDAO productsIncomeDAO = new ProductsIncomeDAO();
+        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
 
-        public Response Insert(ProductIncome item)
-        {
-            Response response = new Response();
-            if (response.Success)
-            {
-                return productsIncomeDAO.Insert(item);
+        public Response Insert(ProductIncome item) {
+            Response response = Validate(item);
+            bool success = true;
+            if (response.Success) {
+                using (TransactionScope scope = new TransactionScope()) {
+                    SingleResponse<int> responseInsert = productsIncomeDAO.Insert(item);
+                    if (responseInsert.Success) {
+
+                        for (int i = 0; i < item.Items.Count; i++) {
+
+                            item.Items[i].IDProductIncome = responseInsert.Data;
+                            Response r = productsIncomeDAO.InsertProductIncomeDetail(item.Items[i]);
+
+                            if (!r.Success) {
+
+                                success = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (success) {
+                        scope.Complete();
+
+                    }
+                }
             }
             return response;
         }

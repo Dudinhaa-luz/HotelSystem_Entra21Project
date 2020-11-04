@@ -376,29 +376,38 @@ namespace DataAccessObject {
             }
         }
 
-        public SingleResponse<Employee> GetPasswordByEmail(int id) {
+        public SingleResponse<Employee> GetEmployeeByLogin(string email, string password) {
             SingleResponse<Employee> response = new SingleResponse<Employee>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT SENHA FROM  EMPLOYEES WHERE EMAIL = @EMAIL";
-            command.Parameters.AddWithValue("@EMAIL", id);
+                "SELECT * FROM  EMPLOYEES WHERE EMAIL = @EMAIL AND SENHA = @SENHA";
+            command.Parameters.AddWithValue("@EMAIL", email);
+            command.Parameters.AddWithValue("@SENHA", password);
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
+                Employee employee = new Employee();
+
+
                 if (reader.Read()) {
-                    Employee employee = new Employee();
-                    employee.Password = (string)reader["SENHA"];
-                   
-                    return response;
+                    employee.ID = (int)reader["ID"];
+                    employee.Name = (string)reader["NOME"];
+                    employee.CPF = (string)reader["CPF"];
+                    employee.RG = (string)reader["RG"];
+                    employee.PhoneNumber = (string)reader["TELEFONE"];
+                    employee.Email = (string)reader["EMAIL"];
+                    employee.Address = (string)reader["ENDERECO"];
                 }
-                response.Message = "E-mail incorreto";
-                response.Success = false;
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = employee;
                 return response;
+
             } catch (Exception ex) {
                 response.Success = false;
                 response.Message = "Erro no banco de dados, contate o adm.";

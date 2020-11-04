@@ -13,9 +13,9 @@ namespace DataAccessObject
 {
     public class ProductsIncomeDAO
     {
-        public Response Insert(ProductIncome productIncome)
+        public SingleResponse<int> Insert(ProductIncome productIncome)
         {
-            Response response = new Response();
+            SingleResponse<int> response = new SingleResponse<int>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -23,7 +23,7 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO PRODUCTS_INCOME (DATAENTRADA, IDFUNCIONARIO, VALORTOTAL, IDFORNECEDOR) VALUES (@DATAENTRADA, @IDFUNCIONARIO, @VALORTOTAL, @IDFORNECEDOR)";
+            "INSERT INTO PRODUCTS_INCOME (DATAENTRADA, IDFUNCIONARIO, VALORTOTAL, IDFORNECEDOR) VALUES (@DATAENTRADA, @IDFUNCIONARIO, @VALORTOTAL, @IDFORNECEDOR) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@DATAENTRADA", productIncome.EntryDate);
             command.Parameters.AddWithValue("@IDFUNCIONARIO", productIncome.EmployeesID);
             command.Parameters.AddWithValue("@VALORTOTAL", productIncome.TotalValue);
@@ -34,9 +34,10 @@ namespace DataAccessObject
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
             }
             catch (Exception ex)
             {
@@ -47,6 +48,40 @@ namespace DataAccessObject
             }
             finally
             {
+                connection.Close();
+            }
+            return response;
+        }
+
+        public SingleResponse<int> InsertProductIncomeDetail(ProductIncomeDetail productIncomeDetail) {
+            SingleResponse<int> response = new SingleResponse<int>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText =
+            "INSERT INTO PRODUCTS_INCOME_DETAILS (IDPRODUCTS_INCOME, IDPRODUCTS, PRECO, QUANTIDADE) VALUES (@IDPRODUCTS_INCOME, @IDPRODUCTS, @PRECO, @QUANTIDADE) SELECT SCOPE_IDENTITY()";
+            command.Parameters.AddWithValue("@IDPRODUCTS_INCOME", productIncomeDetail.IDProductIncome);
+            command.Parameters.AddWithValue("@IDPRODUCTS", productIncomeDetail.IDProduct);
+            command.Parameters.AddWithValue("@PRECO", productIncomeDetail.Price);
+            command.Parameters.AddWithValue("@QUANTIDADE", productIncomeDetail.Quantity);
+
+            command.Connection = connection;
+
+            try {
+                connection.Open();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
+                response.Success = true;
+                response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o administrador.";
+                response.StackTrace = ex.StackTrace;
+                response.ExceptionError = ex.Message;
+            } finally {
                 connection.Close();
             }
             return response;
