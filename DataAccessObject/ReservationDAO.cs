@@ -136,17 +136,17 @@ namespace DataAccessObject
             return response;
         }
 
-        public QueryResponse<ProductOutputQueryModel> GetAllReservations()
+        public QueryResponse<ReservationQueryModel> GetAllReservations()
         {
-            QueryResponse<ProductOutputQueryModel> response = new QueryResponse<ProductOutputQueryModel>();
+            QueryResponse<ReservationQueryModel> response = new QueryResponse<ReservationQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
-                                  "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
-                                  "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID";
+            command.CommandText = "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                                  "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
+                                  "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
 
             command.Connection = connection;
 
@@ -156,25 +156,24 @@ namespace DataAccessObject
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<ProductOutputQueryModel> products = new List<ProductOutputQueryModel>();
+                List<ReservationQueryModel> reservations = new List<ReservationQueryModel>();
 
                 while (reader.Read())
                 {
-                    ProductOutputQueryModel productOutput = new ProductOutputQueryModel();
-                    productOutput.ProductOutputID = (int)reader["ID"];
-                    productOutput.ProductOutputExitDate = (DateTime)reader["DATASAIDA"];
-                    productOutput.ProductOutputTotalValue = (double)reader["VALORTOTAL"];
-                    productOutput.EmployeeID = (int)reader["ID"];
-                    productOutput.EmployeeName = (string)reader["NOME"];
-                    productOutput.EmployeeCPF = (string)reader["CPF"];
-                    productOutput.ClientName = (string)reader["RAZAOSOCIAL"];
-                    productOutput.ClientCPF = (string)reader["CNPJ"];
+                    ReservationQueryModel reservation = new ReservationQueryModel();
+                    reservation.ReservationID = (int)reader["ID"];
+                    reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    reservation.ClientName = (string)reader["NOME"];
+                    reservation.ClientCPF = (string)reader["CPF"];
+                    reservation.ClientPhoneNumber = (string)reader["TELEFONE"];
+                    reservation.ClientEmail = (string)reader["EMAIL"];
 
-                    products.Add(productOutput);
+                    reservations.Add(reservation);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso.";
-                response.Data = products;
+                response.Data = reservations;
                 return response;
             }
             catch (Exception ex)
@@ -192,45 +191,44 @@ namespace DataAccessObject
 
         }
 
-        public QueryResponse<ProductOutputQueryModel> GetAllReservationsbyReservationDate(SearchObject search)
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyReservationDate(SearchObject search)
         {
 
-            QueryResponse<ProductOutputQueryModel> response = new QueryResponse<ProductOutputQueryModel>();
+            QueryResponse<ReservationQueryModel> response = new QueryResponse<ReservationQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
-                "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
-                "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID WHERE PO.DATASAIDA = @DATASAIDA";
+                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE R.DATARESERVA = @DATARESERVA";
 
-            command.Parameters.AddWithValue("@DATASAIDA", search.SearchDate);
+            command.Parameters.AddWithValue("@DATARESERVA", search.SearchDate);
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<ProductOutputQueryModel> products = new List<ProductOutputQueryModel>();
+                List<ReservationQueryModel> reservations = new List<ReservationQueryModel>();
 
                 while (reader.Read())
                 {
-                    ProductOutputQueryModel productOutput = new ProductOutputQueryModel();
-                    productOutput.ProductOutputID = (int)reader["ID"];
-                    productOutput.ProductOutputExitDate = (DateTime)reader["DATASAIDA"];
-                    productOutput.ProductOutputTotalValue = (double)reader["VALORTOTAL"];
-                    productOutput.EmployeeID = (int)reader["ID"];
-                    productOutput.EmployeeName = (string)reader["NOME"];
-                    productOutput.EmployeeCPF = (string)reader["CPF"];
-                    productOutput.ClientName = (string)reader["RAZAOSOCIAL"];
-                    productOutput.ClientCPF = (string)reader["CNPJ"];
+                    ReservationQueryModel reservation = new ReservationQueryModel();
+                    reservation.ReservationID = (int)reader["ID"];
+                    reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    reservation.ClientName = (string)reader["NOME"];
+                    reservation.ClientCPF = (string)reader["CPF"];
+                    reservation.ClientPhoneNumber = (string)reader["TELEFONE"];
+                    reservation.ClientEmail = (string)reader["EMAIL"];
 
-                    products.Add(productOutput);
+                    reservations.Add(reservation);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso";
-                response.Data = products;
+                response.Data = reservations;
                 return response;
             }
             catch (Exception ex)
@@ -248,45 +246,44 @@ namespace DataAccessObject
 
         }
 
-        public QueryResponse<ProductOutputQueryModel> GetAllProductOutputbyEmployeeID(SearchObject search)
+        public QueryResponse<ReservationQueryModel> GetAllReservationsByRoomsNumber(SearchObject search)
         {
 
-            QueryResponse<ProductOutputQueryModel> response = new QueryResponse<ProductOutputQueryModel>();
+            QueryResponse<ReservationQueryModel> response = new QueryResponse<ReservationQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
-                "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
-                "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID WHERE E.ID = @ID";
+                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE RO.NUMEROQUARTO = @NUMEROQUARTO";
 
-            command.Parameters.AddWithValue("@ID", search.SearchID);
+            command.Parameters.AddWithValue("@NUMEROQUARTO", search.SearchNumberRoom);
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<ProductOutputQueryModel> products = new List<ProductOutputQueryModel>();
+                List<ReservationQueryModel> reservations = new List<ReservationQueryModel>();
 
                 while (reader.Read())
                 {
-                    ProductOutputQueryModel productOutput = new ProductOutputQueryModel();
-                    productOutput.ProductOutputID = (int)reader["ID"];
-                    productOutput.ProductOutputExitDate = (DateTime)reader["DATASAIDA"];
-                    productOutput.ProductOutputTotalValue = (double)reader["VALORTOTAL"];
-                    productOutput.EmployeeID = (int)reader["ID"];
-                    productOutput.EmployeeName = (string)reader["NOME"];
-                    productOutput.EmployeeCPF = (string)reader["CPF"];
-                    productOutput.ClientName = (string)reader["RAZAOSOCIAL"];
-                    productOutput.ClientCPF = (string)reader["CNPJ"];
+                    ReservationQueryModel reservation = new ReservationQueryModel();
+                    reservation.ReservationID = (int)reader["ID"];
+                    reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    reservation.ClientName = (string)reader["NOME"];
+                    reservation.ClientCPF = (string)reader["CPF"];
+                    reservation.ClientPhoneNumber = (string)reader["TELEFONE"];
+                    reservation.ClientEmail = (string)reader["EMAIL"];
 
-                    products.Add(productOutput);
+                    reservations.Add(reservation);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso";
-                response.Data = products;
+                response.Data = reservations;
                 return response;
             }
             catch (Exception ex)
@@ -304,44 +301,43 @@ namespace DataAccessObject
 
         }
 
-        public QueryResponse<ProductOutputQueryModel> GetAllProductOutputbyClientID(SearchObject search)
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyClientCPF(SearchObject search)
         {
 
-            QueryResponse<ProductOutputQueryModel> response = new QueryResponse<ProductOutputQueryModel>();
+            QueryResponse<ReservationQueryModel> response = new QueryResponse<ReservationQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
-                "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
-                "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID  WHERE C.ID = @ID";
-            command.Parameters.AddWithValue("@ID", search.SearchID);
+                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE C.CPF = @CPF";
+            command.Parameters.AddWithValue("@CPF", search.SearchCPF);
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<ProductOutputQueryModel> products = new List<ProductOutputQueryModel>();
+                List<ReservationQueryModel> reservations = new List<ReservationQueryModel>();
 
                 while (reader.Read())
                 {
-                    ProductOutputQueryModel productOutput = new ProductOutputQueryModel();
-                    productOutput.ProductOutputID = (int)reader["ID"];
-                    productOutput.ProductOutputExitDate = (DateTime)reader["DATASAIDA"];
-                    productOutput.ProductOutputTotalValue = (double)reader["VALORTOTAL"];
-                    productOutput.EmployeeID = (int)reader["ID"];
-                    productOutput.EmployeeName = (string)reader["NOME"];
-                    productOutput.EmployeeCPF = (string)reader["CPF"];
-                    productOutput.ClientName = (string)reader["RAZAOSOCIAL"];
-                    productOutput.ClientCPF = (string)reader["CNPJ"];
+                    ReservationQueryModel reservation = new ReservationQueryModel();
+                    reservation.ReservationID = (int)reader["ID"];
+                    reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    reservation.ClientName = (string)reader["NOME"];
+                    reservation.ClientCPF = (string)reader["CPF"];
+                    reservation.ClientPhoneNumber = (string)reader["TELEFONE"];
+                    reservation.ClientEmail = (string)reader["EMAIL"];
 
-                    products.Add(productOutput);
+                    reservations.Add(reservation);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso";
-                response.Data = products;
+                response.Data = reservations;
                 return response;
             }
             catch (Exception ex)
