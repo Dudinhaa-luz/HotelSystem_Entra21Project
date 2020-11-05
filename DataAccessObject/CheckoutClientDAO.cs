@@ -12,7 +12,7 @@ using Entities;
 
 
 namespace DataAccessObject {
-    class CheckoutClientDAO {
+    public class CheckoutClientDAO {
         public SingleResponse<int> Insert(CheckoutClient checkoutClient) {
             SingleResponse<int> response = new SingleResponse<int>();
 

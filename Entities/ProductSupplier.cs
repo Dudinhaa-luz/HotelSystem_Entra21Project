@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities {
-    class ProductSupplier {
+    public class ProductSupplier {
         public int IDProduct { get; set; }
         public int IDSupplier { get; set; }
     }

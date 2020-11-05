@@ -38,26 +38,50 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservations();
             List<ReservationQueryModel> temp = responseReservations.Data;
+            foreach (ReservationQueryModel item in temp)
+            {
+                item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            }
             return responseReservations;
         }
         public QueryResponse<ReservationQueryModel> GetAllReservationsbyReservationDate(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyReservationDate(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            foreach (ReservationQueryModel item in temp)
+            {
+                item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            }
             return responseReservations;
         }
         public QueryResponse<ReservationQueryModel> GetAllProductOutputbyEmployeeID(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsByRoomsNumber(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            foreach (ReservationQueryModel item in temp)
+            {
+                item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            }
             return responseReservations;
         }
         public QueryResponse<ReservationQueryModel> GetAllProductOutputbyClientID(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyClientCPF(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            foreach (ReservationQueryModel item in temp)
+            {
+                item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            }
             return responseReservations;
         }
-
+        public override Response Validate(Reservation item)
+        {
+            return base.Validate(item);
         }
+
     }
+}
