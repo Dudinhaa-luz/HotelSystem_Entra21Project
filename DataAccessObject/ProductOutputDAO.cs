@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    class ProductOutputDAO
+    public class ProductOutputDAO
     {
         public SingleResponse<int> Insert(ProductOutput productOutput)
         {
@@ -49,6 +49,40 @@ namespace DataAccessObject
             }
             finally
             {
+                connection.Close();
+            }
+            return response;
+        }
+
+        public SingleResponse<int> InsertProductOutputDetail(ProductOutputDetail productOutputDetail) {
+            SingleResponse<int> response = new SingleResponse<int>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText =
+            "INSERT INTO PRODUCTS_OUTPUT_DETAILS (IDPRODUCTS_OUTPUT, IDPRODUCTS, PRECO, QUANTIDADE) VALUES (@IDPRODUCTS_OUTPUT, @IDPRODUCTS, @PRECO, @QUANTIDADE) SELECT SCOPE_IDENTITY()";
+            command.Parameters.AddWithValue("@IDPRODUCTS_OUTPUT", productOutputDetail.IDProductOutput);
+            command.Parameters.AddWithValue("@IDPRODUCTS", productOutputDetail.IDProduct);
+            command.Parameters.AddWithValue("@PRECO", productOutputDetail.Price);
+            command.Parameters.AddWithValue("@QUANTIDADE", productOutputDetail.Quantity);
+
+            command.Connection = connection;
+
+            try {
+                connection.Open();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
+                response.Success = true;
+                response.Message = "Cadastrado com sucesso.";
+                response.Data = idGerado;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o administrador.";
+                response.StackTrace = ex.StackTrace;
+                response.ExceptionError = ex.Message;
+            } finally {
                 connection.Close();
             }
             return response;

@@ -49,21 +49,23 @@ namespace BussinesLogicalLayer
             }
             return singleResponse;
         }
-        public SingleResponse<Storage> DeleteProduct(ProductIncomeDetail item)
+        public SingleResponse<Storage> DeleteProduct(ProductOutputDetail item)
         {
             SingleResponse<Storage> singleResponse = new SingleResponse<Storage>();
             Storage storage = new Storage();
             storage.ProductsID = item.IDProduct;
 
             StorageDAO storageDAO = new StorageDAO();
-            if (storageDAO.GetQuantityByIDProducts(item).Quantity == 0)
+            if (storageDAO.GetQuantityByIDProductsOutput(item).Quantity == 0)
             {
                 singleResponse.Message = "Estoque zerado";
+                singleResponse.Success = false;
             }
-            else if (storageDAO.GetQuantityByIDProducts(item).Quantity > 0)
+            else if (storageDAO.GetQuantityByIDProductsOutput(item).Quantity > 0)
             {
-                item.Quantity -= storageDAO.GetQuantityByIDProducts(item).Quantity;
+                item.Quantity -= storageDAO.GetQuantityByIDProductsOutput(item).Quantity;
                 storage.Quantity = item.Quantity;
+                singleResponse.Success = true;
                 Update(storage);
             }
             return singleResponse;

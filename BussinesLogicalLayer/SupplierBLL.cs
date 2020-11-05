@@ -6,6 +6,7 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Transactions;
 
 namespace BussinesLogicalLayer {
     public class SupplierBLL : BaseValidator<Supplier> {
@@ -13,9 +14,29 @@ namespace BussinesLogicalLayer {
         private SupplierDAO supplierDAO = new SupplierDAO();
 
         public Response Insert(Supplier item) {
-            Response response = new Response();
+            Response response = Validate(item);
+            bool success = true;
             if (response.Success) {
-                return supplierDAO.Insert(item);
+                using (TransactionScope scope = new TransactionScope()) {
+                    SingleResponse<int> responseInsert = supplierDAO.Insert(item);
+                    if (responseInsert.Success) {
+
+                        for (int i = 0; i < item.Items.Count; i++) {
+
+                            response = supplierDAO.InsertProducts(item.Items[i].ID, responseInsert.Data);
+
+                            if (!response.Success) {
+
+                                success = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (success) {
+                        scope.Complete();
+
+                    }
+                }
             }
             return response;
         }

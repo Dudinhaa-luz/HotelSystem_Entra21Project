@@ -228,6 +228,44 @@ namespace DataAccessObject
             }
 
         }
+
+        public SingleResponse<Storage> GetQuantityByIDProductsOutput(ProductOutputDetail productOutputDetail) {
+            SingleResponse<Storage> response = new SingleResponse<Storage>();
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT QUANTIDADE FROM STORAGE WHERE IDPRODUCTS = @IDPRODUCTS";
+            command.Parameters.AddWithValue("@IDPRODUCTS", productOutputDetail.IDProduct);
+
+            command.Connection = connection;
+
+            try {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                Storage storage = new Storage();
+                if (!reader.Read()) {
+                    response.Quantity = 0;
+                    return response;
+                }
+                while (reader.Read()) {
+                    response.Quantity = (double)reader["QUANTIDADE"];
+                }
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso.";
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+
+        }
         public SingleResponse<Storage> GetById(int id)
         {
             SingleResponse<Storage> response = new SingleResponse<Storage>();

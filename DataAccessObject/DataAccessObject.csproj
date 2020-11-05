@@ -50,6 +50,7 @@
     <Compile Include="ProductDAO.cs" />
     <Compile Include="ProductIncomeDetailDAO.cs" />
     <Compile Include="ProductOutputDAO.cs" />
+    <Compile Include="ProductOutputDetailDAO.cs" />
     <Compile Include="ProductsIncomeDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservationDAO.cs" />

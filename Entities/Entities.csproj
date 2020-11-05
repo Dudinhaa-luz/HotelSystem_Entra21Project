@@ -50,11 +50,14 @@
     <Compile Include="ProductIncome.cs" />
     <Compile Include="ProductIncomeDetail.cs" />
     <Compile Include="ProductOutput.cs" />
+    <Compile Include="ProductOutputDetail.cs" />
     <Compile Include="ProductSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryModel\CheckinQueryModel.cs" />
     <Compile Include="QueryModel\CheckoutQueryModel.cs" />
+    <Compile Include="QueryModel\ProductIncomeDetailQueryModel.cs" />
     <Compile Include="QueryModel\ProductIncomeQueryModel.cs" />
+    <Compile Include="QueryModel\ProductOutputDetailQueryModel.cs" />
     <Compile Include="QueryModel\ProductOutputQueryModel.cs" />
     <Compile Include="QueryModel\ReservationQueryModel.cs" />
     <Compile Include="Reservation.cs" />

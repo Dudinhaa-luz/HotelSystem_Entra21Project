@@ -45,6 +45,36 @@ namespace DataAccessObject {
             return response;
         }
 
+        public Response InsertProducts(int idProducts, int idSuppliers) {
+            Response response = new Response();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText =
+            "INSERT INTO PRODUCTS_SUPPLIERS (IDPRODUCTS, IDSUPPLIERS) VALUES (@PRODUCTS,@SUPPLIERS); SELECT SCOPE_IDENTITY()";
+            command.Parameters.AddWithValue("@PRODUCTS", idProducts);
+            command.Parameters.AddWithValue("@SUPPLIERS", idSuppliers);
+            command.Connection = connection;
+
+            try {
+                connection.Open();
+                int idGerado = Convert.ToInt32(command.ExecuteScalar());
+                response.Success = true;
+                response.Message = "Cadastrado com sucesso.";
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o administrador.";
+                response.StackTrace = ex.StackTrace;
+                response.ExceptionError = ex.Message;
+            } finally {
+                connection.Close();
+            }
+            return response;
+        }
+
         public Response Update(Supplier supplier) {
             Response response = new Response();
 

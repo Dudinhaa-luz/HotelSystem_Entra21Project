@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessObject {
-    public class ProductIncomeDetailDAO {
+    public class ProductOutputDetailDAO {
 
-        public Response Insert(ProductIncomeDetail productIncomeDetail) {
+        public Response Insert(ProductOutputDetail productOutputDetail) {
             Response response = new Response();
 
             SqlConnection connection = new SqlConnection();
@@ -20,9 +20,9 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO PRODUCTS_INCOME_DETAIL (PRECO, QUANTIDADE) VALUES(@PRECO, @QUANTIDADE)";
-            command.Parameters.AddWithValue("@PRECO", productIncomeDetail.Price);
-            command.Parameters.AddWithValue("@QUANTIDADE", productIncomeDetail.Quantity);
+                "INSERT INTO PRODUCTS_OUTPUT_DETAIL (PRECO, QUANTIDADE) VALUES(@PRECO, @QUANTIDADE)";
+            command.Parameters.AddWithValue("@PRECO", productOutputDetail.Price);
+            command.Parameters.AddWithValue("@QUANTIDADE", productOutputDetail.Quantity);
 
             command.Connection = connection;
 
@@ -42,7 +42,7 @@ namespace DataAccessObject {
             return response;
         }
 
-        public Response Update(ProductIncomeDetail productIncomeDetail) {
+        public Response Update(ProductOutputDetail productOutputDetail) {
             Response response = new Response();
 
             SqlConnection connection = new SqlConnection();
@@ -51,9 +51,9 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "UPDATE PRODUCTS_INCOME_DETAIL SET PRECO = @PRECO, QUANTIDADE = @QUANTIDADE WHERE ID = @ID";
-            command.Parameters.AddWithValue("@PRECO", productIncomeDetail.Price);
-            command.Parameters.AddWithValue("@QUANTIDADE", productIncomeDetail.Quantity);
-            command.Parameters.AddWithValue("@ID", productIncomeDetail.IDProductIncome);
+            command.Parameters.AddWithValue("@PRECO", productOutputDetail.Price);
+            command.Parameters.AddWithValue("@QUANTIDADE", productOutputDetail.Quantity);
+            command.Parameters.AddWithValue("@ID", productOutputDetail.IDProductOutput);
 
             command.Connection = connection;
 
@@ -73,41 +73,42 @@ namespace DataAccessObject {
             return response;
         }
 
-        public QueryResponse<ProductIncomeDetailQueryModel> GetAllProductsIncomeDetail() {
-            QueryResponse<ProductIncomeDetailQueryModel> response = new QueryResponse<ProductIncomeDetailQueryModel>();
+        public QueryResponse<ProductOutputDetailQueryModel> GetAllProductsOutputDetail() {
+            QueryResponse<ProductOutputDetailQueryModel> response = new QueryResponse<ProductOutputDetailQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT PD.PRECO, PD.QUANTIDADE, P.ID, P.NOME, P.PRECO, P.VALIDADE," +
-                                  "PI.ID, PI.DATAENTRADA, PI.VALORTOTAL FROM PRODUCTS_INCOME_DETAIL PD INNER JOIN PRODUCTS P ON PD.IDPRODUCTS = P.ID" +
-                                  "INNER JOIN PRODUCTS_INCOME PI ON PD.IDPRODUCTS_INCOME = PI.ID";
+                                  "PO.ID, PO.DATAENTRADA, PO.VALORTOTAL FROM PRODUCTS_OUTPUT_DETAIL PD INNER JOIN PRODUCTS P ON PD.IDPRODUCTS = P.ID" +
+                                  "INNER JOIN PRODUCTS_OUTPUT PO ON PD.IDPRODUCTS_OUTPUT = PO.ID";
 
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<ProductIncomeDetailQueryModel> productsIncomeDetail = new List<ProductIncomeDetailQueryModel>();
+                List<ProductOutputDetailQueryModel> productsOutputDetail = new List<ProductOutputDetailQueryModel>();
 
                 while (reader.Read()) {
-                    ProductIncomeDetailQueryModel productIncomeDetail = new ProductIncomeDetailQueryModel();
-                    productIncomeDetail.ProductIncomeDetailPrice = (double)reader["PRECO"];
-                    productIncomeDetail.ProductIncomeDetailQuantity = (double)reader["QUANTIDADE"];
-                    productIncomeDetail.ProductID = (int)reader["ID"];
-                    productIncomeDetail.ProductName = (string)reader["NOME"];
-                    productIncomeDetail.ProductIncomeDetailPrice = (double)reader["PRECO"];
-                    productIncomeDetail.ProductValidity = (DateTime)reader["VALIDADE"];
-                    productIncomeDetail.ProductIncomeID = (int)reader["ID"];
-                    productIncomeDetail.ProductIncomeEntryDate = (DateTime)reader["DATAENTRADA"];
-                    productIncomeDetail.ProductIncomeTotalValue = (double)reader["VALORTOTAL"];
+                    ProductOutputDetailQueryModel productOutputDetail = new ProductOutputDetailQueryModel();
+                    productOutputDetail.ProductOutputDetailPrice = (double)reader["PRECO"];
+                    productOutputDetail.ProductOutputDetailQuantity = (double)reader["QUANTIDADE"];
+                    productOutputDetail.ProductID = (int)reader["ID"];
+                    productOutputDetail.ProductName = (string)reader["NOME"];
+                    productOutputDetail.ProductOutputDetailPrice = (double)reader["PRECO"];
+                    productOutputDetail.ProductValidity = (DateTime)reader["VALIDADE"];
+                    productOutputDetail.ProductOutputID = (int)reader["ID"];
+                    productOutputDetail.ProductOutputEntryDate = (DateTime)reader["DATAENTRADA"];
+                    productOutputDetail.ProductOutputTotalValue = (double)reader["VALORTOTAL"];
 
-                    productsIncomeDetail.Add(productIncomeDetail);
+
+                    productsOutputDetail.Add(productOutputDetail);
                 }
                 response.Success = true;
                 response.Message = "Dados selecionados com sucesso";
-                response.Data = productsIncomeDetail;
+                response.Data = productsOutputDetail;
                 return response;
             } catch (Exception ex) {
                 response.Success = false;

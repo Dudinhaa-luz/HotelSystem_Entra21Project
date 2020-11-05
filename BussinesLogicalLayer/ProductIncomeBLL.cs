@@ -13,8 +13,9 @@ namespace BussinesLogicalLayer
 {
     public class ProductIncomeBLL : BaseValidator<ProductIncome>
     {
-        private ProductsIncomeDAO productsIncomeDAO = new ProductsIncomeDAO();
-        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
+        ProductsIncomeDAO productsIncomeDAO = new ProductsIncomeDAO();
+        StorageBLL storage = new StorageBLL();
+
 
         public Response Insert(ProductIncome item) {
             Response response = Validate(item);
@@ -29,12 +30,15 @@ namespace BussinesLogicalLayer
                             item.Items[i].IDProductIncome = responseInsert.Data;
                             Response r = productsIncomeDAO.InsertProductIncomeDetail(item.Items[i]);
 
+                            storage.AddProduct(item.Items[i]);
+
                             if (!r.Success) {
 
                                 success = false;
                                 break;
                             }
                         }
+
                     }
                     if (success) {
                         scope.Complete();
