@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    class CheckinClientsDAO
+    public class CheckinClientsDAO
     {
         public Response Insert(CheckinClient checkinClient)
         {
@@ -124,16 +124,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
@@ -182,16 +181,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
@@ -240,16 +238,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
@@ -298,16 +295,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
@@ -356,16 +352,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
@@ -414,16 +409,15 @@ namespace DataAccessObject
                 {
                     CheckinQueryModel checkin = new CheckinQueryModel();
                     checkin.CheckinID = (int)reader["ID"];
-                    checkin.CheckinEntryDate = (DateTime)reader["NOME"];
-                    checkin.CheckinExitDate = (DateTime)reader["CPF"];
+                    checkin.CheckinEntryDate = (DateTime)reader["DATAENTRADA"];
+                    checkin.CheckinExitDate = (DateTime)reader["PREVISAOSAIDA"];
+                    checkin.ClientName = (string)reader["NOME"];
                     checkin.ClientCPF = (string)reader["CPF"];
-                    checkin.ClientName = (string)reader["RG"];
-                    checkin.ClientEmail = (string)reader["TELEFONE1"];
-                    checkin.ClientPhoneNumber = (string)reader["TELEFONE2"];
+                    checkin.ClientPhoneNumber = (string)reader["TELEFONE1"];
                     checkin.ClientEmail = (string)reader["EMAIL"];
                     checkin.RoomNumber = (string)reader["NUMEROQUARTO"];
                     checkin.EmployeeID = (int)reader["ID"];
-                    checkin.EmployeeName = (string)reader["ID"];
+                    checkin.EmployeeName = (string)reader["NOME"];
 
                     checkins.Add(checkin);
                 }
