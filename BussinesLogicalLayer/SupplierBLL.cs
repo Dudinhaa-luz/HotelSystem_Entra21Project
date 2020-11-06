@@ -136,7 +136,7 @@ namespace BussinesLogicalLayer {
             AddError(item.Email.IsValidEmail());
             AddError(item.CNPJ.IsValidCNPJ());
 
-            Response responseCNPJ = supplierDAO.IsCNPJUnique(item.CNPJ);
+            Response responseCNPJ = supplierDAO.IsCnpjUnique(item.CNPJ);
 
             if (!responseCNPJ.Success) {
                 AddError(responseCNPJ.Message);
@@ -168,11 +168,11 @@ namespace BussinesLogicalLayer {
             if (string.IsNullOrWhiteSpace(item.CNPJ)) {
                 AddError("O CNPJ deve ser informado!");
             } else if (item.CNPJ.Length != 14) {
-                AddError("O RG deve conter 14 caracteres.");
+                AddError("O CNPJ deve conter 14 caracteres.");
             }
             for (int i = 0; i < item.CNPJ.Length; i++) {
                 if (char.IsLetter(item.CNPJ[i])) {
-                    AddError("RG deve conter apenas números.");
+                    AddError("CNPJ deve conter apenas números.");
                 }
             }
 

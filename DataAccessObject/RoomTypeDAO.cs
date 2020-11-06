@@ -41,7 +41,6 @@ namespace DataAccessObject {
             }
             return response;
         }
-
         public Response Update(RoomType roomType) {
             Response response = new Response();
 
@@ -74,7 +73,6 @@ namespace DataAccessObject {
             }
             return response;
         }
-
         public Response UpdateDescription(RoomType roomType) {
             Response response = new Response();
 
@@ -103,7 +101,6 @@ namespace DataAccessObject {
             }
             return response;
         }
-
         public Response Delete(RoomType roomType) {
             Response response = new Response();
 
@@ -137,7 +134,6 @@ namespace DataAccessObject {
             }
             return response;
         }
-
         public QueryResponse<RoomType> GetAllRoomsType() {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -177,7 +173,6 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-
         public QueryResponse<RoomType> GetAllRoomsTypeByDescription(SearchObject search) {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -218,7 +213,6 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-
         public QueryResponse<RoomType> GetAllRoomsTypeByGuestNumber(SearchObject search) {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -259,7 +253,6 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-
         public SingleResponse<RoomType> GetById(int id) {
             SingleResponse<RoomType> response = new SingleResponse<RoomType>();
 
@@ -298,7 +291,6 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-
         public SingleResponse<RoomType> GetIDByDescription(string description) {
             SingleResponse<RoomType> response = new SingleResponse<RoomType>();
 

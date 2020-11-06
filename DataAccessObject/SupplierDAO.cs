@@ -141,11 +141,6 @@ namespace DataAccessObject {
             }
             return response;
         }
-
-        public Response IsCNPJUnique(string cNPJ) {
-            throw new NotImplementedException();
-        }
-
         public Response UpdateActiveSupplier(Supplier supplier) {
             Response response = new Response();
 

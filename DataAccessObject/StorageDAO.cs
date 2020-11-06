@@ -228,7 +228,6 @@ namespace DataAccessObject
             }
 
         }
-
         public SingleResponse<Storage> GetQuantityByIDProductsOutput(ProductOutputDetail productOutputDetail) {
             SingleResponse<Storage> response = new SingleResponse<Storage>();
             SqlConnection connection = new SqlConnection();
