@@ -1,6 +1,7 @@
 ﻿using Common;
 using DataAccessObject;
 using Entities;
+using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,14 +29,14 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
-        public QueryResponse<ProductIncomeDetail> GetAllProductsIncomeDetail()
+        public QueryResponse<ProductIncomeDetailQueryModel> GetAllProductsIncomeDetail()
         {
-            QueryResponse<ProductIncomeDetail> responseProductIncomeDetail = productIncomeDetailDAO.GetAllProductsIncomeDetail();
-            List<ProductIncomeDetail> temp = responseProductIncomeDetail.Data;
-            foreach (ProductIncomeDetail item in temp)
-            {
-                item.Price.ToString("C2");
-            }
+            QueryResponse<ProductIncomeDetailQueryModel> responseProductIncomeDetail = productIncomeDetailDAO.GetAllProductsIncomeDetail();
+            List<ProductIncomeDetailQueryModel> temp = responseProductIncomeDetail.Data;
+            //foreach (ProductIncomeDetailQueryModel item in temp)
+            //{
+            //    item.Price.ToString("C2");
+            //}
             return responseProductIncomeDetail;
         }
         public override Response Validate(ProductIncomeDetail item)
