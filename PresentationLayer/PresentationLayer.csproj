@@ -52,10 +52,100 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMainMenu.designer.cs">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsClient\FormClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsClient\FormClient.Designer.cs">
+      <DependentUpon>FormClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsClient\FormDeleteClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsClient\FormDeleteClient.Designer.cs">
+      <DependentUpon>FormDeleteClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsClient\FormInsertClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsClient\FormInsertClient.Designer.cs">
+      <DependentUpon>FormInsertClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsClient\FormUpdateClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsClient\FormUpdateClient.Designer.cs">
+      <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsProducts\FormDeleteProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsProducts\FormDeleteProduct.Designer.cs">
+      <DependentUpon>FormDeleteProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsProducts\FormInsertProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsProducts\FormInsertProduct.Designer.cs">
+      <DependentUpon>FormInsertProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsProducts\FormProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsProducts\FormProduct.Designer.cs">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsProducts\FormUpdateProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsProducts\FormUpdateProduct.Designer.cs">
+      <DependentUpon>FormUpdateProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMainMenu.resx">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsClient\FormClient.resx">
+      <DependentUpon>FormClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsClient\FormDeleteClient.resx">
+      <DependentUpon>FormDeleteClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsClient\FormInsertClient.resx">
+      <DependentUpon>FormInsertClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsClient\FormUpdateClient.resx">
+      <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsProducts\FormDeleteProduct.resx">
+      <DependentUpon>FormDeleteProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsProducts\FormInsertProduct.resx">
+      <DependentUpon>FormInsertProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsProducts\FormProduct.resx">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsProducts\FormUpdateProduct.resx">
+      <DependentUpon>FormUpdateProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +155,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +169,60 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1603574952709.png" />
+    <Content Include="Resources\armazem.png" />
+    <Content Include="Resources\caminhao-de-entrega.png" />
+    <Content Include="Resources\carrinho-de-compras.png" />
+    <Content Include="Resources\carrinho-de-mala %281%29.png" />
+    <Content Include="Resources\carrinho-de-mala.png" />
+    <Content Include="Resources\cerrar.png" />
+    <Content Include="Resources\cliente.png" />
+    <Content Include="Resources\cliente1.png" />
+    <Content Include="Resources\clientes.png" />
+    <Content Include="Resources\combinado.png" />
+    <Content Include="Resources\confira %281%29.png" />
+    <Content Include="Resources\empleados.png" />
+    <Content Include="Resources\etiqueta-de-preco.png" />
+    <Content Include="Resources\funcionarios.png" />
+    <Content Include="Resources\LogoMakerCa-1603575184170_2.png" />
+    <Content Include="Resources\LogoMakerCa-1603575184170_21.png" />
+    <Content Include="Resources\LogoMakerCa-1603575397702.png" />
+    <Content Include="Resources\LOGOS.png" />
+    <Content Include="Resources\maxi.png" />
+    <Content Include="Resources\minimazar.png" />
+    <Content Include="Resources\minimazar1.png" />
+    <Content Include="Resources\novo-produto.png" />
+    <Content Include="Resources\pagos.png" />
+    <Content Include="Resources\producto.png" />
+    <Content Include="Resources\producto2.png" />
+    <Content Include="Resources\quarto %281%29.png" />
+    <Content Include="Resources\quarto.png" />
+    <Content Include="Resources\recepcao.png" />
+    <Content Include="Resources\reportes.png" />
+    <Content Include="Resources\reportes1.png" />
+    <Content Include="Resources\res.png" />
+    <Content Include="Resources\res1.png" />
+    <Content Include="Resources\reserva %281%29.png" />
+    <Content Include="Resources\reserva %282%29.png" />
+    <Content Include="Resources\salir.png" />
+    <Content Include="Resources\simbolo-de-ferramenta-preenchido-com-filtro.png" />
+    <Content Include="Resources\venta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{e6a2c3ff-7fbf-48c3-92fe-79de812799fd}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj">
+      <Project>{95285E0C-DA60-4100-A1F0-5EAF558AA5EA}</Project>
+      <Name>DataAccessObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{B1C7D2E6-1CC0-4984-B64B-91A2A5A1F9CF}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
