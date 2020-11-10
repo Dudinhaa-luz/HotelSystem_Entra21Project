@@ -31,6 +31,7 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
+
         public Response UpdateActiveEmployee(Employee item)
         {
             Response response = new Response();
@@ -40,10 +41,12 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
+
         public Response Delete(Employee item)
         {
             return employeeDAO.Delete(item);
         }
+
         public QueryResponse<Employee> GetAllEmployeesByActive()
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByActive();
@@ -56,6 +59,7 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
+
         public QueryResponse<Employee> GetAllEmployeesByInactive()
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByInactive();
@@ -68,6 +72,7 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
+
         public QueryResponse<Employee> GetAllEmployeesByName(SearchObject search)
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByName(search);
@@ -80,6 +85,7 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
+
         public QueryResponse<Employee> GetAllEmployeesByCPF(SearchObject search)
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByCPF(search);
@@ -92,6 +98,7 @@ namespace BussinesLogicalLayer
             }
             return responseEmployees;
         }
+
         public SingleResponse<Employee> GetClientsByID(int id)
         {
             SingleResponse<Employee> responseEmployees = employeeDAO.GetById(id);
@@ -102,6 +109,7 @@ namespace BussinesLogicalLayer
             idgerado.PhoneNumber = idgerado.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
             return responseEmployees;
         }
+
         public Response IsADM(Employee item)
         {
             Response response = new Response();
@@ -112,6 +120,7 @@ namespace BussinesLogicalLayer
             response.Success = true;
             return response;
         }
+
         public override Response Validate(Employee item)
         {
 
@@ -175,6 +184,7 @@ namespace BussinesLogicalLayer
         }
 
         private HashAlgorithm _algoritmo;
+
         public void Hash(HashAlgorithm algoritmo) {
             _algoritmo = algoritmo;
         }

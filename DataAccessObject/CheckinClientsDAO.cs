@@ -61,8 +61,7 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE CHECKIN_CLIENTS SET PREVISAOSAIDA = @PREVISAOSAIDA, IDCLIENTS = @IDCLIENTS, IDROOMS = @IDROOMS, IDEMPLOYEES = @IDEMPLOYEES WHERE ID = @ID";
-            command.Parameters.AddWithValue("@PREVISAOSAIDA", checkinClient.ExitDate);
+                "UPDATE CHECKIN_CLIENTS SET IDCLIENTS = @IDCLIENTS, IDROOMS = @IDROOMS, IDEMPLOYEES = @IDEMPLOYEES WHERE ID = @ID";
             command.Parameters.AddWithValue("@IDCLIENTS", checkinClient.ClientID);
             command.Parameters.AddWithValue("@IDROOMS", checkinClient.RoomID);
             command.Parameters.AddWithValue("@IDEMPLOYEES", checkinClient.EmployeesID);
@@ -440,7 +439,6 @@ namespace DataAccessObject
             }
 
         }
-
 
     }
 

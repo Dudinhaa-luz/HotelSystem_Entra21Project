@@ -1,1 +1,0 @@
-﻿Drop table Checkout_Clients_Products_Output

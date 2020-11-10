@@ -54,7 +54,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+            command.CommandText = "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA, C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL, " +
                                   "R.NUMEROQUARTO, E.ID, E.NOME FROM CHECKOUT_CLIENTS CH INNER JOIN CLIENTS C ON CH.IDCLIENTS = C.ID" +
                                   "INNER JOIN ROOMS R ON CHIN.IDROOMS = R.ID INNER JOIN EMPLOYEES E ON CH.IDEMPLOYEES = E.ID";
 
@@ -109,7 +109,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA, C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL," +
                 "R.NUMEROQUARTO, E.ID, E.NOME FROM CHECKOUT_CLIENTS CH INNER JOIN CLIENTS C ON CH.IDCLIENTS = C.ID" +
                 "INNER JOIN ROOMS R ON CHIN.IDROOMS = R.ID INNER JOIN EMPLOYEES E ON CH.IDEMPLOYEES = E.ID WHERE CH.DATASAIDA = @DATASAIDA";
             command.Parameters.AddWithValue("@DATASAIDA", search.SearchDate);
@@ -162,7 +162,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA, C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL," +
                 "R.NUMEROQUARTO, E.ID, E.NOME FROM CHECKOUT_CLIENTS CH INNER JOIN CLIENTS C ON CH.IDCLIENTS = C.ID" +
                 "INNER JOIN ROOMS R ON CHIN.IDROOMS = R.ID INNER JOIN EMPLOYEES E ON CH.IDEMPLOYEES = E.ID WHERE C.ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);
@@ -215,7 +215,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "SELECT CH.ID, CH.DATASAIDA, CH.SAIDANOPRAZO, CH.MULTA, CKIN.DATAENTRADA, C.ID, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL, " +
                 "R.NUMEROQUARTO, E.ID, E.NOME FROM CHECKOUT_CLIENTS CH INNER JOIN CLIENTS C ON CH.IDCLIENTS = C.ID" +
                 "INNER JOIN ROOMS R ON CHIN.IDROOMS = R.ID INNER JOIN EMPLOYEES E ON CH.IDEMPLOYEES = E.ID WHERE E.ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);
