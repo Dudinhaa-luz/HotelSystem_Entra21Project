@@ -26,7 +26,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgvClients = new System.Windows.Forms.DataGridView();
+            this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -40,14 +40,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvClients
+            // dgvProducts
             // 
-            this.dgvClients.BackgroundColor = System.Drawing.SystemColors.ControlDark;
-            this.dgvClients.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvClients.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvProducts.BackgroundColor = System.Drawing.SystemColors.ControlDark;
+            this.dgvProducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProducts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -55,14 +55,14 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClients.ColumnHeadersHeight = 30;
-            this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvClients.EnableHeadersVisualStyles = false;
-            this.dgvClients.GridColor = System.Drawing.Color.SteelBlue;
-            this.dgvClients.Location = new System.Drawing.Point(27, 153);
-            this.dgvClients.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvClients.Name = "dgvClients";
+            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProducts.ColumnHeadersHeight = 30;
+            this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProducts.EnableHeadersVisualStyles = false;
+            this.dgvProducts.GridColor = System.Drawing.Color.SteelBlue;
+            this.dgvProducts.Location = new System.Drawing.Point(27, 153);
+            this.dgvProducts.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvProducts.Name = "dgvProducts";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -70,17 +70,17 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClients.RowHeadersWidth = 51;
+            this.dgvProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProducts.RowHeadersWidth = 51;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvClients.Size = new System.Drawing.Size(744, 442);
-            this.dgvClients.TabIndex = 0;
-            this.dgvClients.SelectionChanged += new System.EventHandler(this.dgvClients_SelectionChanged_1);
+            this.dgvProducts.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProducts.Size = new System.Drawing.Size(744, 442);
+            this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged_1);
             // 
             // txtDescription
             // 
@@ -139,7 +139,7 @@
             this.btnUpdate.TabIndex = 42;
             this.btnUpdate.Text = "ATUALIZAR";
             this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.button1_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label1
             // 
@@ -250,13 +250,13 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dgvClients);
+            this.Controls.Add(this.dgvProducts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormUpdateProduct";
             this.Text = "FormUpdateClient";
-            this.Load += new System.EventHandler(this.FormUpdateClient_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
+            this.Load += new System.EventHandler(this.FormUpdateProduct_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,7 +264,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvClients;
+        private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtName;

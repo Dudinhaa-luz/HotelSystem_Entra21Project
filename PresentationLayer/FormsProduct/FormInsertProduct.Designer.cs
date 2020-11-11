@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCadastrar = new System.Windows.Forms.Button();
+            this.btnInsert = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,21 +49,22 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Cadastro de Produto";
             // 
-            // btnCadastrar
+            // btnInsert
             // 
-            this.btnCadastrar.BackColor = System.Drawing.Color.Black;
-            this.btnCadastrar.FlatAppearance.BorderSize = 0;
-            this.btnCadastrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnCadastrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCadastrar.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCadastrar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCadastrar.Location = new System.Drawing.Point(569, 434);
-            this.btnCadastrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnCadastrar.Name = "btnCadastrar";
-            this.btnCadastrar.Size = new System.Drawing.Size(395, 55);
-            this.btnCadastrar.TabIndex = 7;
-            this.btnCadastrar.Text = "CADASTRAR";
-            this.btnCadastrar.UseVisualStyleBackColor = false;
+            this.btnInsert.BackColor = System.Drawing.Color.Black;
+            this.btnInsert.FlatAppearance.BorderSize = 0;
+            this.btnInsert.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsert.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsert.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnInsert.Location = new System.Drawing.Point(569, 434);
+            this.btnInsert.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(395, 55);
+            this.btnInsert.TabIndex = 7;
+            this.btnInsert.Text = "CADASTRAR";
+            this.btnInsert.UseVisualStyleBackColor = false;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // label2
             // 
@@ -81,7 +82,7 @@
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(529, 210);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(465, 30);
             this.txtName.TabIndex = 1;
@@ -126,7 +127,7 @@
             // 
             this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrice.Location = new System.Drawing.Point(529, 315);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrice.Mask = "$";
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(115, 30);
@@ -137,7 +138,7 @@
             // 
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.Location = new System.Drawing.Point(529, 262);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(465, 30);
             this.txtDescription.TabIndex = 31;
@@ -160,7 +161,7 @@
             this.dtpValidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpValidity.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpValidity.Location = new System.Drawing.Point(779, 374);
-            this.dtpValidity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpValidity.Margin = new System.Windows.Forms.Padding(4);
             this.dtpValidity.Name = "dtpValidity";
             this.dtpValidity.Size = new System.Drawing.Size(145, 30);
             this.dtpValidity.TabIndex = 33;
@@ -169,7 +170,7 @@
             // 
             this.txtProfitMargin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProfitMargin.Location = new System.Drawing.Point(880, 315);
-            this.txtProfitMargin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProfitMargin.Margin = new System.Windows.Forms.Padding(4);
             this.txtProfitMargin.Name = "txtProfitMargin";
             this.txtProfitMargin.Size = new System.Drawing.Size(115, 30);
             this.txtProfitMargin.TabIndex = 34;
@@ -190,10 +191,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnCadastrar);
+            this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormInsertProduct";
             this.Text = "2";
             this.ResumeLayout(false);
@@ -204,7 +205,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCadastrar;
+        private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;

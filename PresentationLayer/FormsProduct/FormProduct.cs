@@ -14,13 +14,13 @@ namespace PresentationLayer {
             InitializeComponent();
         }
         private void OpenForm(object form) {
-            if (this.pnlInitialClient.Controls.Count > 0)
-                this.pnlInitialClient.Controls.RemoveAt(0);
+            if (this.pnlInitialProduct.Controls.Count > 0)
+                this.pnlInitialProduct.Controls.RemoveAt(0);
                 Form fh = form as Form;
                 fh.TopLevel = false;
                 fh.Dock = DockStyle.Fill;
-                this.pnlInitialClient.Controls.Add(fh);
-                this.pnlInitialClient.Tag = fh;
+                this.pnlInitialProduct.Controls.Add(fh);
+                this.pnlInitialProduct.Tag = fh;
                 fh.Show();
             
         }
@@ -30,12 +30,15 @@ namespace PresentationLayer {
         }
 
         private void btnUpdate_Click(object sender, EventArgs e) {
+            OpenForm(new FormUpdateProduct());
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
+            OpenForm(new FormDeleteProduct());
         }
 
         private void FormInitialScreem_Load(object sender, EventArgs e) {
+            OpenForm(new FormInsertProduct());
         }
     }
 }

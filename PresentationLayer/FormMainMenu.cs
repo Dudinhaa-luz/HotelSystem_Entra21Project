@@ -69,12 +69,13 @@ namespace PresentationLayer
             OpenForm(new FormInitialScreem());
         }
 
-        private void panel8_Paint(object sender, PaintEventArgs e) {
-
-        }
-
         private void btnProducts_Click(object sender, EventArgs e) {
             OpenForm(new FormProduct());
+        }
+
+        private void btnRooms_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormRoom());
         }
     }
 }
