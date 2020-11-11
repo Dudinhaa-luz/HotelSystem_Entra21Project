@@ -145,7 +145,7 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
-                                  "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
+                                  "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
                                   "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
 
             command.Connection = connection;

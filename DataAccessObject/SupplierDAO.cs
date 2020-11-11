@@ -141,6 +141,7 @@ namespace DataAccessObject {
             }
             return response;
         }
+
         public Response UpdateActiveSupplier(Supplier supplier) {
             Response response = new Response();
 

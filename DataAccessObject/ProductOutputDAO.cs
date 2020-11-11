@@ -141,7 +141,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
+            command.CommandText = "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME," +
                                   "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
                                   "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID";
 
@@ -198,7 +198,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
+                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME," +
                 "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
                 "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID WHERE PO.DATASAIDA = @DATASAIDA";
 
@@ -254,7 +254,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
+                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME," +
                 "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
                 "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID WHERE E.ID = @ID";
 
@@ -310,7 +310,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME" +
+                "SELECT PO.ID, PO.DATASAIDA, PO.VALORTOTAL, E.ID, E.NOME, E.CPF, C.NOME," +
                 "C.CPF FROM PRODUCTS_OUTPUT PO INNER JOIN EMPLOYEES E ON PO.IDFUNCIONARIO = E.ID" +
                 "INNER JOIN CLIENTS C ON PO.IDCLIENTE = C.ID  WHERE C.ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);

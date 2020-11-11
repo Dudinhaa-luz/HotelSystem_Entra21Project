@@ -20,7 +20,7 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO PRODUCTS_INCOME_DETAIL (PRECO, QUANTIDADE) VALUES(@PRECO, @QUANTIDADE)";
+                "INSERT INTO PRODUCTS_INCOME_DETAILS (PRECO, QUANTIDADE) VALUES(@PRECO, @QUANTIDADE)";
             command.Parameters.AddWithValue("@PRECO", productIncomeDetail.Price);
             command.Parameters.AddWithValue("@QUANTIDADE", productIncomeDetail.Quantity);
 
@@ -50,7 +50,7 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE PRODUCTS_INCOME_DETAIL SET PRECO = @PRECO, QUANTIDADE = @QUANTIDADE WHERE ID = @ID";
+                "UPDATE PRODUCTS_INCOME_DETAILS SET PRECO = @PRECO, QUANTIDADE = @QUANTIDADE WHERE ID = @ID";
             command.Parameters.AddWithValue("@PRECO", productIncomeDetail.Price);
             command.Parameters.AddWithValue("@QUANTIDADE", productIncomeDetail.Quantity);
             command.Parameters.AddWithValue("@ID", productIncomeDetail.IDProductIncome);
@@ -81,7 +81,7 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT PD.PRECO, PD.QUANTIDADE, P.ID, P.NOME, P.PRECO, P.VALIDADE," +
-                                  "PI.ID, PI.DATAENTRADA, PI.VALORTOTAL FROM PRODUCTS_INCOME_DETAIL PD INNER JOIN PRODUCTS P ON PD.IDPRODUCTS = P.ID" +
+                                  "PI.ID, PI.DATAENTRADA, PI.VALORTOTAL FROM PRODUCTS_INCOME_DETAILS PD INNER JOIN PRODUCTS P ON PD.IDPRODUCTS = P.ID" +
                                   "INNER JOIN PRODUCTS_INCOME PI ON PD.IDPRODUCTS_INCOME = PI.ID";
 
             command.Connection = connection;

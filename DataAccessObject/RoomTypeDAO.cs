@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject {
     public class RoomTypeDAO {
+
         public Response Insert(RoomType roomType) {
             Response response = new Response();
 
@@ -41,6 +42,7 @@ namespace DataAccessObject {
             }
             return response;
         }
+
         public Response Update(RoomType roomType) {
             Response response = new Response();
 
@@ -73,6 +75,7 @@ namespace DataAccessObject {
             }
             return response;
         }
+
         public Response UpdateDescription(RoomType roomType) {
             Response response = new Response();
 
@@ -101,6 +104,7 @@ namespace DataAccessObject {
             }
             return response;
         }
+
         public Response Delete(RoomType roomType) {
             Response response = new Response();
 
@@ -134,6 +138,7 @@ namespace DataAccessObject {
             }
             return response;
         }
+
         public QueryResponse<RoomType> GetAllRoomsType() {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -173,6 +178,7 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
         public QueryResponse<RoomType> GetAllRoomsTypeByDescription(SearchObject search) {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -180,8 +186,8 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS_TYPE WHERE DESCRIPTION LIKE %DESCRIPTION% = @DESCRIPTION";
-            command.Parameters.AddWithValue("@DESCRIPTION", search.SearchDescription);
+                "SELECT * FROM ROOMS_TYPE WHERE DESCRICAO LIKE %DESCRICAO% = @DESCRICAO";
+            command.Parameters.AddWithValue("@DESCRICAO", search.SearchDescription);
             command.Connection = connection;
             try {
                 connection.Open();
@@ -213,6 +219,7 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
         public QueryResponse<RoomType> GetAllRoomsTypeByGuestNumber(SearchObject search) {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
@@ -253,6 +260,7 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
         public SingleResponse<RoomType> GetById(int id) {
             SingleResponse<RoomType> response = new SingleResponse<RoomType>();
 
@@ -260,7 +268,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  ROOMS_TYPE WHERE ID = @ID";
+                "SELECT * FROM ROOMS_TYPE WHERE ID = @ID";
             command.Parameters.AddWithValue("@ID", id);
             command.Connection = connection;
             try {
@@ -291,6 +299,7 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
         public SingleResponse<RoomType> GetIDByDescription(string description) {
             SingleResponse<RoomType> response = new SingleResponse<RoomType>();
 
@@ -298,7 +307,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT ID FROM  ROOMS_TYPE WHERE DESCRICAO = @DESCRICAO";
+                "SELECT ID FROM ROOMS_TYPE WHERE DESCRICAO = @DESCRICAO";
             command.Parameters.AddWithValue("@DESCRICAO", description);
             command.Connection = connection;
             try {

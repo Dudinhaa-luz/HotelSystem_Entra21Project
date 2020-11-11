@@ -1,6 +1,7 @@
 ﻿using Common;
 using DataAccessObject.Infrastructure;
 using Entities;
+using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -20,7 +21,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "INSERT INTO ROOMS (ISOCUPADO, NUMEROQUARTO, IDROOMS_TYPE) VALUES(@ISOCUPADO, @NUMEROQUARTO, @IDROOMS_TYPE) SELECT SCOPE_IDENTITY()";
-            command.Parameters.AddWithValue("@ISOCUPADO", room.IsAvailable);
+            command.Parameters.AddWithValue("@ISOCUPADO", false);
             command.Parameters.AddWithValue("@NUMEROQUARTO", room.NumberRoom);
             command.Parameters.AddWithValue("@IDROOMS_TYPE", room.IDRoomType);
 
@@ -52,7 +53,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "UPDATE ROOMS SET ISOCUPADO = @ISOCUPADO  WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ISOCUPADO", room.IsAvailable);
+            command.Parameters.AddWithValue("@ISOCUPADO", true);
             command.Parameters.AddWithValue("@ID", room.ID);
 
             command.Connection = connection;
@@ -73,27 +74,31 @@ namespace DataAccessObject {
             return response;
         }
 
-        public QueryResponse<Room> GetAllRoomsAvailable() {
-            QueryResponse<Room> response = new QueryResponse<Room>();
+        public QueryResponse<RoomQueryModel> GetAllRoomsAvailable() {
+            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS WHERE ISOCUPADO = 1";
+                "SELECT R.ID, R.NUMEROQUARTO, RT.DESCRICAO, RT.VALORDIARIA, " +
+                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOM_TYPE = RT.ID WHERE R.ISOCUPADO = 1";
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Room> rooms = new List<Room>();
+                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
 
                 while (reader.Read()) {
-                    Room room = new Room();
-                    room.ID = (int)reader["ID"];
-                    room.NumberRoom = (string)reader["NUMEROQUARTO"];
-                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
-                    room.IsAvailable = (bool)reader["ISOCUPADO"];
+                    RoomQueryModel room = new RoomQueryModel();
+                    room.RoomID = (int)reader["ID"];
+                    room.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
+                    room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+
 
                     rooms.Add(room);
                 }
@@ -112,27 +117,30 @@ namespace DataAccessObject {
             }
         }
 
-        public QueryResponse<Room> GetAllRoomsOccupy() {
-            QueryResponse<Room> response = new QueryResponse<Room>();
+        public QueryResponse<RoomQueryModel> GetAllRoomsOccupy() {
+            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS WHERE ISOCUPADO = 0";
+                "SELECT R.ID, R.NUMEROQUARTO, RT.DESCRICAO, RT.VALORDIARIA, " +
+                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOM_TYPE = RT.ID WHERE R.ISOCUPADO = 0";
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Room> rooms = new List<Room>();
+                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
 
                 while (reader.Read()) {
-                    Room room = new Room();
-                    room.ID = (int)reader["ID"];
-                    room.NumberRoom = (string)reader["NUMEROQUARTO"];
-                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
-                    room.IsAvailable = (bool)reader["ISOCUPADO"];
+                    RoomQueryModel room = new RoomQueryModel();
+                    room.RoomID = (int)reader["ID"];
+                    room.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
+                    room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
 
                     rooms.Add(room);
                 }
@@ -151,28 +159,33 @@ namespace DataAccessObject {
             }
         }
 
-        public QueryResponse<Room> GetAllRoomsByNumberRoom(SearchObject search) {
-            QueryResponse<Room> response = new QueryResponse<Room>();
+        public QueryResponse<RoomQueryModel> GetAllRoomsByNumberRoom(SearchObject search) {
+            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS WHERE NUMEROQUARTO = @NUMEROQUARTO";
+                "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
+                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOM_TYPE = RT.ID WHERE R.NUMEROQUARTO LIKE %NUMEROQUARTO% = @NUMEROQUARTO";
+
             command.Parameters.AddWithValue("@NUMEROQUARTO", search.SearchNumberRoom);
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Room> rooms = new List<Room>();
+                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
 
                 while (reader.Read()) {
-                    Room room = new Room();
-                    room.ID = (int)reader["ID"];
-                    room.NumberRoom = (string)reader["NUMEROQUARTO"];
-                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
-                    room.IsAvailable = (bool)reader["ISOCUPADO"];
+                    RoomQueryModel room = new RoomQueryModel();
+                    room.RoomID = (int)reader["ID"];
+                    room.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    room.RoomIsOcuppy = (bool)reader["ISOCUPADO"];
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
+                    room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
 
                     rooms.Add(room);
                 }
@@ -191,14 +204,16 @@ namespace DataAccessObject {
             }
         }
 
-        public SingleResponse<Room> GetById(int id) {
-            SingleResponse<Room> response = new SingleResponse<Room>();
+        public SingleResponse<RoomQueryModel> GetById(int id) {
+            SingleResponse<RoomQueryModel> response = new SingleResponse<RoomQueryModel>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  ROOMS WHERE ID = @ID";
+                "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
+                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOM_TYPE = RT.ID WHERE R.ID = @ID";
             command.Parameters.AddWithValue("@ID", id);
             command.Connection = connection;
             try {
@@ -206,11 +221,15 @@ namespace DataAccessObject {
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read()) {
-                    Room room = new Room();
-                    room.ID = (int)reader["ID"];
-                    room.NumberRoom = (string)reader["NUMEROQUARTO"];
-                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
-                    room.IsAvailable = (bool)reader["ISOCUPADO"];
+                    RoomQueryModel room = new RoomQueryModel();
+
+                    room.RoomID = (int)reader["ID"];
+                    room.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    room.RoomIsOcuppy = (bool)reader["ISOCUPADO"];
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
+                    room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+
                     response.Message = "Dados selecionados com sucesso.";
                     response.Success = true;
                     response.Data = room;

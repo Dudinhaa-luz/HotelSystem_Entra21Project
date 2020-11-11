@@ -60,6 +60,7 @@
     <Compile Include="QueryModel\ProductOutputDetailQueryModel.cs" />
     <Compile Include="QueryModel\ProductOutputQueryModel.cs" />
     <Compile Include="QueryModel\ReservationQueryModel.cs" />
+    <Compile Include="QueryModel\RoomQueryModel.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RoomType.cs" />

@@ -95,7 +95,7 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE CHECKIN_CLIENTS SET DATAENTRADA = @DATAENTRADA, IDFUNCIONARIO = @IDFUNCIONARIO, VALORTOTAL = @VALORTOTAL, IDFORNECEDOR = @IDFORNECEDOR WHERE ID = @ID";
+                "UPDATE PRODUCTS_INCOME SET DATAENTRADA = @DATAENTRADA, IDFUNCIONARIO = @IDFUNCIONARIO, VALORTOTAL = @VALORTOTAL, IDFORNECEDOR = @IDFORNECEDOR WHERE ID = @ID";
             command.Parameters.AddWithValue("@DATAENTRADA", productIncome.EntryDate);
             command.Parameters.AddWithValue("@IDFUNCIONARIO", productIncome.EmployeesID);
             command.Parameters.AddWithValue("@VALORTOTAL", productIncome.TotalValue);
@@ -140,7 +140,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL" +
+            command.CommandText = "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL," +
                                   "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID" +
                                   "INNER JOIN SUPPLIERS S ON PI.IDFORNECEDOR = S.ID";
 
@@ -197,7 +197,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL" +
+                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL," +
                                   "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID" +
                                   "INNER JOIN SUPPLIERS S ON PI.IDFORNECEDOR = S.ID WHERE PI.DATAENTRADA = @DATAENTRADA";
             command.Parameters.AddWithValue("@DATAENTRADA", search.SearchDate);
@@ -252,7 +252,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL" +
+                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL," +
                                   "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID" +
                                   "INNER JOIN SUPPLIERS S ON PI.IDFORNECEDOR = S.ID WHERE E.ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);
@@ -307,7 +307,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL" +
+                "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL," +
                                   "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID" +
                                   "INNER JOIN SUPPLIERS S ON PI.IDFORNECEDOR = S.ID WHERE S.ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);
