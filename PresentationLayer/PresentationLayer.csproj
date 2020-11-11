@@ -178,14 +178,21 @@
     <Content Include="Resources\carrinho-de-mala %281%29.png" />
     <Content Include="Resources\carrinho-de-mala.png" />
     <Content Include="Resources\cerrar.png" />
+    <None Include="Resources\CheckinCerto.png" />
+    <None Include="Resources\Checkout.png" />
     <Content Include="Resources\cliente.png" />
     <Content Include="Resources\cliente1.png" />
     <Content Include="Resources\clientes.png" />
     <Content Include="Resources\combinado.png" />
     <Content Include="Resources\confira %281%29.png" />
     <Content Include="Resources\empleados.png" />
+    <None Include="Resources\Estoque.png" />
+    <None Include="Resources\Estoque1.png" />
     <Content Include="Resources\etiqueta-de-preco.png" />
+    <None Include="Resources\fornecedor3.png" />
     <Content Include="Resources\funcionarios.png" />
+    <None Include="Resources\LogoBranco.png" />
+    <None Include="Resources\Funcionário.png" />
     <Content Include="Resources\LogoMakerCa-1603575184170_2.png" />
     <Content Include="Resources\LogoMakerCa-1603575184170_21.png" />
     <Content Include="Resources\LogoMakerCa-1603575397702.png" />
@@ -197,8 +204,10 @@
     <Content Include="Resources\pagos.png" />
     <Content Include="Resources\producto.png" />
     <Content Include="Resources\producto2.png" />
+    <None Include="Resources\Produtos.png" />
     <Content Include="Resources\quarto %281%29.png" />
     <Content Include="Resources\quarto.png" />
+    <None Include="Resources\quartos.png" />
     <Content Include="Resources\recepcao.png" />
     <Content Include="Resources\reportes.png" />
     <Content Include="Resources\reportes1.png" />
@@ -206,8 +215,11 @@
     <Content Include="Resources\res1.png" />
     <Content Include="Resources\reserva %281%29.png" />
     <Content Include="Resources\reserva %282%29.png" />
+    <None Include="Resources\Reservas1.png" />
     <Content Include="Resources\salir.png" />
     <Content Include="Resources\simbolo-de-ferramenta-preenchido-com-filtro.png" />
+    <None Include="Resources\Vendas.png" />
+    <None Include="Resources\Vendas1.png" />
     <Content Include="Resources\venta.png" />
   </ItemGroup>
   <ItemGroup>
