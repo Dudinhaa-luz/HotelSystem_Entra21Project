@@ -52,12 +52,16 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Product> responseProducts = producteDAO.GetAllProductsByActive();
             List<Product> temp = responseProducts.Data;
-            foreach (Product item in temp)
+            if (temp == null)
             {
-                item.Price.ToString("C2");
-                Convert.ToString(item.ProfitMargin + "%");
+                return responseProducts;
             }
-            return responseProducts;
+                foreach (Product item in temp)
+                {
+                    item.Price.ToString("C2");
+                    Convert.ToString(item.ProfitMargin + "%");
+                }
+                return responseProducts;
         }
         public QueryResponse<Product> GetAllProductsByInactive()
         {

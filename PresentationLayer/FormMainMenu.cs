@@ -72,5 +72,10 @@ namespace PresentationLayer
         private void btnProducts_Click(object sender, EventArgs e) {
             OpenForm(new FormProduct());
         }
+
+        private void btnRooms_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormRoom());
+        }
     }
 }

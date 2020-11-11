@@ -46,7 +46,7 @@
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(333, 406);
             this.panel1.TabIndex = 0;
@@ -54,11 +54,11 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::PresentationLayer.Properties.Resources.LogoMakerCa_1603575397702;
-            this.pictureBox3.Location = new System.Drawing.Point(4, 57);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Image = global::PresentationLayer.Properties.Resources.LogoBranco;
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(329, 290);
+            this.pictureBox3.Size = new System.Drawing.Size(329, 393);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
@@ -68,7 +68,7 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(395, 140);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(595, 2);
             this.panel2.TabIndex = 1;
@@ -80,7 +80,7 @@
             this.txtUser.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.ForeColor = System.Drawing.Color.Black;
             this.txtUser.Location = new System.Drawing.Point(395, 114);
-            this.txtUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(595, 25);
             this.txtUser.TabIndex = 1;
@@ -95,7 +95,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.ForeColor = System.Drawing.Color.Black;
             this.txtPassword.Location = new System.Drawing.Point(395, 196);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(595, 25);
             this.txtPassword.TabIndex = 2;
@@ -108,7 +108,7 @@
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Enabled = false;
             this.panel3.Location = new System.Drawing.Point(395, 222);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(595, 2);
             this.panel3.TabIndex = 3;
@@ -135,7 +135,7 @@
             this.btnAccess.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAccess.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnAccess.Location = new System.Drawing.Point(395, 272);
-            this.btnAccess.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAccess.Margin = new System.Windows.Forms.Padding(4);
             this.btnAccess.Name = "btnAccess";
             this.btnAccess.Size = new System.Drawing.Size(595, 50);
             this.btnAccess.TabIndex = 3;
@@ -160,7 +160,7 @@
             // 
             this.btnMinimize.Image = global::PresentationLayer.Properties.Resources.minimazar;
             this.btnMinimize.Location = new System.Drawing.Point(976, 0);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(20, 18);
             this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -172,7 +172,7 @@
             // 
             this.btnExit.Image = global::PresentationLayer.Properties.Resources.cerrar;
             this.btnExit.Location = new System.Drawing.Point(1004, 0);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(20, 18);
             this.btnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -197,7 +197,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormLogin";
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
