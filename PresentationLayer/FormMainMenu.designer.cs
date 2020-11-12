@@ -371,6 +371,7 @@ namespace PresentationLayer
             this.btnEmployees.TabIndex = 17;
             this.btnEmployees.Text = "    Funcionários";
             this.btnEmployees.UseVisualStyleBackColor = false;
+            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
             // btnReservations
             // 

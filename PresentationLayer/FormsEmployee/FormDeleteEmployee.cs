@@ -8,12 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PresentationLayer
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
+namespace PresentationLayer {
+    public partial class FormDeleteEmployee : Form {
+        public FormDeleteEmployee() {
             InitializeComponent();
         }
     }

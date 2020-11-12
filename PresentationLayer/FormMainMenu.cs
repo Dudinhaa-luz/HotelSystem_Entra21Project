@@ -77,5 +77,10 @@ namespace PresentationLayer
         {
             OpenForm(new FormRoom());
         }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormEmployee());
+        }
     }
 }

@@ -390,5 +390,50 @@ namespace DataAccessObject
                 connection.Close();
             }
         }
+
+        public SingleResponse<Product> GetPriceById(int id)
+        {
+            SingleResponse<Product> response = new SingleResponse<Product>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT PRECO FROM PRODUCTS WHERE ID = @ID";
+            command.Parameters.AddWithValue("@ID", id);
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Product product = new Product();
+                    
+                    product.Price = (double)reader["PRECO"];
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = product;
+                    return response;
+                }
+                response.Message = "Funcionário não encontrado.";
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }

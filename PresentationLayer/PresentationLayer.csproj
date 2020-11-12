@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +81,30 @@
     </Compile>
     <Compile Include="FormsClient\FormUpdateClient.Designer.cs">
       <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsEmployee\FormDeleteEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsEmployee\FormDeleteEmployee.Designer.cs">
+      <DependentUpon>FormDeleteEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsEmployee\FormEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsEmployee\FormEmployee.Designer.cs">
+      <DependentUpon>FormEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsEmployee\FormInsertEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsEmployee\FormInsertEmployee.Designer.cs">
+      <DependentUpon>FormInsertEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsEmployee\FormUpdateEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsEmployee\FormUpdateEmployee.Designer.cs">
+      <DependentUpon>FormUpdateEmployee.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsProduct\FormDeleteProduct.cs">
       <SubType>Form</SubType>
@@ -130,17 +148,32 @@
     <Compile Include="FormsRoom\FormRoom.Designer.cs">
       <DependentUpon>FormRoom.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsSupplier\FormSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsSupplier\FormSupplier.Designer.cs">
+      <DependentUpon>FormSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsSupplier\FormDeleteSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsSupplier\FormDeleteSupplier.Designer.cs">
+      <DependentUpon>FormDeleteSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormsSupplier\FormInsertSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormsSupplier\FormInsertSupplier.Designer.cs">
       <DependentUpon>FormInsertSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsSupplier\FormUpdateSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsSupplier\FormUpdateSupplier.Designer.cs">
+      <DependentUpon>FormUpdateSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +191,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormsClient\FormUpdateClient.resx">
       <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsEmployee\FormDeleteEmployee.resx">
+      <DependentUpon>FormDeleteEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsEmployee\FormEmployee.resx">
+      <DependentUpon>FormEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsEmployee\FormInsertEmployee.resx">
+      <DependentUpon>FormInsertEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsEmployee\FormUpdateEmployee.resx">
+      <DependentUpon>FormUpdateEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsProduct\FormDeleteProduct.resx">
       <DependentUpon>FormDeleteProduct.cs</DependentUpon>
@@ -180,8 +225,17 @@
     <EmbeddedResource Include="FormsRoom\FormRoom.resx">
       <DependentUpon>FormRoom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormsSupplier\FormSupplier.resx">
+      <DependentUpon>FormSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsSupplier\FormDeleteSupplier.resx">
+      <DependentUpon>FormDeleteSupplier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormsSupplier\FormInsertSupplier.resx">
       <DependentUpon>FormInsertSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsSupplier\FormUpdateSupplier.resx">
+      <DependentUpon>FormUpdateSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -275,6 +329,9 @@
       <Project>{B1C7D2E6-1CC0-4984-B64B-91A2A5A1F9CF}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FormsStorage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

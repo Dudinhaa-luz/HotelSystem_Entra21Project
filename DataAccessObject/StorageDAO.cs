@@ -12,42 +12,6 @@ namespace DataAccessObject
 {
     public class StorageDAO
     {
-        public Response Insert(Storage storage)
-        {
-            Response response = new Response();
-
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText =
-            "INSERT INTO STORAGE (IDPRODUCTS,QUANTIDADE) VALUES (@IDPRODUCTS,@QUANTIDADE)";
-            command.Parameters.AddWithValue("@IDPRODUCTS", storage.ProductsID);
-            command.Parameters.AddWithValue("@QUANTIDADE", storage.Quantity);
-
-            command.Connection = connection;
-
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-                response.Success = true;
-                response.Message = "Cadastrado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return response;
-        }
         public Response Update(Storage storage)
         {
             Response response = new Response();
