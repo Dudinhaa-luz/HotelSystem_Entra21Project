@@ -2,6 +2,7 @@
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
 using Entities;
+using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,30 +27,30 @@ namespace BussinesLogicalLayer {
             return response;
         }
 
-        public QueryResponse<Room> GetAllRoomsAvailable() {
-            QueryResponse<Room> responseRooms = roomDAO.GetAllRoomsAvailable();
-            List<Room> temp = responseRooms.Data;
+        public QueryResponse<RoomQueryModel> GetAllRoomsAvailable() {
+            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsAvailable();
+            List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
 
-        public QueryResponse<Room> GetAllRoomsOccupy() {
-            QueryResponse<Room> responseRooms = roomDAO.GetAllRoomsOccupy();
-            List<Room> temp = responseRooms.Data;
+        public QueryResponse<RoomQueryModel> GetAllRoomsOccupy() {
+            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsOccupy();
+            List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
 
-        public QueryResponse<Room> GetAllRoomsByNumberRoom(SearchObject search) {
-            QueryResponse<Room> responseRooms = roomDAO.GetAllRoomsByNumberRoom(search);
-            List<Room> temp = responseRooms.Data;
+        public QueryResponse<RoomQueryModel> GetAllRoomsByNumberRoom(SearchObject search) {
+            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsByNumberRoom(search);
+            List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
 
-        public SingleResponse<Room> GetById(int id) {
+        public SingleResponse<RoomQueryModel> GetById(int id) {
 
-            SingleResponse<Room> responseRooms = roomDAO.GetById(id);
+            SingleResponse<RoomQueryModel> responseRooms = roomDAO.GetById(id);
 
             return responseRooms;
         }
@@ -64,7 +65,7 @@ namespace BussinesLogicalLayer {
             if (string.IsNullOrWhiteSpace(item.Description)) {
                 AddError("A descrição do quarto deve ser informada.");
             } else if (item.NumberRoom.Length < 1 || item.NumberRoom.Length < 5) {
-                AddError("A descriçãodeve conter entre 3 e 100 caracteres");
+                AddError("A descrição deve conter entre 3 e 100 caracteres");
             }
             if (item.IDRoomType == 0) {
                 AddError("O tipo do quarto deve ser informado");

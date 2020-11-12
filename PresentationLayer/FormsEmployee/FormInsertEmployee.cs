@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer {
-    public partial class FormInsertSupplier : Form {
-        public FormInsertSupplier() {
+    public partial class FormInsertEmployee : Form {
+        public FormInsertEmployee() {
             InitializeComponent();
         }
 
@@ -22,10 +22,12 @@ namespace PresentationLayer {
         private void button1_Click(object sender, EventArgs e) {
             client.Name = txtName.Text;
             client.CPF = txtCPF.Text;
+            client.RG = txtRG.Text;
             client.PhoneNumber1 = txtPhoneNumber1.Text;
             client.Email = txtEmail.Text;
 
             //ClientBll
         }
+
     }
 }

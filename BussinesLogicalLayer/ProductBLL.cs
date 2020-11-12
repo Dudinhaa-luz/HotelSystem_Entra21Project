@@ -95,6 +95,14 @@ namespace BussinesLogicalLayer
 
             return responseProducts;
         }
+        public SingleResponse<Product> GetPriceByID(int id)
+        {
+            SingleResponse<Product> responseProducts = producteDAO.GetPriceById(id);
+            Product idgerado = responseProducts.Data;
+
+            idgerado.Price = Convert.ToDouble(idgerado.Price.ToString("C2"));
+            return responseProducts;
+        }
         public override Response Validate(Product item)
         {
             if (string.IsNullOrWhiteSpace(item.Name))

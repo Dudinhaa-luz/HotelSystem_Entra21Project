@@ -10,15 +10,7 @@ namespace BussinesLogicalLayer
     public class StorageBLL : BaseValidator<Storage>
     {
         private StorageDAO storageDAO = new StorageDAO();
-        public Response Insert(Storage item)
-        {
-            Response response = new Response();
-            if (response.Success)
-            {
-                return storageDAO.Insert(item);
-            }
-            return response;
-        }
+        
         public Response Update(Storage item)
         {
             Response response = new Response();
@@ -31,18 +23,25 @@ namespace BussinesLogicalLayer
         public SingleResponse<Storage> AddProduct(ProductIncomeDetail item)
         {
             SingleResponse<Storage> singleResponse = new SingleResponse<Storage>();
+            ProductBLL productBLL = new ProductBLL();
             Storage storage = new Storage();
             storage.ProductsID = item.IDProduct;
 
             StorageDAO storageDAO = new StorageDAO();
             if (storageDAO.GetQuantityByIDProducts(item).Quantity == 0)
             {
+                
                 item.Quantity += storageDAO.GetQuantityByIDProducts(item).Quantity;
                 storage.Quantity = item.Quantity;
-                Insert(storage);
+                Update(storage);
             }
             else if (storageDAO.GetQuantityByIDProducts(item).Quantity > 0)
             {
+                double qtdProductsStorage = Convert.ToDouble(storageDAO.GetQuantityByIDProducts(item).Data);
+                double productPrice = Convert.ToDouble(productBLL.GetPriceByID(item.IDProduct));
+                double qtdProductsEntry = item.Quantity;
+                double products = ((qtdProductsStorage * productPrice) + (qtdProductsEntry * item.Price)) / qtdProductsStorage + qtdProductsEntry;
+               
                 item.Quantity += storageDAO.GetQuantityByIDProducts(item).Quantity;
                 storage.Quantity = item.Quantity;
                 Update(storage);
