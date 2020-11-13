@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject.Infrastructure
 {
-    class ConnectionHelper
+    public class ConnectionHelper
     {
         public static string GetConnectionString()
         {

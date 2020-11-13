@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using DataAccessObject;
 using Common;
 using Entities;
-using DataAccessObject.Infrastructure;
 using BussinesLogicalLayer;
+using Common.Infrastructure;
 
 namespace PresentationLayer {
     public partial class FormUpdateProduct : Form {
@@ -21,7 +21,7 @@ namespace PresentationLayer {
 
         ProductBLL productBLL = new ProductBLL();
         Product product = new Product();
-        SearchObject search = new SearchObject();
+        SearchObject searchObject = new SearchObject();
 
         private void FormUpdateProduct_Load(object sender, EventArgs e) {
 
@@ -53,8 +53,17 @@ namespace PresentationLayer {
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            //dgvClients.DataSource = clientDAO.GetAllClientsByName(search).Data;
+
+            if (cmbSearch.Text == "Nome")
+            {
+                searchObject.SearchName = txtSource.Text;
+                dgvProducts.DataSource = productBLL.GetAllProductsByName(searchObject);
+            }
+            else
+            {
+                searchObject.SearchID = Convert.ToInt32(txtSource.Text);
+                dgvProducts.DataSource = productBLL.GetAllProductsByID(searchObject.SearchID);
+            }
         }
 
     }

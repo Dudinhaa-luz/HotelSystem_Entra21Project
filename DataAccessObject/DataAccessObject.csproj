@@ -45,9 +45,6 @@
     <Compile Include="CheckoutClientDAO.cs" />
     <Compile Include="ClientDAO.cs" />
     <Compile Include="EmployeeDAO.cs" />
-    <Compile Include="Infrastructure\ConnectionHelper.cs" />
-    <Compile Include="Infrastructure\SearchObject.cs" />
-    <Compile Include="ProductBLL.cs" />
     <Compile Include="ProductDAO.cs" />
     <Compile Include="ProductIncomeDetailDAO.cs" />
     <Compile Include="ProductOutputDAO.cs" />

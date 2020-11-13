@@ -65,7 +65,7 @@
             this.btnInsert.TabIndex = 7;
             this.btnInsert.Text = "CADASTRAR";
             this.btnInsert.UseVisualStyleBackColor = false;
-            this.btnInsert.Click += new System.EventHandler(this.button1_Click);
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // label2
             // 

@@ -35,7 +35,6 @@
             this.txtSource = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.oi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -91,8 +90,6 @@
             this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProducts.ColumnHeadersHeight = 30;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.oi});
             this.dgvProducts.EnableHeadersVisualStyles = false;
             this.dgvProducts.GridColor = System.Drawing.Color.SteelBlue;
             this.dgvProducts.Location = new System.Drawing.Point(65, 171);
@@ -116,13 +113,6 @@
             this.dgvProducts.Size = new System.Drawing.Size(1263, 442);
             this.dgvProducts.TabIndex = 47;
             // 
-            // oi
-            // 
-            this.oi.HeaderText = "ytu";
-            this.oi.MinimumWidth = 6;
-            this.oi.Name = "oi";
-            this.oi.Width = 125;
-            // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.Black;
@@ -138,6 +128,7 @@
             this.btnDelete.TabIndex = 54;
             this.btnDelete.Text = "APAGAR";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label1
             // 
@@ -181,6 +172,5 @@
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oi;
     }
 }
