@@ -29,6 +29,15 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
+        public Response UpdatePrice(int id, double price)
+        {
+            Response response = new Response();
+            if (response.Success)
+            {
+                return producteDAO.UpdatePrice(id,price);
+            }
+            return response;
+        }
         public Response UpdateActiveProduct(Product item)
         {
             Response response = new Response();
