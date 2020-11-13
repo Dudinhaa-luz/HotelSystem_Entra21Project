@@ -99,6 +99,48 @@ namespace DataAccessObject
             return response;
         }
 
+        public Response UpdatePrice(int id, double price)
+        {
+            Response response = new Response();
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "UPDATE PRODUCTS SET PRECO = @PRECO WHERE ID = @ID";
+            command.Parameters.AddWithValue("@PRECO", price);
+            command.Parameters.AddWithValue("@ID", id);
+
+            command.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                int nLinhasAfetadas = command.ExecuteNonQuery();
+                if (nLinhasAfetadas != 1)
+                {
+                    response.Success = false;
+                    response.Message = "Registro não encontrado!";
+                    return response;
+                }
+
+                response.Success = true;
+                response.Message = "Atualizado com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o administrador.";
+                response.StackTrace = ex.StackTrace;
+                response.ExceptionError = ex.Message;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return response;
+        }
+
         public Response UpdateActiveProduct(Product product)
         {
             Response response = new Response();

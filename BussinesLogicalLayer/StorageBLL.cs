@@ -37,16 +37,24 @@ namespace BussinesLogicalLayer
             }
             else if (storageDAO.GetQuantityByIDProducts(item).Quantity > 0)
             {
-                double qtdProductsStorage = Convert.ToDouble(storageDAO.GetQuantityByIDProducts(item).Data);
-                double productPrice = Convert.ToDouble(productBLL.GetPriceByID(item.IDProduct));
-                double qtdProductsEntry = item.Quantity;
-                double products = ((qtdProductsStorage * productPrice) + (qtdProductsEntry * item.Price)) / qtdProductsStorage + qtdProductsEntry;
-               
+                ProductPriceAtt(item);
                 item.Quantity += storageDAO.GetQuantityByIDProducts(item).Quantity;
                 storage.Quantity = item.Quantity;
                 Update(storage);
             }
             return singleResponse;
+        }
+        private void ProductPriceAtt(ProductIncomeDetail item)
+        {
+            ProductBLL productBLL = new ProductBLL();
+            Storage storage = new Storage();
+            storage.ProductsID = item.IDProduct;
+            
+                double qtdProductsStorage = Convert.ToDouble(storageDAO.GetQuantityByIDProducts(item).Data);
+                double productPrice = Convert.ToDouble(productBLL.GetPriceByID(item.IDProduct));
+                double qtdProductsEntry = item.Quantity;
+                double products = ((qtdProductsStorage * productPrice) + (qtdProductsEntry * item.Price)) / qtdProductsStorage + qtdProductsEntry;
+                productBLL.UpdatePrice(item.IDProduct, products);
         }
         public SingleResponse<Storage> DeleteProduct(ProductOutputDetail item)
         {
