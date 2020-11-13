@@ -43,7 +43,7 @@ namespace BussinesLogicalLayer
             Response response = new Response();
             if (response.Success)
             {
-                return producteDAO.Update(item);
+                return producteDAO.UpdateActiveProduct(item);
             }
             return response;
         }
@@ -51,12 +51,14 @@ namespace BussinesLogicalLayer
         {
             return producteDAO.Delete(item);
         }
+
         public double ProfitMarginCalculation(Product item)
         {
             double margemLucro = (item.Price / 100) * item.ProfitMargin;
             double margemLucroTotal = margemLucro + item.Price;
             return margemLucroTotal;
         }
+
         public QueryResponse<Product> GetAllProductsByActive()
         {
             QueryResponse<Product> responseProducts = producteDAO.GetAllProductsByActive();
@@ -118,7 +120,7 @@ namespace BussinesLogicalLayer
             {
                 AddError("O nome deve ser informado.");
             }
-            else if (item.Name.Length < 2 || item.Name.Length < 100)
+            else if (item.Name.Length < 2 || item.Name.Length > 100)
             {
                 AddError("O nome deve conter entre 2 e 100 caracteres.");
             }
@@ -126,16 +128,16 @@ namespace BussinesLogicalLayer
             {
                 if (!char.IsLetter(item.Name[i]))
                 {
-                    AddError("O nome deve contêr apenas letras.");
+                    AddError("O nome deve conter apenas letras.");
                 }
             }
             if (string.IsNullOrWhiteSpace(item.Description))
             {
                 AddError("A descrição deve ser informada!");
             }
-            else if (item.Description.Length < 150)
+            else if (item.Description.Length < 5 ||item.Description.Length > 150)
             {
-                AddError("A descrição pode contêr no máximo 150 caracteres");
+                AddError("A descrição deve conter entre 5 e 150 caracteres");
             }
             if (string.IsNullOrWhiteSpace(Convert.ToString(item.Storage)))
             {

@@ -75,7 +75,7 @@ namespace BussinesLogicalLayer {
 
             return responseProductsOutput;
         }
-        public QueryResponse<ProductOutputQueryModel> GetAllProductIncomebyEmployeeID(SearchObject search) {
+        public QueryResponse<ProductOutputQueryModel> GetAllProductOutputbyEmployeeID(SearchObject search) {
 
             QueryResponse<ProductOutputQueryModel> responseProductsOutput = productsOutputDAO.GetAllProductOutputbyEmployeeID(search);
 
@@ -86,7 +86,7 @@ namespace BussinesLogicalLayer {
 
             return responseProductsOutput;
         }
-        public QueryResponse<ProductOutputQueryModel> GetAllProductIncomebySupplierID(SearchObject search) {
+        public QueryResponse<ProductOutputQueryModel> GetAllProductOutputbyClientID(SearchObject search) {
 
             QueryResponse<ProductOutputQueryModel> responseProductsOutput = productsOutputDAO.GetAllProductOutputbyClientID(search);
 
@@ -99,9 +99,19 @@ namespace BussinesLogicalLayer {
         }
 
         public override Response Validate(ProductOutput item) {
+
             if (string.IsNullOrWhiteSpace(item.Items.ToString())) {
                 AddError("Insira um produto.");
             }
+            if (item.EmployeeID == 0)
+            {
+                AddError("Informe um funcionário");
+            }
+            if (item.ClientID == 0)
+            {
+                AddError("Informe um Cliente");
+            }
+
             return base.Validate(item);
         }
     }

@@ -56,7 +56,7 @@ namespace BussinesLogicalLayer
             }
             return responseReservations;
         }
-        public QueryResponse<ReservationQueryModel> GetAllProductOutputbyEmployeeID(SearchObject search)
+        public QueryResponse<ReservationQueryModel> GetAllReservationsByRoomsNumber(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsByRoomsNumber(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
@@ -67,7 +67,7 @@ namespace BussinesLogicalLayer
             }
             return responseReservations;
         }
-        public QueryResponse<ReservationQueryModel> GetAllProductOutputbyClientID(SearchObject search)
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyClientCPF(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyClientCPF(search);
             List<ReservationQueryModel> temp = responseReservations.Data;

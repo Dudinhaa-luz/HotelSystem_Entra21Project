@@ -249,5 +249,51 @@ namespace DataAccessObject {
             }
         }
 
+        public SingleResponse<Room> GetRoomTypeIDByRoomID(int id)
+        {
+            SingleResponse<Room> response = new SingleResponse<Room>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT IDROOMS_TYPE WHERE ID = @ID";
+            command.Parameters.AddWithValue("@ID", id);
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Room room = new Room();
+
+                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
+                    
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = room;
+                    return response;
+                }
+                response.Message = "Quarto não encontrado.";
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
     }
 }

@@ -82,5 +82,17 @@ namespace BussinesLogicalLayer {
             return responseProducts;
         }
 
+        public SingleResponse<RoomType> GetDailyValueByRoomTypeID(int id)
+        {
+            SingleResponse<RoomType> responseProducts = roomTypeDAO.GetDailyValueByRoomTypeID(id);
+
+            RoomType room = new RoomType();
+
+            room.DailyValue.ToString("C2");
+
+            return responseProducts;
+        }
+
+
     }
 }

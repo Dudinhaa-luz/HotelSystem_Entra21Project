@@ -33,10 +33,7 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ProductIncomeDetailQueryModel> responseProductIncomeDetail = productIncomeDetailDAO.GetAllProductsIncomeDetail();
             List<ProductIncomeDetailQueryModel> temp = responseProductIncomeDetail.Data;
-            //foreach (ProductIncomeDetailQueryModel item in temp)
-            //{
-            //    item.Price.ToString("C2");
-            //}
+         
             return responseProductIncomeDetail;
         }
         public override Response Validate(ProductIncomeDetail item)

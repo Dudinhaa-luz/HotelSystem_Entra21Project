@@ -337,5 +337,51 @@ namespace DataAccessObject {
             }
         }
 
+        public SingleResponse<RoomType> GetDailyValueByRoomTypeID(int id)
+        {
+            SingleResponse<RoomType> response = new SingleResponse<RoomType>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT VALORDIARIA FROM ROOMS_TYPE WHERE ID = @ID";
+            command.Parameters.AddWithValue("@ID", id);
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    RoomType roomType = new RoomType();
+                    
+                    roomType.DailyValue = (double)reader["VALORDIARIA"];
+
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = roomType;
+                    return response;
+                }
+                response.Message = "Quarto não encontrado.";
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
     }
 }

@@ -35,7 +35,7 @@ namespace BussinesLogicalLayer
             Response response = new Response();
             if (response.Success)
             {
-                return clientDAO.Update(item);
+                return clientDAO.UpdateActiveClient(item);
             }
             return response;
         }
@@ -135,7 +135,7 @@ namespace BussinesLogicalLayer
             {
                 AddError("O nome deve ser informado.");
             }
-            else if (item.Name.Length < 3 || item.Name.Length < 80)
+            else if (item.Name.Length < 3 || item.Name.Length > 80)
             {
                 AddError("O nome deve conter entre 3 e 80 caracteres.");
             }

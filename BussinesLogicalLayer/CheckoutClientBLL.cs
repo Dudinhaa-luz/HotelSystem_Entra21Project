@@ -12,6 +12,11 @@ namespace BussinesLogicalLayer
     public class CheckoutClientBLL : BaseValidator<CheckoutClient>
     {
         private CheckoutClientDAO checkoutClientDAO = new CheckoutClientDAO();
+        private RoomDAO roomDAO = new RoomDAO();
+        private RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+
+
+
         public Response Insert(CheckoutClient item)
         {
             Response response = new Response();
@@ -68,6 +73,34 @@ namespace BussinesLogicalLayer
         public override Response Validate(CheckoutClient item)
         {
             return base.Validate(item);
+        }
+
+        public void PenaltyCalculation(CheckinClient checkin, CheckoutClient checkout)
+        {
+            if (checkin.ExitDate == checkout.ExitDate)
+            {
+                checkout.ExitOnTime = true;
+                checkout.Penalty = 0;
+            }
+            else if (checkin.ExitDate > checkout.ExitDate)
+            {
+                checkout.ExitOnTime = true;
+                checkout.Penalty = 0;
+            }
+            else
+            {
+                int roomTypeID = Convert.ToInt32(roomDAO.GetRoomTypeIDByRoomID(checkin.RoomID).Data);
+
+                double dailyValue = Convert.ToDouble(roomTypeDAO.GetDailyValueByRoomTypeID(roomTypeID).Data);
+
+                int days = checkout.ExitDate.Day - checkin.ExitDate.Day;
+
+                checkout.ExitOnTime = false;
+                checkout.Penalty = dailyValue * days;
+            }
+
+           
+
         }
 
     }

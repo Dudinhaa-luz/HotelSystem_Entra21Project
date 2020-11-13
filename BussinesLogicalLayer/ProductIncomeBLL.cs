@@ -116,6 +116,14 @@ namespace BussinesLogicalLayer
             {
                 AddError("Insira um produto."); 
             }
+            if (item.EmployeesID == 0)
+            {
+                AddError("O funcionário deve ser informado");
+            }
+            if (item.EmployeesID == 0)
+            {
+                AddError("O fornecedor deve ser informado");
+            }
             return base.Validate(item);
         }
     }

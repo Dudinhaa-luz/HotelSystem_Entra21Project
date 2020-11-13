@@ -55,6 +55,15 @@ namespace BussinesLogicalLayer {
             return responseRooms;
         }
 
+        public SingleResponse<Room> GetRoomTypeIDByRoomID(int id)
+        {
+
+            SingleResponse<Room> responseRooms = roomDAO.GetRoomTypeIDByRoomID(id);
+
+            return responseRooms;
+        }
+
+
         public override Response Validate(Room item) {
 
             if (string.IsNullOrWhiteSpace(item.NumberRoom)) {

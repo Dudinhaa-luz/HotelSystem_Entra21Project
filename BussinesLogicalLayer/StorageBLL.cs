@@ -23,7 +23,6 @@ namespace BussinesLogicalLayer
         public SingleResponse<Storage> AddProduct(ProductIncomeDetail item)
         {
             SingleResponse<Storage> singleResponse = new SingleResponse<Storage>();
-            ProductBLL productBLL = new ProductBLL();
             Storage storage = new Storage();
             storage.ProductsID = item.IDProduct;
 
@@ -31,7 +30,7 @@ namespace BussinesLogicalLayer
             if (storageDAO.GetQuantityByIDProducts(item).Quantity == 0)
             {
                 
-                item.Quantity += storageDAO.GetQuantityByIDProducts(item).Quantity;
+                item.Quantity = storageDAO.GetQuantityByIDProducts(item).Quantity;
                 storage.Quantity = item.Quantity;
                 Update(storage);
             }
