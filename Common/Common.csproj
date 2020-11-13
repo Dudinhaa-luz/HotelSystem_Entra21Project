@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\ConnectionHelper.cs" />
+    <Compile Include="Infrastructure\SearchObject.cs" />
     <Compile Include="QueryResponse.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

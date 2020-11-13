@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataAccessObject;
 using Common;
 using Entities;
-using DataAccessObject.Infrastructure;
+using BussinesLogicalLayer;
+using Common.Infrastructure;
 
 namespace PresentationLayer {
     public partial class FormUpdateClient : Form {
@@ -18,17 +18,14 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        ClientDAO clientDAO = new ClientDAO();
+        ClientBLL clientBLL = new ClientBLL();
         Client client = new Client();
-        SearchObject search = new SearchObject();
-
-
+        SearchObject searchObject = new SearchObject();
 
         private void FormUpdateClient_Load(object sender, EventArgs e) {
 
             cmbSearch.SelectedIndex = 1;
-            dgvClients.DataSource = clientDAO.GetAllClientsByActive().Data;
-
+            dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
         }
 
         private void dgvClients_SelectionChanged_1(object sender, EventArgs e) {
@@ -39,21 +36,33 @@ namespace PresentationLayer {
             this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void btnUpdate_Click(object sender, EventArgs e) {
 
             client.Name = txtName.Text;
             client.PhoneNumber1 = txtPhoneNumber1.Text;
             client.PhoneNumber2 = txtPhoneNumber2.Text;
             client.Email = txtEmail.Text;
 
-            //dando erro (no método update cai direto no catch)- tem que passar pelo BLL
-
-            MessageBox.Show(clientDAO.Update(client).Message);
+            MessageBox.Show(clientBLL.Update(client).Message);
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            //dgvClients.DataSource = clientDAO.GetAllClientsByName(search).Data;
+
+            if (cmbSearch.Text == "Nome")
+            {
+                searchObject.SearchName = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByName(searchObject);
+            }
+            else if (cmbSearch.Text == "CPF")
+            {
+                searchObject.SearchCPF = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByCPF(searchObject);
+            }
+            else
+            {
+                searchObject.SearchID = Convert.ToInt32(txtSource.Text);
+                dgvClients.DataSource = clientBLL.GetClientsByID(searchObject.SearchID);
+            }
         }
     }
 }
