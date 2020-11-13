@@ -152,14 +152,14 @@ namespace BussinesLogicalLayer {
             if (string.IsNullOrWhiteSpace(item.ContactName)) {
                 AddError("O nome de contato deve ser informado.");
             } else if (item.ContactName.Length < 3 || item.CompanyName.Length < 80) {
-                AddError("A razão social deve conter entre 3 e 80 caracteres.");
+                AddError("O nome de contato deve conter entre 3 e 80 caracteres.");
             }
 
             if (string.IsNullOrWhiteSpace(item.Email)) {
                 AddError("O Email deve ser informado.");
             }
 
-                if (string.IsNullOrWhiteSpace(item.PhoneNumber)) {
+            if (string.IsNullOrWhiteSpace(item.PhoneNumber)) {
                 AddError("O telefone deve ser informado!");
             } else if (item.PhoneNumber.Length < 12) {
                 AddError("O telefone deve conter 12 caracteres");

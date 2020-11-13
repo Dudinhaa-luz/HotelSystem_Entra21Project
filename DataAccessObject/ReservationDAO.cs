@@ -24,8 +24,9 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO RESERVATIONS (DATARESERVA, IDROOMS, IDCLIENTS) VALUES (@DATARESERVA, @IDROOMS, @IDCLIENTS)";
+            "INSERT INTO RESERVATIONS (DATARESERVA, DATAPREVISAOSAIDA, IDROOMS, IDCLIENTS) VALUES (@DATARESERVA, @DATAPREVISAOSAIDA, @IDROOMS, @IDCLIENTS)";
             command.Parameters.AddWithValue("@DATARESERVA", reservation.ReservationDate);
+            command.Parameters.AddWithValue("@DATAPREVISAOSAIDA", reservation.ExitDatePrevision);
             command.Parameters.AddWithValue("@IDROOMS", reservation.RoomID);
             command.Parameters.AddWithValue("@IDCLIENTS", reservation.ClientID);
 
@@ -60,8 +61,9 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE RESERVATION SET DATARESERVA = @DATARESERVA, IDROOMS = @IDROOMS, IDCLIENTS = @IDCLIENTS WHERE ID = @ID";
+                "UPDATE RESERVATIONS SET DATARESERVA = @DATARESERVA, DATAPREVISAOSAIDA = @DATAPREVISAOSAIDA, IDROOMS = @IDROOMS, IDCLIENTS = @IDCLIENTS WHERE ID = @ID";
             command.Parameters.AddWithValue("@DATARESERVA", reservation.ReservationDate);
+            command.Parameters.AddWithValue("@DATAPREVISAOSAIDA", reservation.ExitDatePrevision);
             command.Parameters.AddWithValue("@IDROOMS", reservation.RoomID);
             command.Parameters.AddWithValue("@IDCLIENTS", reservation.ClientID);
             command.Parameters.AddWithValue("@ID", reservation.ID);
@@ -145,7 +147,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+            command.CommandText = "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
                                   "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
                                   "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
 
@@ -164,6 +166,7 @@ namespace DataAccessObject
                     ReservationQueryModel reservation = new ReservationQueryModel();
                     reservation.ReservationID = (int)reader["ID"];
                     reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.ReservationExitDatePrevision = (DateTime)reader["DATAPREVISAOSAIDA"];
                     reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
                     reservation.ClientName = (string)reader["NOME"];
                     reservation.ClientCPF = (string)reader["CPF"];
@@ -201,9 +204,9 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
-                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
-                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE R.DATARESERVA = @DATARESERVA";
+                "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
 
             command.Parameters.AddWithValue("@DATARESERVA", search.SearchDate);
             command.Connection = connection;
@@ -219,6 +222,7 @@ namespace DataAccessObject
                     ReservationQueryModel reservation = new ReservationQueryModel();
                     reservation.ReservationID = (int)reader["ID"];
                     reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.ReservationExitDatePrevision = (DateTime)reader["DATAPREVISAOSAIDA"];
                     reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
                     reservation.ClientName = (string)reader["NOME"];
                     reservation.ClientCPF = (string)reader["CPF"];
@@ -256,9 +260,9 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
-                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
-                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE RO.NUMEROQUARTO = @NUMEROQUARTO";
+                "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
 
             command.Parameters.AddWithValue("@NUMEROQUARTO", search.SearchNumberRoom);
             command.Connection = connection;
@@ -274,6 +278,7 @@ namespace DataAccessObject
                     ReservationQueryModel reservation = new ReservationQueryModel();
                     reservation.ReservationID = (int)reader["ID"];
                     reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.ReservationExitDatePrevision = (DateTime)reader["DATAPREVISAOSAIDA"];
                     reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
                     reservation.ClientName = (string)reader["NOME"];
                     reservation.ClientCPF = (string)reader["CPF"];
@@ -311,9 +316,10 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT R.ID, R.DATARESERVA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
-                "FROM RESERVATIONS R INNER JOIN ROOMS R ON R.IDROOMS = RO.ID" +
-                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE C.CPF = @CPF";
+               "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
+
             command.Parameters.AddWithValue("@CPF", search.SearchCPF);
             command.Connection = connection;
             try
@@ -328,6 +334,7 @@ namespace DataAccessObject
                     ReservationQueryModel reservation = new ReservationQueryModel();
                     reservation.ReservationID = (int)reader["ID"];
                     reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.ReservationExitDatePrevision = (DateTime)reader["DATAPREVISAOSAIDA"];
                     reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
                     reservation.ClientName = (string)reader["NOME"];
                     reservation.ClientCPF = (string)reader["CPF"];
