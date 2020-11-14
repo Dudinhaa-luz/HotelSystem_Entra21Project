@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Infrastructure;
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
 using Entities;
@@ -12,9 +13,10 @@ namespace BussinesLogicalLayer
     public class ReservationBLL : BaseValidator<Reservation>
     {
         private ReservationDAO reservationDAO = new ReservationDAO();
-        public Response Insert(Reservation item)
+        public Response Insert(Reservation item, Room room)
         {
             Response response = new Response();
+
             if (response.Success)
             {
                 return reservationDAO.Insert(item);
