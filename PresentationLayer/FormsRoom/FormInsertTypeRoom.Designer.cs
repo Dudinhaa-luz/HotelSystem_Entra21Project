@@ -45,10 +45,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(561, 106);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(366, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(462, 44);
+            this.label1.Size = new System.Drawing.Size(371, 36);
             this.label1.TabIndex = 18;
             this.label1.Text = "Cadastro Tipo de Quarto";
             // 
@@ -60,34 +59,31 @@
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsert.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsert.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnInsert.Location = new System.Drawing.Point(569, 448);
-            this.btnInsert.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInsert.Location = new System.Drawing.Point(427, 364);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(395, 55);
+            this.btnInsert.Size = new System.Drawing.Size(296, 45);
             this.btnInsert.TabIndex = 7;
             this.btnInsert.Text = "CADASTRAR";
             this.btnInsert.UseVisualStyleBackColor = false;
-            this.btnInsert.Click += new System.EventHandler(this.button1_Click);
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(599, 206);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(403, 162);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 23);
+            this.label2.Size = new System.Drawing.Size(87, 21);
             this.label2.TabIndex = 20;
             this.label2.Text = "Descrição";
             // 
             // txtDescription
             // 
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(708, 203);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDescription.Location = new System.Drawing.Point(485, 160);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(399, 30);
+            this.txtDescription.Size = new System.Drawing.Size(300, 26);
             this.txtDescription.TabIndex = 1;
             // 
             // label3
@@ -95,20 +91,18 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(599, 260);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(403, 206);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 23);
+            this.label3.Size = new System.Drawing.Size(50, 21);
             this.label3.TabIndex = 21;
             this.label3.Text = "Valor";
             // 
             // txtValue
             // 
             this.txtValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValue.Location = new System.Drawing.Point(708, 260);
-            this.txtValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtValue.Location = new System.Drawing.Point(485, 206);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(110, 30);
+            this.txtValue.Size = new System.Drawing.Size(84, 26);
             this.txtValue.TabIndex = 22;
             // 
             // label4
@@ -116,20 +110,18 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(599, 320);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(403, 255);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(159, 23);
+            this.label4.Size = new System.Drawing.Size(126, 21);
             this.label4.TabIndex = 23;
             this.label4.Text = "Valor Da Diária";
             // 
             // txtDailyValue
             // 
             this.txtDailyValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDailyValue.Location = new System.Drawing.Point(766, 316);
-            this.txtDailyValue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDailyValue.Location = new System.Drawing.Point(528, 252);
             this.txtDailyValue.Name = "txtDailyValue";
-            this.txtDailyValue.Size = new System.Drawing.Size(100, 30);
+            this.txtDailyValue.Size = new System.Drawing.Size(76, 26);
             this.txtDailyValue.TabIndex = 24;
             // 
             // label5
@@ -137,28 +129,26 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(599, 367);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(403, 293);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(267, 23);
+            this.label5.Size = new System.Drawing.Size(213, 21);
             this.label5.TabIndex = 25;
             this.label5.Text = "Quantidade De Hóspedes";
             // 
             // txtGuestNumber
             // 
             this.txtGuestNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGuestNumber.Location = new System.Drawing.Point(874, 363);
-            this.txtGuestNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.txtGuestNumber.Location = new System.Drawing.Point(616, 291);
             this.txtGuestNumber.Name = "txtGuestNumber";
-            this.txtGuestNumber.Size = new System.Drawing.Size(90, 30);
+            this.txtGuestNumber.Size = new System.Drawing.Size(68, 26);
             this.txtGuestNumber.TabIndex = 26;
             // 
             // FormInsertTypeRoom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1408, 655);
+            this.ClientSize = new System.Drawing.Size(1040, 532);
             this.Controls.Add(this.txtGuestNumber);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtDailyValue);
@@ -171,7 +161,6 @@
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormInsertTypeRoom";
             this.Text = "2";
             this.ResumeLayout(false);

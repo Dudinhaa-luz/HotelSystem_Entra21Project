@@ -1,4 +1,5 @@
-﻿using DataAccessObject;
+﻿using BussinesLogicalLayer;
+using DataAccessObject;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,18 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        Client client = new Client();
-        ClientDAO clientDAO = new ClientDAO();
+        Room room = new Room();
+        RoomBLL rommBLL = new RoomBLL();
 
-        private void button1_Click(object sender, EventArgs e) {
-            client.Name = txtNumber.Text;
+        private void btnInsert_Click(object sender, EventArgs e) {
+            room.NumberRoom = txtNumber.Text;
+            room.Description = Convert.ToString(cbDescription.SelectedItem);
+            rommBLL.Insert(room);
+        }
 
-            //ClientBll
+        private void FormInsertRoom_Load(object sender, EventArgs e)
+        {
+            cbDescription.Items.Add(rommBLL.GetRoomTypeDescription().Data);
         }
     }
 }

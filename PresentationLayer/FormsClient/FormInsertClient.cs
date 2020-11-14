@@ -1,5 +1,4 @@
 ﻿using BussinesLogicalLayer;
-using DataAccessObject;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,6 @@ namespace PresentationLayer {
             client.PhoneNumber2 = txtPhoneNumber2.Text;
             client.Email = txtEmail.Text;
             clientBLL.Insert(client);
-
         }
     }
 }

@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
+using Common.Infrastructure;
 
 namespace BussinesLogicalLayer {
     public class RoomTypeBLL : BaseValidator<RoomType> {
 
         RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
         public Response Insert(RoomType item) {
+            Validate(item);
             Response response = new Response();
             if (response.Success) {
                 return roomTypeDAO.Insert(item);
@@ -93,6 +95,31 @@ namespace BussinesLogicalLayer {
             return responseProducts;
         }
 
+        public override Response Validate(RoomType item)
+        {
+
+            if (string.IsNullOrWhiteSpace(Convert.ToString(item.Value)))
+            {
+                AddError("O valor do quarto deve ser informado.");
+            }
+            else if (string.IsNullOrWhiteSpace(Convert.ToString(item.DailyValue)))
+            {
+                AddError("O valor da diária do quarto deve ser informado.");
+            }
+            if (string.IsNullOrWhiteSpace(item.Description))
+            {
+                AddError("A descrição do quarto deve ser informada.");
+            }
+            else if (item.Description.Length > 100)
+            {
+                AddError("A descrição não pode conter mais de 100 caracteres");
+            }
+            else if (string.IsNullOrWhiteSpace(Convert.ToString(item.GuestNumber)))
+            {
+                AddError("A quantidade de hóspedes deve ser informado.");
+            }
+            return base.Validate(item);
+        }
 
     }
 }

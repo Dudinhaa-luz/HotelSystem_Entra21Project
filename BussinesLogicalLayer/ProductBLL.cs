@@ -14,6 +14,7 @@ namespace BussinesLogicalLayer
         private ProductDAO producteDAO = new ProductDAO();
         public Response Insert(Product item)
         {
+            Validate(item);
             Response response = new Response();
             if (response.Success)
             {
@@ -23,6 +24,7 @@ namespace BussinesLogicalLayer
         }
         public Response Update(Product item)
         {
+            Validate(item);
             Response response = new Response();
             if (response.Success)
             {
@@ -52,7 +54,6 @@ namespace BussinesLogicalLayer
         {
             return producteDAO.Delete(item);
         }
-
         public double ProfitMarginCalculation(Product item)
         {
             double margemLucro = (item.Price / 100) * item.ProfitMargin;
