@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Infrastructure;
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
 using Entities;
@@ -14,8 +15,6 @@ namespace BussinesLogicalLayer
         private CheckoutClientDAO checkoutClientDAO = new CheckoutClientDAO();
         private RoomDAO roomDAO = new RoomDAO();
         private RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
-
-
 
         public Response Insert(CheckoutClient item)
         {
@@ -98,8 +97,6 @@ namespace BussinesLogicalLayer
                 checkout.ExitOnTime = false;
                 checkout.Penalty = dailyValue * days;
             }
-
-           
 
         }
 

@@ -1,10 +1,12 @@
 ﻿using Common;
+using Common.Infrastructure;
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
 using Entities;
 using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Transactions;
 
@@ -16,6 +18,10 @@ namespace BussinesLogicalLayer {
 
 
         public Response Insert(ProductOutput item) {
+
+            item.ExitDate = DateTime.Now;
+            item.TotalValue = item.Items.Sum(w => w.Price * w.Quantity);
+
             Response response = Validate(item);
             bool success = true;
             if (response.Success) {
@@ -36,7 +42,6 @@ namespace BussinesLogicalLayer {
                                 break;
                             }
                         }
-
                     }
                     if (success) {
                         scope.Complete();

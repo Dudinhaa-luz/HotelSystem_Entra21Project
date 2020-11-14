@@ -6,6 +6,7 @@ using Entities;
 using Entities.QueryModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Transactions;
 
@@ -17,11 +18,15 @@ namespace BussinesLogicalLayer
         ProductsIncomeDAO productsIncomeDAO = new ProductsIncomeDAO();
         StorageBLL storage = new StorageBLL();
 
-
         public Response Insert(ProductIncome item) {
             Response response = Validate(item);
+
+            item.EntryDate = DateTime.Now;
+            item.TotalValue = item.Items.Sum(w => w.Price * w.Quantity);
+
             bool success = true;
             if (response.Success) {
+
                 using (TransactionScope scope = new TransactionScope()) {
                     SingleResponse<int> responseInsert = productsIncomeDAO.Insert(item);
                     if (responseInsert.Success) {
@@ -34,16 +39,13 @@ namespace BussinesLogicalLayer
                             storage.AddProduct(item.Items[i]);
 
                             if (!r.Success) {
-
                                 success = false;
                                 break;
                             }
                         }
-
                     }
                     if (success) {
                         scope.Complete();
-
                     }
                 }
             }
