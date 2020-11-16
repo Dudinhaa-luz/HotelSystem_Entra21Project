@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Infrastructure;
 using DataAccessObject.Infrastructure;
 using Entities;
 using Entities.QueryModel;
@@ -293,6 +294,48 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+        public QueryResponse<RoomQueryModel> GetRoomTypeDescription()
+        {
+            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT DESCRICAO FROM ROOMS_TYPE";
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
+
+                while (reader.Read())
+                {
+                    RoomQueryModel room = new RoomQueryModel();
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    rooms.Add(room);
+                }
+                response.Data = rooms;
+                
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
 
 
     }

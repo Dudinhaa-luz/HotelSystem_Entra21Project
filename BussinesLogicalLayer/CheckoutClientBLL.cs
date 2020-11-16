@@ -16,8 +16,6 @@ namespace BussinesLogicalLayer
         private RoomDAO roomDAO = new RoomDAO();
         private RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
 
-
-
         public Response Insert(CheckoutClient item)
         {
             Response response = new Response();
@@ -99,8 +97,6 @@ namespace BussinesLogicalLayer
                 checkout.ExitOnTime = false;
                 checkout.Penalty = dailyValue * days;
             }
-
-           
 
         }
 

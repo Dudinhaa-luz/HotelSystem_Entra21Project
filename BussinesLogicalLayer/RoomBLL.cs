@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Infrastructure;
 using DataAccessObject;
 using DataAccessObject.Infrastructure;
 using Entities;
@@ -8,11 +9,12 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BussinesLogicalLayer {
-    class RoomBLL : BaseValidator<Room> {
+    public class RoomBLL : BaseValidator<Room> {
 
         private RoomDAO roomDAO = new RoomDAO();
 
         public Response Insert(Room item) {
+            Validate(item);
             Response response = new Response();
             if (response.Success) {
                 return roomDAO.Insert(item);
@@ -47,6 +49,13 @@ namespace BussinesLogicalLayer {
 
             return responseRooms;
         }
+        public QueryResponse<RoomQueryModel> GetRoomTypeDescription()
+        {
+            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetRoomTypeDescription();
+            List<RoomQueryModel> temp = responseRooms.Data;
+
+            return responseRooms;
+        }
 
         public SingleResponse<RoomQueryModel> GetById(int id) {
 
@@ -62,7 +71,6 @@ namespace BussinesLogicalLayer {
 
             return responseRooms;
         }
-
 
         public override Response Validate(Room item) {
 
