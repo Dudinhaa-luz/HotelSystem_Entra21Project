@@ -29,7 +29,6 @@
             this.dgvClients = new System.Windows.Forms.DataGridView();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtPhoneNumber2 = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPhoneNumber1 = new System.Windows.Forms.MaskedTextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -39,6 +38,7 @@
             this.txtSource = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSearch = new System.Windows.Forms.ComboBox();
+            this.txtPhoneNumber2 = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,16 +102,6 @@
             this.label6.TabIndex = 41;
             this.label6.Text = "E-mail";
             // 
-            // txtPhoneNumber2
-            // 
-            this.txtPhoneNumber2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNumber2.Location = new System.Drawing.Point(1141, 255);
-            this.txtPhoneNumber2.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPhoneNumber2.Mask = "+00 (00)00000-0000";
-            this.txtPhoneNumber2.Name = "txtPhoneNumber2";
-            this.txtPhoneNumber2.Size = new System.Drawing.Size(212, 30);
-            this.txtPhoneNumber2.TabIndex = 34;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -129,7 +119,7 @@
             this.txtPhoneNumber1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhoneNumber1.Location = new System.Drawing.Point(888, 255);
             this.txtPhoneNumber1.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPhoneNumber1.Mask = "+00 (00)00000-0000";
+            this.txtPhoneNumber1.Mask = "(00)00000-0000";
             this.txtPhoneNumber1.Name = "txtPhoneNumber1";
             this.txtPhoneNumber1.Size = new System.Drawing.Size(212, 30);
             this.txtPhoneNumber1.TabIndex = 33;
@@ -220,6 +210,16 @@
             this.cmbSearch.Size = new System.Drawing.Size(247, 33);
             this.cmbSearch.TabIndex = 46;
             // 
+            // txtPhoneNumber2
+            // 
+            this.txtPhoneNumber2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhoneNumber2.Location = new System.Drawing.Point(1141, 255);
+            this.txtPhoneNumber2.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPhoneNumber2.Mask = "(00)00000-0000";
+            this.txtPhoneNumber2.Name = "txtPhoneNumber2";
+            this.txtPhoneNumber2.Size = new System.Drawing.Size(212, 30);
+            this.txtPhoneNumber2.TabIndex = 34;
+            // 
             // FormUpdateClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -255,7 +255,6 @@
         private System.Windows.Forms.DataGridView dgvClients;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.MaskedTextBox txtPhoneNumber2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox txtPhoneNumber1;
         private System.Windows.Forms.TextBox txtName;
@@ -265,5 +264,6 @@
         private System.Windows.Forms.TextBox txtSource;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbSearch;
+        private System.Windows.Forms.MaskedTextBox txtPhoneNumber2;
     }
 }

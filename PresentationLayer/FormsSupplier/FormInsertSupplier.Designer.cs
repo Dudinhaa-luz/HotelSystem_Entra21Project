@@ -31,11 +31,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnInsert = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.txtCPF = new System.Windows.Forms.MaskedTextBox();
+            this.txtCompanyName = new System.Windows.Forms.TextBox();
+            this.txtCNPJ = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtPhoneNumber1 = new System.Windows.Forms.MaskedTextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.MaskedTextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -83,24 +83,24 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Razão Social";
             // 
-            // txtName
+            // txtCompanyName
             // 
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(529, 210);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(465, 30);
-            this.txtName.TabIndex = 1;
+            this.txtCompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCompanyName.Location = new System.Drawing.Point(529, 210);
+            this.txtCompanyName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCompanyName.Name = "txtCompanyName";
+            this.txtCompanyName.Size = new System.Drawing.Size(465, 30);
+            this.txtCompanyName.TabIndex = 1;
             // 
-            // txtCPF
+            // txtCNPJ
             // 
-            this.txtCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCPF.Location = new System.Drawing.Point(527, 320);
-            this.txtCPF.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCPF.Mask = "00,000,000/0000-00";
-            this.txtCPF.Name = "txtCPF";
-            this.txtCPF.Size = new System.Drawing.Size(192, 30);
-            this.txtCPF.TabIndex = 22;
+            this.txtCNPJ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCNPJ.Location = new System.Drawing.Point(527, 320);
+            this.txtCNPJ.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCNPJ.Mask = "00,000,000/0000-00";
+            this.txtCNPJ.Name = "txtCNPJ";
+            this.txtCNPJ.Size = new System.Drawing.Size(192, 30);
+            this.txtCNPJ.TabIndex = 22;
             // 
             // label3
             // 
@@ -126,15 +126,15 @@
             this.label5.TabIndex = 27;
             this.label5.Text = "Telefone";
             // 
-            // txtPhoneNumber1
+            // txtPhoneNumber
             // 
-            this.txtPhoneNumber1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNumber1.Location = new System.Drawing.Point(527, 375);
-            this.txtPhoneNumber1.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPhoneNumber1.Mask = "+00 (00)00000-0000";
-            this.txtPhoneNumber1.Name = "txtPhoneNumber1";
-            this.txtPhoneNumber1.Size = new System.Drawing.Size(192, 30);
-            this.txtPhoneNumber1.TabIndex = 4;
+            this.txtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhoneNumber.Location = new System.Drawing.Point(527, 375);
+            this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPhoneNumber.Mask = "+00 (00)00000-0000";
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(192, 30);
+            this.txtPhoneNumber.TabIndex = 4;
             // 
             // txtEmail
             // 
@@ -189,10 +189,10 @@
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtPhoneNumber1);
+            this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtCPF);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtCNPJ);
+            this.Controls.Add(this.txtCompanyName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.label1);
@@ -211,11 +211,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.MaskedTextBox txtCPF;
+        private System.Windows.Forms.TextBox txtCompanyName;
+        private System.Windows.Forms.MaskedTextBox txtCNPJ;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MaskedTextBox txtPhoneNumber1;
+        private System.Windows.Forms.MaskedTextBox txtPhoneNumber;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;

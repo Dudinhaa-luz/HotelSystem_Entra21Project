@@ -1,4 +1,5 @@
-﻿using DataAccessObject;
+﻿using BussinesLogicalLayer;
+using DataAccessObject;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,16 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        Client client = new Client();
-        ClientDAO clientDAO = new ClientDAO();
+        Supplier supplier = new Supplier();
+        SupplierBLL supplierBLL = new SupplierBLL();
 
         private void button1_Click(object sender, EventArgs e) {
-            client.Name = txtName.Text;
-            client.CPF = txtCPF.Text;
-            client.PhoneNumber1 = txtPhoneNumber1.Text;
-            client.Email = txtEmail.Text;
-
-            //ClientBll
+            supplier.CompanyName = txtCompanyName.Text;
+            supplier.ContactName = txtContactName.Text;
+            supplier.CNPJ = txtCNPJ.Text;
+            supplier.Email = txtEmail.Text;
+            supplier.PhoneNumber = txtPhoneNumber.Text;
+            supplierBLL.Insert(supplier);
         }
     }
 }

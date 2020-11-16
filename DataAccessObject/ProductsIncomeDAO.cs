@@ -8,6 +8,7 @@ using Entities;
 using System.Data.SqlClient;
 using DataAccessObject.Infrastructure;
 using Entities.QueryModel;
+using Common.Infrastructure;
 
 namespace DataAccessObject
 {
