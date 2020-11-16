@@ -16,7 +16,8 @@ namespace BussinesLogicalLayer
         public Response Insert(Client item)
         {
             Response response = new Response();
-            if (response.Success)
+
+            if (Validate(item).Success)
             {
                 return clientDAO.Insert(item);
             }
@@ -25,7 +26,7 @@ namespace BussinesLogicalLayer
         public Response Update(Client item)
         {
             Response response = new Response();
-            if (response.Success)
+            if (Validate(item).Success)
             {
                 return clientDAO.Update(item);
             }
@@ -36,18 +37,26 @@ namespace BussinesLogicalLayer
             Response response = new Response();
             if (response.Success)
             {
+                Validate(item);
+
                 return clientDAO.UpdateActiveClient(item);
             }
             return response;
         }
         public Response Delete(Client item)
         {
+            Validate(item);
+
             return clientDAO.Delete(item);
         }
         public QueryResponse<Client> GetAllClientsByActive()
         {
             QueryResponse<Client> responseClients = clientDAO.GetAllClientsByActive();
             List<Client> temp = responseClients.Data;
+            if (temp == null)
+            {
+                return responseClients;
+            }
             foreach (Client item in temp)
             {
                 item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
@@ -132,6 +141,8 @@ namespace BussinesLogicalLayer
 
             AddError(item.Email.IsValidEmail());
 
+            AddError(item.RG.IsValidRG());
+
             if (string.IsNullOrWhiteSpace(item.Name))
             {
                 AddError("O nome deve ser informado.");
@@ -142,39 +153,13 @@ namespace BussinesLogicalLayer
             }
             for (int i = 0; i < item.Name.Length; i++)
             {
-                if (!char.IsLetter(item.Name[i]))
+                if (char.IsLetter(item.Name[i]) || item.Name == " ")
+                {
+                    break;
+                }
+                else
                 {
                     AddError("O nome deve contêr apenas letras.");
-                }
-            }
-            if (string.IsNullOrWhiteSpace(item.PhoneNumber1))
-            {
-                AddError("O telefone deve ser informado!");
-            }
-            else if (item.PhoneNumber1.Length < 12)
-            {
-                AddError("O telefone deve contêr 12 caracteres");
-            }
-            if (item.PhoneNumber2 != null)
-            {
-                if (item.PhoneNumber2.Length < 12)
-                {
-                    AddError("O telefone deve contêr 12 caracteres");
-                }
-            }
-            if (string.IsNullOrWhiteSpace(item.RG))
-            {
-                AddError("O RG deve ser informado!");
-            }
-            else if (item.RG.Length != 7)
-            {
-                AddError("O RG deve contêr 7 caracteres.");
-            }
-            for (int i = 0; i < item.RG.Length; i++)
-            {
-                if (char.IsLetter(item.RG[i]))
-                {
-                    AddError("RG deve contêr apenas números.");
                 }
             }
 
@@ -183,6 +168,7 @@ namespace BussinesLogicalLayer
             {
                 AddError(responseCPF.Message);
             }
+            
             return base.Validate(item);
         }
     }

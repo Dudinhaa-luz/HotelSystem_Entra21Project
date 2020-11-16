@@ -25,7 +25,10 @@ namespace PresentationLayer {
         private void FormUpdateClient_Load(object sender, EventArgs e) {
 
             cmbSearch.SelectedIndex = 1;
-            dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
+            if (!(clientBLL.GetAllClientsByActive() == null))
+            {
+                dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
+            }
         }
 
         private void dgvClients_SelectionChanged_1(object sender, EventArgs e) {

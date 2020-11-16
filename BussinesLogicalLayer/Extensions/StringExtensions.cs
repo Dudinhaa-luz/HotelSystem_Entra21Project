@@ -50,12 +50,15 @@ namespace BussinesLogicalLayer.Extensions
 		}
         public static string IsValidPhoneNumber (this string phonenumber)
 		{
-			Regex regex = new Regex(@"^(\([0 - 9]{ 2 }\))\s([9]{ 1})?([0 - 9]{ 4})-([0 - 9]{ 4})$");
-            if (regex.IsMatch(phonenumber))
-            {
-				return "";
-            }
-			return "Telefone inválido";
+			if (string.IsNullOrEmpty(phonenumber))
+			{
+				return "Telefone inválido.";
+			}
+			if (phonenumber.Length > 11 && phonenumber.Length < 9)
+			{
+				return "Telefone inválido.";
+			}
+			return "";
 		}
         public static string IsValidEmail (this string email)
         {
@@ -106,5 +109,29 @@ namespace BussinesLogicalLayer.Extensions
 			}
 			return "CNPJ inválido.";
 		}
-    }
+		public static string IsValidRG(this string rg)
+		{
+			rg = rg.Replace(".", "").Replace("-", "");
+
+			if (string.IsNullOrWhiteSpace(rg))
+			{
+
+				return ("O RG deve ser informado!");
+			}
+			for (int i = 0; i < rg.Length; i++)
+			{
+				if (char.IsLetter(rg[i]))
+				{
+					return ("RG deve contêr apenas números.");
+				}
+			}
+			if (rg.Length != 7)
+			{
+				return ("O RG deve contêr 7 caracteres.");
+			}
+
+			return "";
+		}
+
+	}
 }

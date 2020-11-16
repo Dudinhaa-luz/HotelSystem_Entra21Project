@@ -11,6 +11,7 @@ using DataAccessObject;
 using Common;
 using Entities;
 using DataAccessObject.Infrastructure;
+using Common.Infrastructure;
 
 namespace PresentationLayer {
     public partial class FormUpdateEmployee : Form {
