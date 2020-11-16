@@ -40,5 +40,10 @@ namespace PresentationLayer {
         private void FormInitialScreem_Load(object sender, EventArgs e) {
             OpenForm(new FormInsertProduct());
         }
+
+        private void btnStorage_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormStorage());
+        }
     }
 }

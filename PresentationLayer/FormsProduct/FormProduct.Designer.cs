@@ -31,12 +31,14 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.btnInsert = new System.Windows.Forms.Button();
             this.pnlInitialProduct = new System.Windows.Forms.Panel();
+            this.btnStorage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Controls.Add(this.btnStorage);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.btnDelete);
@@ -143,6 +145,25 @@
             this.pnlInitialProduct.Size = new System.Drawing.Size(1408, 655);
             this.pnlInitialProduct.TabIndex = 1;
             // 
+            // btnStorage
+            // 
+            this.btnStorage.BackColor = System.Drawing.Color.Black;
+            this.btnStorage.FlatAppearance.BorderSize = 0;
+            this.btnStorage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnStorage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStorage.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStorage.ForeColor = System.Drawing.Color.White;
+            this.btnStorage.Image = global::PresentationLayer.Properties.Resources.Estoque1;
+            this.btnStorage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStorage.Location = new System.Drawing.Point(916, 9);
+            this.btnStorage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStorage.Name = "btnStorage";
+            this.btnStorage.Size = new System.Drawing.Size(285, 39);
+            this.btnStorage.TabIndex = 7;
+            this.btnStorage.Text = "ESTOQUE";
+            this.btnStorage.UseVisualStyleBackColor = false;
+            this.btnStorage.Click += new System.EventHandler(this.btnStorage_Click);
+            // 
             // FormProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -171,5 +192,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Panel pnlInitialProduct;
+        private System.Windows.Forms.Button btnStorage;
     }
 }

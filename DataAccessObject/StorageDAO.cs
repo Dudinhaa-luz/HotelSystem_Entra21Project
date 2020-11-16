@@ -100,7 +100,7 @@ namespace DataAccessObject
             }
 
         }
-        public QueryResponse<Storage> GetAllStorageByIDProducts()
+        public QueryResponse<Storage> GetAllStorageByIDProducts(Product id)
         {
             QueryResponse<Storage> response = new QueryResponse<Storage>();
 
@@ -109,6 +109,7 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT * FROM STORAGE WHERE IDPRODUCTS = @IDPRODUCTS";
+            command.Parameters.AddWithValue("@IDPRODUCTS", id.ID);
 
             command.Connection = connection;
 

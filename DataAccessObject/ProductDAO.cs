@@ -278,6 +278,59 @@ namespace DataAccessObject
 
         }
 
+        public QueryResponse<Product> GetIDProductByName()
+        {
+            QueryResponse<Product> response = new QueryResponse<Product>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT ID FROM PRODUCTS WHERE NOME = @NOME";
+
+            command.Connection = connection;
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<Product> products = new List<Product>();
+
+                while (reader.Read())
+                {
+                    Product product = new Product();
+                    product.ID = (int)reader["ID"];
+                    product.Name = (string)reader["NOME"];
+                    product.Description = (string)reader["DESCRICAO"];
+                    product.Storage = (double)reader["ESTOQUE"];
+                    product.ProfitMargin = (double)reader["MARGEMLUCRO"];
+                    product.Price = (double)reader["PRECO"];
+                    product.Validity = (DateTime)reader["VALIDADE"];
+                    product.IsActive = (bool)reader["ISATIVO"];
+                    products.Add(product);
+                }
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso.";
+                response.Data = products;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
         public QueryResponse<Product> GetAllProductsByInactive()
         {
             QueryResponse<Product> response = new QueryResponse<Product>();

@@ -85,12 +85,12 @@ namespace BussinesLogicalLayer
             }
             return response;
         }
-        public QueryResponse<Storage> GetAllStorageByIDProducts()
+        public QueryResponse<Storage> GetAllStorageByIDProducts(Product item)
         {
             QueryResponse<Storage> response = new QueryResponse<Storage>();
             if (response.Success)
             {
-                return storageDAO.GetAllStorageByIDProducts();
+                return storageDAO.GetAllStorageByIDProducts(item);
             }
             return response;
         }
