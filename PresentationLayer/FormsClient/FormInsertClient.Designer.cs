@@ -149,7 +149,7 @@
             this.txtPhoneNumber1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhoneNumber1.Location = new System.Drawing.Point(529, 315);
             this.txtPhoneNumber1.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPhoneNumber1.Mask = "+00 (00)00000-0000";
+            this.txtPhoneNumber1.Mask = "(00)00000-0000";
             this.txtPhoneNumber1.Name = "txtPhoneNumber1";
             this.txtPhoneNumber1.Size = new System.Drawing.Size(212, 30);
             this.txtPhoneNumber1.TabIndex = 4;
@@ -159,7 +159,7 @@
             this.txtPhoneNumber2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhoneNumber2.Location = new System.Drawing.Point(783, 315);
             this.txtPhoneNumber2.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPhoneNumber2.Mask = "+00 (00)00000-0000";
+            this.txtPhoneNumber2.Mask = "(00)00000-0000";
             this.txtPhoneNumber2.Name = "txtPhoneNumber2";
             this.txtPhoneNumber2.Size = new System.Drawing.Size(212, 30);
             this.txtPhoneNumber2.TabIndex = 5;

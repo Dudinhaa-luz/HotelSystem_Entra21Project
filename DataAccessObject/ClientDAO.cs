@@ -23,24 +23,22 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL,@ATIVO) SELECT SCOPE_IDENTITY()";
+            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL)";
             command.Parameters.AddWithValue("@NOME", client.Name);
             command.Parameters.AddWithValue("@CPF", client.CPF);
             command.Parameters.AddWithValue("@RG", client.RG);
             command.Parameters.AddWithValue("@TELEFONE1", client.PhoneNumber1);
             command.Parameters.AddWithValue("@TELEFONE2", client.PhoneNumber2);
             command.Parameters.AddWithValue("@EMAIL", client.Email);
-            command.Parameters.AddWithValue("@ATIVO", true);
 
             command.Connection = connection;
 
             try
             {
                 connection.Open();
-                int idGerado = Convert.ToInt32(command.ExecuteScalar());
+                command.ExecuteNonQuery();
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
-                response.Data = idGerado;
             }
             catch (Exception ex)
             {

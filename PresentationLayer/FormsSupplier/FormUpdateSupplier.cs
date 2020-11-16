@@ -11,6 +11,8 @@ using DataAccessObject;
 using Common;
 using Entities;
 using DataAccessObject.Infrastructure;
+using Common.Infrastructure;
+using BussinesLogicalLayer;
 
 namespace PresentationLayer {
     public partial class FormUpdateSupplier : Form {
@@ -18,40 +20,53 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        ClientDAO clientDAO = new ClientDAO();
-        Client client = new Client();
+        SupplierBLL supplierBLL = new SupplierBLL();
+        Supplier supplier = new Supplier();
         SearchObject search = new SearchObject();
 
-
-
-        private void FormUpdateClient_Load(object sender, EventArgs e) {
-
+        private void FormUpdateSupplier_Load(object sender, EventArgs e)
+        {
             cmbSearch.SelectedIndex = 1;
-            dgvClients.DataSource = clientDAO.GetAllClientsByActive().Data;
-
+            dgvSuppliers.DataSource = supplierBLL.GetAllSuppliersByActive().Data;
         }
 
-        private void dgvClients_SelectionChanged_1(object sender, EventArgs e) {
-            this.txtName.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Name"].Value);
-            this.txtPhoneNumber1.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["PhoneNumber1"].Value);
-            this.txtEmail.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Email"].Value);
-            this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
+        private void dgvSuppliers_SelectionChanged(object sender, EventArgs e)
+        {
+            this.txtCompanyName.Text = Convert.ToString(this.dgvSuppliers.CurrentRow.Cells["CompanyName"].Value);
+            this.txtContactName.Text = Convert.ToString(this.dgvSuppliers.CurrentRow.Cells["ContactName"].Value);
+            this.txtPhoneNumber.Text = Convert.ToString(this.dgvSuppliers.CurrentRow.Cells["PhoneNumber"].Value);
+            this.txtEmail.Text = Convert.ToString(this.dgvSuppliers.CurrentRow.Cells["Email"].Value);
+            this.supplier.ID = Convert.ToInt32(this.dgvSuppliers.CurrentRow.Cells["ID"].Value);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void button1_Click(object sender, EventArgs e)
+        {
+            supplier.CompanyName = txtCompanyName.Text;
+            supplier.PhoneNumber = txtPhoneNumber.Text;
+            supplier.ContactName = txtContactName.Text;
+            supplier.Email = txtEmail.Text;
+            supplierBLL.Update(supplier);
 
-            client.Name = txtName.Text;
-            client.PhoneNumber1 = txtPhoneNumber1.Text;
-            client.Email = txtEmail.Text;
-
-            //dando erro (no método update cai direto no catch)- tem que passar pelo BLL
-
-            MessageBox.Show(clientDAO.Update(client).Message);
+            MessageBox.Show(supplierBLL.Update(supplier).Message);
         }
 
-        private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            //dgvClients.DataSource = clientDAO.GetAllClientsByName(search).Data;
+        private void txtSource_TextChanged(object sender, EventArgs e)
+        {
+            if (cmbSearch.Text == "Razão Social")
+            {
+                search.SearchName = txtSource.Text;
+                dgvSuppliers.DataSource = supplierBLL.GetAllSuppliersByCompanyName(search);
+            }
+            else if (cmbSearch.Text == "CNPJ")
+            {
+                search.SearchCPF = txtSource.Text;
+                dgvSuppliers.DataSource = supplierBLL.GetAllSuppliersByCNPJ(search);
+            }
+            else
+            {
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                dgvSuppliers.DataSource = supplierBLL.GetSuppliersById(search.SearchID);
+            }
         }
     }
 }
