@@ -1,6 +1,7 @@
 ﻿namespace PresentationLayer
 {
-    partial class FormLinkRoom {
+    partial class FormLinkClient
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
