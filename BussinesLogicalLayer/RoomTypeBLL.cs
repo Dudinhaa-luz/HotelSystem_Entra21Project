@@ -12,9 +12,8 @@ namespace BussinesLogicalLayer {
 
         RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
         public Response Insert(RoomType item) {
-            Validate(item);
             Response response = new Response();
-            if (response.Success) {
+            if (Validate(item).Success) {
                 return roomTypeDAO.Insert(item);
             }
             return response;
