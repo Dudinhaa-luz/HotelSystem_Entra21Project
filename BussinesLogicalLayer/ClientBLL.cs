@@ -26,7 +26,7 @@ namespace BussinesLogicalLayer
         public Response Update(Client item)
         {
             Response response = new Response();
-            if (Validate(item).Success)
+            if (ValidateUpdate(item).Success)
             {
                 return clientDAO.Update(item);
             }
@@ -37,7 +37,7 @@ namespace BussinesLogicalLayer
             Response response = new Response();
             if (response.Success)
             {
-                Validate(item);
+                ValidateUpdate(item);
 
                 return clientDAO.UpdateActiveClient(item);
             }
@@ -45,8 +45,6 @@ namespace BussinesLogicalLayer
         }
         public Response Delete(Client item)
         {
-            Validate(item);
-
             return clientDAO.Delete(item);
         }
         public QueryResponse<Client> GetAllClientsByActive()
@@ -59,12 +57,12 @@ namespace BussinesLogicalLayer
             }
             foreach (Client item in temp)
             {
-                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
-                item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
+                item.RG = item.RG.Insert(1, ".").Insert(5, ".");
+                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 if (item.PhoneNumber2 != null)
                 {
-                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 }
             }
             return responseClients;
@@ -133,7 +131,7 @@ namespace BussinesLogicalLayer
         }
         public override Response Validate(Client item)
         {
-            AddError(item.PhoneNumber1.IsValidPhoneNumber());
+             AddError(item.PhoneNumber1.IsValidPhoneNumber());
 
             AddError(item.PhoneNumber2.IsValidPhoneNumber());
 
@@ -170,6 +168,36 @@ namespace BussinesLogicalLayer
             }
             
             return base.Validate(item);
+        }
+        public override Response ValidateUpdate(Client item)
+        {
+            AddError(item.PhoneNumber1.IsValidPhoneNumber());
+
+            AddError(item.PhoneNumber2.IsValidPhoneNumber());
+
+            AddError(item.Email.IsValidEmail());
+
+            if (string.IsNullOrWhiteSpace(item.Name))
+            {
+                AddError("O nome deve ser informado.");
+            }
+            else if (item.Name.Length < 3 || item.Name.Length > 80)
+            {
+                AddError("O nome deve conter entre 3 e 80 caracteres.");
+            }
+            for (int i = 0; i < item.Name.Length; i++)
+            {
+                if (char.IsLetter(item.Name[i]) || item.Name == " ")
+                {
+                    break;
+                }
+                else
+                {
+                    AddError("O nome deve contêr apenas letras.");
+                }
+            }
+
+            return base.ValidateUpdate(item);
         }
     }
 }

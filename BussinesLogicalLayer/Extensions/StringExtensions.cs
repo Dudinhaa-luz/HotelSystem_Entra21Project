@@ -115,7 +115,6 @@ namespace BussinesLogicalLayer.Extensions
 
 			if (string.IsNullOrWhiteSpace(rg))
 			{
-
 				return ("O RG deve ser informado!");
 			}
 			for (int i = 0; i < rg.Length; i++)

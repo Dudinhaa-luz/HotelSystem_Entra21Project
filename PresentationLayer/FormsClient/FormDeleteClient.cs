@@ -23,7 +23,8 @@ namespace PresentationLayer {
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            clientBLL.Delete(client);
+            MessageBox.Show(clientBLL.Delete(client).Message);
+            dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
         }
 
         private void FormDeleteClient_Load(object sender, EventArgs e)

@@ -23,13 +23,14 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL)";
+            "INSERT INTO CLIENTS (NOME,CPF,RG,TELEFONE1,TELEFONE2,EMAIL,ISATIVO) VALUES (@NOME,@CPF,@RG,@TELEFONE1,@TELEFONE2,@EMAIL,@ISATIVO)";
             command.Parameters.AddWithValue("@NOME", client.Name);
             command.Parameters.AddWithValue("@CPF", client.CPF);
             command.Parameters.AddWithValue("@RG", client.RG);
             command.Parameters.AddWithValue("@TELEFONE1", client.PhoneNumber1);
             command.Parameters.AddWithValue("@TELEFONE2", client.PhoneNumber2);
             command.Parameters.AddWithValue("@EMAIL", client.Email);
+            command.Parameters.AddWithValue("@ISATIVO", true);
 
             command.Connection = connection;
 
@@ -191,7 +192,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM CLIENTS WHERE ATIVO = 1";
+            command.CommandText = "SELECT * FROM CLIENTS WHERE ISATIVO = 1";
 
             command.Connection = connection;
 
@@ -244,7 +245,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM CLIENTS WHERE ATIVO = 0";
+            command.CommandText = "SELECT * FROM CLIENTS WHERE ISATIVO = 0";
 
             command.Connection = connection;
 
@@ -298,7 +299,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM CLIENTS WHERE NOME LIKE %NOME% = @NOME";
+                "SELECT * FROM CLIENTS WHERE NOME LIKE '%NOME% = @NOME'";
             command.Parameters.AddWithValue("@NOME", search.SearchName);
             command.Connection = connection;
             try

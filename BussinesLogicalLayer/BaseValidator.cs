@@ -24,6 +24,12 @@ namespace BussinesLogicalLayer
             this.errors.Clear();
             return response;
         }
+        public virtual Response ValidateUpdate(T item)
+        {
+            Response response = CheckError();
+            this.errors.Clear();
+            return response;
+        }
         private Response CheckError()
         {
             Response r = new Response();
