@@ -15,8 +15,8 @@ using Common.Infrastructure;
 using BussinesLogicalLayer;
 
 namespace PresentationLayer {
-    public partial class FormUpdateClient : Form {
-        public FormUpdateClient() {
+    public partial class FormLinkClient : Form {
+        public FormLinkClient() {
             InitializeComponent();
         }
 
