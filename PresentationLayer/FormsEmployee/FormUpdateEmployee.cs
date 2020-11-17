@@ -19,7 +19,7 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        ClientDAO clientDAO = new ClientDAO();
+        //ClientDAO clientDAO = new ClientDAO();
         Client client = new Client();
         SearchObject search = new SearchObject();
 
@@ -28,7 +28,7 @@ namespace PresentationLayer {
         private void FormUpdateClient_Load(object sender, EventArgs e) {
 
             cmbSearch.SelectedIndex = 1;
-            dgvEmployees.DataSource = clientDAO.GetAllClientsByActive().Data;
+            //dgvEmployees.DataSource = clientDAO.GetAllClientsByActive().Data;
 
         }
 
@@ -47,7 +47,7 @@ namespace PresentationLayer {
 
             //dando erro (no método update cai direto no catch)- tem que passar pelo BLL
 
-            MessageBox.Show(clientDAO.Update(client).Message);
+            //MessageBox.Show(clientDAO.Update(client).Message);
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {

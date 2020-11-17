@@ -17,7 +17,6 @@ namespace PresentationLayer {
         }
 
         Client client = new Client();
-        ClientDAO clientDAO = new ClientDAO();
 
         private void button1_Click(object sender, EventArgs e) {
             //client.Name = txtName.Text;

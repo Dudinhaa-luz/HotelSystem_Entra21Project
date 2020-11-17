@@ -357,10 +357,6 @@
       <Project>{e6a2c3ff-7fbf-48c3-92fe-79de812799fd}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj">
-      <Project>{95285E0C-DA60-4100-A1F0-5EAF558AA5EA}</Project>
-      <Name>DataAccessObject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{B1C7D2E6-1CC0-4984-B64B-91A2A5A1F9CF}</Project>
       <Name>Entities</Name>

@@ -299,8 +299,8 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM CLIENTS WHERE NOME LIKE '%NOME% = @NOME'";
-            command.Parameters.AddWithValue("@NOME", search.SearchName);
+                "SELECT * FROM CLIENTS WHERE NOME LIKE @NOME";
+            command.Parameters.AddWithValue("@NOME", "%" + search.SearchName + "%");
             command.Connection = connection;
             try
             {

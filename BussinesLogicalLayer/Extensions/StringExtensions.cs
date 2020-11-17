@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace BussinesLogicalLayer.Extensions
 {
-    static class StringExtensions
+    public static class StringExtensions
     {
 		public static string IsValidCPF(this string cpf)
 		{
@@ -131,6 +131,25 @@ namespace BussinesLogicalLayer.Extensions
 
 			return "";
 		}
-
+		public static string RemoveMaskCPF(this string cpf)
+        {
+			cpf = cpf.Replace(".", "").Replace("-", "");
+			return cpf;
+		}
+		public static string RemoveMaskRG(this string rg)
+		{
+			rg = rg.Replace(".", "").Replace("-", "");
+			return rg;
+		}
+		public static string RemoveMaskCNPJ(this string cnpj)
+		{
+			cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+			return cnpj;
+		}
+		public static string RemoveMaskPhoneNumber(this string phonenumber)
+		{
+			phonenumber = phonenumber.Replace("(", "").Replace(")", "").Replace("-", "");
+			return phonenumber;
+		}
 	}
 }

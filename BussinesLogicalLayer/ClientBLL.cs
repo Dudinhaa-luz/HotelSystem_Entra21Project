@@ -15,10 +15,17 @@ namespace BussinesLogicalLayer
         private ClientDAO clientDAO = new ClientDAO();
         public Response Insert(Client item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
 
-            if (Validate(item).Success)
+            if (response.Success)
             {
+                item.RG = item.RG.RemoveMaskRG();
+                item.PhoneNumber1 = item.PhoneNumber1.RemoveMaskPhoneNumber();
+                if (item.PhoneNumber2 != null)
+                {
+                    item.PhoneNumber2 = item.PhoneNumber2.RemoveMaskPhoneNumber();
+                }
+                item.CPF = item.CPF.RemoveMaskCPF();
                 return clientDAO.Insert(item);
             }
             return response;
@@ -131,7 +138,7 @@ namespace BussinesLogicalLayer
         }
         public override Response Validate(Client item)
         {
-             AddError(item.PhoneNumber1.IsValidPhoneNumber());
+            AddError(item.PhoneNumber1.IsValidPhoneNumber());
 
             AddError(item.PhoneNumber2.IsValidPhoneNumber());
 
