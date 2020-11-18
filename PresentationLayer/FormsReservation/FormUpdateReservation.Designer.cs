@@ -1,6 +1,7 @@
 ﻿namespace PresentationLayer
 {
-    partial class FormUpdateClient {
+    partial class FormUpdateReservation
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>

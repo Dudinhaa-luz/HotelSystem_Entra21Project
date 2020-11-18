@@ -20,7 +20,7 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO EMPLOYEES (NOME, CPF, RG, ENDERECO, TELEFONE, EMAIL, SENHA, ISADM) VALUES(@NOME, @CPF, @RG, @ENDERECO, @TELEFONE, @EMAIL, @SENHA, @ISADM, @ISATIVO )";
+                "INSERT INTO EMPLOYEES (NOME, CPF, RG, ENDERECO, TELEFONE, EMAIL, SENHA, ISADM, ISATIVO) VALUES(@NOME, @CPF, @RG, @ENDERECO, @TELEFONE, @EMAIL, @SENHA, @ISADM, @ISATIVO )";
             command.Parameters.AddWithValue("@NOME", employee.Name);
             command.Parameters.AddWithValue("@CPF", employee.CPF);
             command.Parameters.AddWithValue("@RG", employee.RG);
