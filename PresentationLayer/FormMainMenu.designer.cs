@@ -520,6 +520,7 @@ namespace PresentationLayer
             this.btnSuppliers.TabIndex = 5;
             this.btnSuppliers.Text = "    Fornecedores";
             this.btnSuppliers.UseVisualStyleBackColor = false;
+            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
             // 
             // btnRooms
             // 

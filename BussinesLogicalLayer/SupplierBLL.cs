@@ -163,11 +163,7 @@ namespace BussinesLogicalLayer {
             }
             for (int i = 0; i < item.CompanyName.Length; i++)
             {
-                if (char.IsLetter(item.CompanyName[i]) || item.CompanyName == " ")
-                {
-                    break;
-                }
-                else
+                if (char.IsDigit(item.CompanyName[i]))
                 {
                     AddError("O nome deve contêr apenas letras.");
                 }

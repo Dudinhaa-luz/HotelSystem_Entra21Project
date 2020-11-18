@@ -82,5 +82,10 @@ namespace PresentationLayer
         {
             OpenForm(new FormEmployee());
         }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormSupplier());
+        }
     }
 }
