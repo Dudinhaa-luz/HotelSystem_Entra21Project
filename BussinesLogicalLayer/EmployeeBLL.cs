@@ -17,18 +17,22 @@ namespace BussinesLogicalLayer
 
         public Response Insert(Employee item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success)
             {
+                item.PhoneNumber = item.PhoneNumber.RemoveMaskPhoneNumber();
+                item.CPF = item.CPF.RemoveMaskCPF();
+                item.RG = item.RG.RemoveMaskRG();
                 return employeeDAO.Insert(item);
             }
             return response;
         }
         public Response Update(Employee item)
         {
-            Response response = new Response();
+            Response response = ValidateUpdate(item);
             if (response.Success)
             {
+                item.PhoneNumber = item.PhoneNumber.RemoveMaskPhoneNumber();
                 return employeeDAO.Update(item);
             }
             return response;
@@ -36,7 +40,7 @@ namespace BussinesLogicalLayer
 
         public Response UpdateActiveEmployee(Employee item)
         {
-            Response response = new Response();
+            Response response = ValidateUpdate(item);
             if (response.Success)
             {
                 return employeeDAO.UpdateActiveEmployee(item);
@@ -101,7 +105,7 @@ namespace BussinesLogicalLayer
             return responseEmployees;
         }
 
-        public SingleResponse<Employee> GetClientsByID(int id)
+        public SingleResponse<Employee> GetEmployeesByID(int id)
         {
             SingleResponse<Employee> responseEmployees = employeeDAO.GetById(id);
             Employee idgerado = responseEmployees.Data;
@@ -132,6 +136,8 @@ namespace BussinesLogicalLayer
 
             AddError(item.Email.IsValidEmail());
 
+            AddError(item.RG.IsValidRG());
+
             if (string.IsNullOrWhiteSpace(item.Name))
             {
                 AddError("O nome deve ser informado.");
@@ -140,36 +146,14 @@ namespace BussinesLogicalLayer
             {
                 AddError("O nome deve conter entre 3 e 80 caracteres.");
             }
-            for (int i = 0; i < item.Name.Length; i++)
-            {
-                if (!char.IsLetter(item.Name[i]))
-                {
+            for (int i = 0; i < item.Name.Length; i++) {
+                if (char.IsLetter(item.Name[i]) || item.Name == " ") {
+                    break;
+                } else {
                     AddError("O nome deve contêr apenas letras.");
                 }
             }
-            if (string.IsNullOrWhiteSpace(item.PhoneNumber))
-            {
-                AddError("O telefone deve ser informado!");
-            }
-            else if (item.PhoneNumber.Length < 12)
-            {
-                AddError("O telefone deve contêr 12 caracteres");
-            }
-            if (string.IsNullOrWhiteSpace(item.RG))
-            {
-                AddError("O RG deve ser informado!");
-            }
-            else if (item.RG.Length != 7)
-            {
-                AddError("O RG deve contêr 7 caracteres.");
-            }
-            for (int i = 0; i < item.RG.Length; i++)
-            {
-                if (char.IsLetter(item.RG[i]))
-                {
-                    AddError("RG deve contêr apenas números.");
-                }
-            }
+            
 
             Response responseCPF = employeeDAO.IsCPFUnique(item.CPF);
             if (!responseCPF.Success)
@@ -190,7 +174,7 @@ namespace BussinesLogicalLayer
         public void Hash(HashAlgorithm algoritmo) {
             _algoritmo = algoritmo;
         }
-        
+        0
         public string EncryptPassword(string senha) {
             var encodedValue = Encoding.UTF8.GetBytes(senha);
             var encryptedPassword = _algoritmo.ComputeHash(encodedValue);
