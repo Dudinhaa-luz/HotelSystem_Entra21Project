@@ -394,9 +394,9 @@ namespace DataAccessObject
             }
         }
 
-        public SingleResponse<Client> GetByID(int id)
+        public QueryResponse<Client> GetByID(int id)
         {
-            SingleResponse<Client> response = new SingleResponse<Client>();
+            QueryResponse<Client> response = new QueryResponse<Client>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -409,8 +409,9 @@ namespace DataAccessObject
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                List<Client> clients = new List<Client>();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Client client = new Client();
                     client.ID = (int)reader["ID"];
@@ -421,13 +422,12 @@ namespace DataAccessObject
                     client.PhoneNumber2 = (string)reader["TELEFONE2"];
                     client.Email = (string)reader["EMAIL"];
                     client.IsActive = (bool)reader["ISATIVO"];
-                    response.Message = "Dados selecionados com sucesso.";
-                    response.Success = true;
-                    response.Data = client;
-                    return response;
+
+                    clients.Add(client);
                 }
-                response.Message = "Funcionário não encontrado.";
-                response.Success = false;
+                response.Message = "Cliente encontrado.";
+                response.Success = true;
+                response.Data = clients;
                 return response;
             }
             catch (Exception ex)

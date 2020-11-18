@@ -112,6 +112,12 @@
     <Compile Include="FormsProduct\FormDeleteProduct.Designer.cs">
       <DependentUpon>FormDeleteProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsProduct\FormInsertEntryProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsProduct\FormInsertEntryProduct.Designer.cs">
+      <DependentUpon>FormInsertEntryProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormsProduct\FormInsertProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormsProduct\FormDeleteProduct.resx">
       <DependentUpon>FormDeleteProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsProduct\FormInsertEntryProduct.resx">
+      <DependentUpon>FormInsertEntryProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsProduct\FormInsertProduct.resx">
       <DependentUpon>FormInsertProduct.cs</DependentUpon>

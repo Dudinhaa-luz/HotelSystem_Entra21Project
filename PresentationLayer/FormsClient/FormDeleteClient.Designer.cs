@@ -37,23 +37,26 @@
             // 
             // cmbSearch
             // 
+            this.cmbSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbSearch.FormattingEnabled = true;
             this.cmbSearch.Items.AddRange(new object[] {
             "Nome",
             "CPF",
             "ID"});
-            this.cmbSearch.Location = new System.Drawing.Point(503, 86);
+            this.cmbSearch.Location = new System.Drawing.Point(671, 106);
+            this.cmbSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbSearch.Name = "cmbSearch";
-            this.cmbSearch.Size = new System.Drawing.Size(240, 28);
+            this.cmbSearch.Size = new System.Drawing.Size(319, 33);
             this.cmbSearch.TabIndex = 53;
             // 
             // txtSource
             // 
             this.txtSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSource.Location = new System.Drawing.Point(190, 86);
+            this.txtSource.Location = new System.Drawing.Point(253, 106);
+            this.txtSource.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(307, 26);
+            this.txtSource.Size = new System.Drawing.Size(408, 30);
             this.txtSource.TabIndex = 51;
             this.txtSource.TextChanged += new System.EventHandler(this.txtSource_TextChanged);
             // 
@@ -62,9 +65,10 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(43, 88);
+            this.label3.Location = new System.Drawing.Point(57, 108);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(141, 21);
+            this.label3.Size = new System.Drawing.Size(175, 23);
             this.label3.TabIndex = 52;
             this.label3.Text = "Pesquisar Cliente";
             // 
@@ -85,7 +89,8 @@
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvClients.EnableHeadersVisualStyles = false;
             this.dgvClients.GridColor = System.Drawing.Color.SteelBlue;
-            this.dgvClients.Location = new System.Drawing.Point(49, 139);
+            this.dgvClients.Location = new System.Drawing.Point(65, 171);
+            this.dgvClients.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvClients.Name = "dgvClients";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
@@ -102,7 +107,7 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvClients.Size = new System.Drawing.Size(947, 359);
+            this.dgvClients.Size = new System.Drawing.Size(1263, 442);
             this.dgvClients.TabIndex = 47;
             this.dgvClients.SelectionChanged += new System.EventHandler(this.dgvClients_SelectionChanged);
             // 
@@ -114,9 +119,10 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.Location = new System.Drawing.Point(749, 86);
+            this.btnDelete.Location = new System.Drawing.Point(999, 106);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(256, 28);
+            this.btnDelete.Size = new System.Drawing.Size(341, 34);
             this.btnDelete.TabIndex = 54;
             this.btnDelete.Text = "APAGAR";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -127,18 +133,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(353, 30);
+            this.label1.Location = new System.Drawing.Point(471, 37);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(326, 36);
+            this.label1.Size = new System.Drawing.Size(410, 44);
             this.label1.TabIndex = 55;
             this.label1.Text = "Exclusão de Cadastro";
             // 
             // FormDeleteClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1040, 532);
+            this.ClientSize = new System.Drawing.Size(1387, 655);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.cmbSearch);
@@ -146,6 +153,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgvClients);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormDeleteClient";
             this.Text = "FormDeleteClient";
             this.Load += new System.EventHandler(this.FormDeleteClient_Load);

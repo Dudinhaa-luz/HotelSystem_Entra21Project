@@ -23,7 +23,7 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO PRODUCTS (NOME,DESCRICAO,ESTOQUE,MARGEMLUCRO,PRECO,VALIDADE) VALUES (@NOME,@DESCRICAO,@ESTOQUE,@MARGEMLUCRO,@PRECO,@VALIDADE,@ISATIVO); SELECT SCOPE_IDENTITY()";
+            "INSERT INTO PRODUCTS (NOME,DESCRICAO,ESTOQUE,MARGEMLUCRO,PRECO,VALIDADE,ISATIVO) VALUES (@NOME,@DESCRICAO,@ESTOQUE,@MARGEMLUCRO,@PRECO,@VALIDADE,@ISATIVO); SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@NOME", product.Name);
             command.Parameters.AddWithValue("@DESCRICAO", product.Description);
             command.Parameters.AddWithValue("@ESTOQUE", product.Storage);

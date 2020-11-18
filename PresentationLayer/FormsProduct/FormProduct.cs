@@ -45,5 +45,10 @@ namespace PresentationLayer {
         {
             OpenForm(new FormStorage());
         }
+
+        private void btnEntryProduct_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormInsertEntryProduct());
+        }
     }
 }

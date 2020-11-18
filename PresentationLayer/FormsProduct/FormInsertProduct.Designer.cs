@@ -30,11 +30,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtPrice = new System.Windows.Forms.MaskedTextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpValidity = new System.Windows.Forms.DateTimePicker();
             this.txtProfitMargin = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPrice = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -123,17 +124,6 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "Validade";
             // 
-            // txtPrice
-            // 
-            this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(529, 315);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPrice.Mask = "$";
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(115, 30);
-            this.txtPrice.TabIndex = 4;
-            this.txtPrice.ValidatingType = typeof(System.DateTime);
-            // 
             // txtDescription
             // 
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -175,19 +165,39 @@
             this.txtProfitMargin.Size = new System.Drawing.Size(115, 30);
             this.txtProfitMargin.TabIndex = 34;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.label7.Location = new System.Drawing.Point(489, 318);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 23);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "R$";
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrice.Location = new System.Drawing.Point(529, 314);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(115, 30);
+            this.txtPrice.TabIndex = 36;
+            // 
             // FormInsertProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1408, 655);
+            this.Controls.Add(this.txtPrice);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtProfitMargin);
             this.Controls.Add(this.dtpValidity);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
@@ -211,10 +221,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.MaskedTextBox txtPrice;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpValidity;
         private System.Windows.Forms.TextBox txtProfitMargin;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtPrice;
     }
 }
