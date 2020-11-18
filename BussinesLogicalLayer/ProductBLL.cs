@@ -14,8 +14,7 @@ namespace BussinesLogicalLayer
         private ProductDAO producteDAO = new ProductDAO();
         public Response Insert(Product item)
         {
-            Validate(item);
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success)
             {
                 return producteDAO.Insert(item);
@@ -128,7 +127,7 @@ namespace BussinesLogicalLayer
             }
             for (int i = 0; i < item.Name.Length; i++)
             {
-                if (!char.IsLetter(item.Name[i]))
+                if (char.IsDigit(item.Name[i]))
                 {
                     AddError("O nome deve conter apenas letras.");
                 }

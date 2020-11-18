@@ -16,7 +16,7 @@ namespace PresentationLayer {
             InitializeComponent();
         }
         Product product = new Product();
-        ProductBLL productBLL = new ProductBLL(); 
+        ProductBLL productBLL = new ProductBLL();
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace PresentationLayer {
             product.Price = Convert.ToDouble(txtPrice.Text);
             product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
             product.Validity = dtpValidity.Value;
-            productBLL.Insert(product);
+            MessageBox.Show(productBLL.Insert(product).Message);
         }
     }
 }

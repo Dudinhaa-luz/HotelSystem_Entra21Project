@@ -38,17 +38,17 @@ namespace PresentationLayer {
             if (cmbSearch.Text == "Nome")
             {
                 searchObject.SearchName = txtSource.Text;
-                dgvClients.DataSource = clientBLL.GetAllClientsByName(searchObject);
+                dgvClients.DataSource = clientBLL.GetAllClientsByName(searchObject).Data;
             }
             else if (cmbSearch.Text == "CPF")
             {
                 searchObject.SearchCPF = txtSource.Text;
-                dgvClients.DataSource = clientBLL.GetAllClientsByCPF(searchObject);
+                dgvClients.DataSource = clientBLL.GetAllClientsByCPF(searchObject).Data;
             }
             else
             {
                 searchObject.SearchID = Convert.ToInt32(txtSource.Text);
-                dgvClients.DataSource = clientBLL.GetClientsByID(searchObject.SearchID);
+                dgvClients.DataSource = clientBLL.GetClientsByID(searchObject.SearchID).Data;
             }
         }
         private void dgvClients_SelectionChanged(object sender, EventArgs e)

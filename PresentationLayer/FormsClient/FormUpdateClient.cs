@@ -63,8 +63,17 @@ namespace PresentationLayer {
             }
             else
             {
-                search.SearchID = Convert.ToInt32(txtSource.Text);
-                dgvClients.DataSource = clientBLL.GetClientsByID(search.SearchID).Data;
+                if (txtSource.Text == "")
+                {
+                 dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
+                    return;
+                }
+                else
+                {
+                    search.SearchID = Convert.ToInt32(txtSource.Text);
+                    dgvClients.DataSource = clientBLL.GetClientsByID(search.SearchID).Data;
+                }
+                
             }
         }
     }

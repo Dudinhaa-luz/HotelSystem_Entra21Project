@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEntryProduct = new System.Windows.Forms.Button();
+            this.btnStorage = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -31,13 +33,13 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.btnInsert = new System.Windows.Forms.Button();
             this.pnlInitialProduct = new System.Windows.Forms.Panel();
-            this.btnStorage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Controls.Add(this.btnEntryProduct);
             this.panel1.Controls.Add(this.btnStorage);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
@@ -49,8 +51,46 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1440, 52);
+            this.panel1.Size = new System.Drawing.Size(1587, 52);
             this.panel1.TabIndex = 0;
+            // 
+            // btnEntryProduct
+            // 
+            this.btnEntryProduct.BackColor = System.Drawing.Color.Black;
+            this.btnEntryProduct.FlatAppearance.BorderSize = 0;
+            this.btnEntryProduct.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnEntryProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntryProduct.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntryProduct.ForeColor = System.Drawing.Color.White;
+            this.btnEntryProduct.Image = global::PresentationLayer.Properties.Resources.Produtos;
+            this.btnEntryProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntryProduct.Location = new System.Drawing.Point(1209, 9);
+            this.btnEntryProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEntryProduct.Name = "btnEntryProduct";
+            this.btnEntryProduct.Size = new System.Drawing.Size(355, 39);
+            this.btnEntryProduct.TabIndex = 8;
+            this.btnEntryProduct.Text = "  ENTRADA DE PRODUTOS";
+            this.btnEntryProduct.UseVisualStyleBackColor = false;
+            this.btnEntryProduct.Click += new System.EventHandler(this.btnEntryProduct_Click);
+            // 
+            // btnStorage
+            // 
+            this.btnStorage.BackColor = System.Drawing.Color.Black;
+            this.btnStorage.FlatAppearance.BorderSize = 0;
+            this.btnStorage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnStorage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStorage.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStorage.ForeColor = System.Drawing.Color.White;
+            this.btnStorage.Image = global::PresentationLayer.Properties.Resources.Estoque1;
+            this.btnStorage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStorage.Location = new System.Drawing.Point(916, 9);
+            this.btnStorage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStorage.Name = "btnStorage";
+            this.btnStorage.Size = new System.Drawing.Size(285, 39);
+            this.btnStorage.TabIndex = 7;
+            this.btnStorage.Text = "ESTOQUE";
+            this.btnStorage.UseVisualStyleBackColor = false;
+            this.btnStorage.Click += new System.EventHandler(this.btnStorage_Click);
             // 
             // panel3
             // 
@@ -142,34 +182,15 @@
             this.pnlInitialProduct.Location = new System.Drawing.Point(16, 59);
             this.pnlInitialProduct.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInitialProduct.Name = "pnlInitialProduct";
-            this.pnlInitialProduct.Size = new System.Drawing.Size(1408, 655);
+            this.pnlInitialProduct.Size = new System.Drawing.Size(1587, 929);
             this.pnlInitialProduct.TabIndex = 1;
-            // 
-            // btnStorage
-            // 
-            this.btnStorage.BackColor = System.Drawing.Color.Black;
-            this.btnStorage.FlatAppearance.BorderSize = 0;
-            this.btnStorage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
-            this.btnStorage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStorage.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStorage.ForeColor = System.Drawing.Color.White;
-            this.btnStorage.Image = global::PresentationLayer.Properties.Resources.Estoque1;
-            this.btnStorage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStorage.Location = new System.Drawing.Point(916, 9);
-            this.btnStorage.Margin = new System.Windows.Forms.Padding(4);
-            this.btnStorage.Name = "btnStorage";
-            this.btnStorage.Size = new System.Drawing.Size(285, 39);
-            this.btnStorage.TabIndex = 7;
-            this.btnStorage.Text = "ESTOQUE";
-            this.btnStorage.UseVisualStyleBackColor = false;
-            this.btnStorage.Click += new System.EventHandler(this.btnStorage_Click);
             // 
             // FormProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1440, 729);
+            this.ClientSize = new System.Drawing.Size(1587, 929);
             this.Controls.Add(this.pnlInitialProduct);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -193,5 +214,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Panel pnlInitialProduct;
         private System.Windows.Forms.Button btnStorage;
+        private System.Windows.Forms.Button btnEntryProduct;
     }
 }
