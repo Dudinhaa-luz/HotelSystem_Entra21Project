@@ -24,7 +24,7 @@ namespace PresentationLayer {
             roomType.Value = Convert.ToDouble(txtValue.Text);
             roomType.DailyValue = Convert.ToDouble(txtDailyValue.Text);
             roomType.GuestNumber = Convert.ToInt32(txtGuestNumber.Text);
-            roomTypeBLL.Insert(roomType);
+            MessageBox.Show(roomTypeBLL.Insert(roomType).Message);
         }
     }
 }

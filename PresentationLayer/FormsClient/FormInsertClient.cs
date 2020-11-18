@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace PresentationLayer {
     public partial class FormInsertClient : Form {
         public FormInsertClient() {
@@ -18,6 +19,8 @@ namespace PresentationLayer {
 
         Client client = new Client();
         ClientBLL clientBLL = new ClientBLL();
+        
+        
 
         private void btnInsert_Click(object sender, EventArgs e) {
             client.Name = txtName.Text;
@@ -26,7 +29,7 @@ namespace PresentationLayer {
             client.PhoneNumber1 = txtPhoneNumber1.Text;
             client.PhoneNumber2 = txtPhoneNumber2.Text;
             client.Email = txtEmail.Text;
-            clientBLL.Insert(client);
+            MessageBox.Show(clientBLL.Insert(client).Message);
         }
     }
 }

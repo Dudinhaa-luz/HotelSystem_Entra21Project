@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataAccessObject;
 using Common;
 using Entities;
 using DataAccessObject.Infrastructure;
@@ -36,22 +35,38 @@ namespace PresentationLayer {
         private void dgvClients_SelectionChanged_1(object sender, EventArgs e) {
             this.txtName.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Name"].Value);
             this.txtPhoneNumber.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["PhoneNumber1"].Value);
+            this.txtPhoneNumber2.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["PhoneNumber2"].Value);
             this.txtEmail.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Email"].Value);
             this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void btnUpdate_Click(object sender, EventArgs e) {
 
             client.Name = txtName.Text;
             client.PhoneNumber1 = txtPhoneNumber.Text;
+            client.PhoneNumber2 = txtPhoneNumber2.Text;
             client.Email = txtEmail.Text;
 
             MessageBox.Show(clientBLL.Update(client).Message);
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            dgvClients.DataSource = clientBLL.GetAllClientsByName(search).Data;
+            if (cmbSearch.Text == "Nome")
+            {
+                search.SearchName = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByName(search).Data;
+            }
+            else if (cmbSearch.Text == "CPF")
+            {
+                search.SearchCPF = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByCPF(search).Data;
+            }
+            else
+            {
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                //Não está trazendo o cliente
+                dgvClients.DataSource = clientBLL.GetClientsByID(search.SearchID).Data;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace PresentationLayer
 {
-    partial class FormUpdateClient { 
+    partial class FormUpdateReservation
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -43,7 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSearch = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtPhoneNumber2 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,7 +120,7 @@
             // 
             this.txtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhoneNumber.Location = new System.Drawing.Point(666, 206);
-            this.txtPhoneNumber.Mask = "(00)00000-0000";
+            this.txtPhoneNumber.Mask = "+00 (00)00000-0000";
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(160, 26);
             this.txtPhoneNumber.TabIndex = 33;
@@ -157,7 +158,7 @@
             this.btnUpdate.TabIndex = 42;
             this.btnUpdate.Text = "ATUALIZAR";
             this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -214,14 +215,14 @@
             this.label9.TabIndex = 54;
             this.label9.Text = "Telefone";
             // 
-            // txtPhoneNumber2
+            // maskedTextBox1
             // 
-            this.txtPhoneNumber2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNumber2.Location = new System.Drawing.Point(666, 249);
-            this.txtPhoneNumber2.Mask = "(00)00000-0000";
-            this.txtPhoneNumber2.Name = "txtPhoneNumber2";
-            this.txtPhoneNumber2.Size = new System.Drawing.Size(160, 26);
-            this.txtPhoneNumber2.TabIndex = 53;
+            this.maskedTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTextBox1.Location = new System.Drawing.Point(666, 249);
+            this.maskedTextBox1.Mask = "+00 (00)00000-0000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(160, 26);
+            this.maskedTextBox1.TabIndex = 53;
             // 
             // FormUpdateClient
             // 
@@ -230,7 +231,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1040, 532);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtPhoneNumber2);
+            this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.cmbSearch);
             this.Controls.Add(this.txtSource);
             this.Controls.Add(this.label3);
@@ -268,6 +269,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbSearch;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.MaskedTextBox txtPhoneNumber2;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
     }
 }

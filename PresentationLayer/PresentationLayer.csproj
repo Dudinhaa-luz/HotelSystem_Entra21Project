@@ -136,11 +136,11 @@
     <Compile Include="FormsProduct\FormUpdateProduct.Designer.cs">
       <DependentUpon>FormUpdateProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsReservation\FormInsertReservation.cs">
+    <Compile Include="FormsReservation\FormLinkRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsReservation\FormInsertReservation.Designer.cs">
-      <DependentUpon>FormInsertReservation.cs</DependentUpon>
+    <Compile Include="FormsReservation\FormLinkRoom.Designer.cs">
+      <DependentUpon>FormLinkRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsReservation\FormReservation.cs">
       <SubType>Form</SubType>
@@ -153,6 +153,12 @@
     </Compile>
     <Compile Include="FormsReservation\FormLinkClient.Designer.cs">
       <DependentUpon>FormLinkClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsReservation\FormUpdateReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsReservation\FormUpdateReservation.Designer.cs">
+      <DependentUpon>FormUpdateReservation.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsRoom\FormInsertTypeRoom.cs">
       <SubType>Form</SubType>
@@ -243,14 +249,17 @@
     <EmbeddedResource Include="FormsProduct\FormUpdateProduct.resx">
       <DependentUpon>FormUpdateProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsReservation\FormInsertReservation.resx">
-      <DependentUpon>FormInsertReservation.cs</DependentUpon>
+    <EmbeddedResource Include="FormsReservation\FormLinkRoom.resx">
+      <DependentUpon>FormLinkRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsReservation\FormReservation.resx">
       <DependentUpon>FormReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsReservation\FormLinkClient.resx">
       <DependentUpon>FormLinkClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsReservation\FormUpdateReservation.resx">
+      <DependentUpon>FormUpdateReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsRoom\FormInsertTypeRoom.resx">
       <DependentUpon>FormInsertTypeRoom.cs</DependentUpon>
@@ -356,10 +365,6 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{e6a2c3ff-7fbf-48c3-92fe-79de812799fd}</Project>
       <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccessObject\DataAccessObject.csproj">
-      <Project>{95285E0C-DA60-4100-A1F0-5EAF558AA5EA}</Project>
-      <Name>DataAccessObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{B1C7D2E6-1CC0-4984-B64B-91A2A5A1F9CF}</Project>

@@ -14,8 +14,7 @@ namespace BussinesLogicalLayer {
         private RoomDAO roomDAO = new RoomDAO();
 
         public Response Insert(Room item) {
-            Validate(item);
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success) {
                 return roomDAO.Insert(item);
             }
@@ -49,11 +48,11 @@ namespace BussinesLogicalLayer {
 
             return responseRooms;
         }
-        public QueryResponse<RoomQueryModel> GetRoomTypeDescription()
+        public QueryResponse<RoomType> GetRoomTypeDescription()
         {
-            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetRoomTypeDescription();
-            List<RoomQueryModel> temp = responseRooms.Data;
-
+            QueryResponse<RoomType> responseRooms = roomDAO.GetRoomTypeDescription();
+            List<RoomType> temp = responseRooms.Data;
+            
             return responseRooms;
         }
 
@@ -68,6 +67,13 @@ namespace BussinesLogicalLayer {
         {
 
             SingleResponse<Room> responseRooms = roomDAO.GetRoomTypeIDByRoomID(id);
+
+            return responseRooms;
+        }
+        public SingleResponse<Room> GetRoomTypeIDByDescription(string description)
+        {
+
+            SingleResponse<Room> responseRooms = roomDAO.GetRoomTypeIDByDescription(description);
 
             return responseRooms;
         }

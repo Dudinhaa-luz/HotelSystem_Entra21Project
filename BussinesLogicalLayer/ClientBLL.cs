@@ -15,10 +15,17 @@ namespace BussinesLogicalLayer
         private ClientDAO clientDAO = new ClientDAO();
         public Response Insert(Client item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
 
-            if (Validate(item).Success)
+            if (response.Success)
             {
+                item.RG = item.RG.RemoveMaskRG();
+                item.PhoneNumber1 = item.PhoneNumber1.RemoveMaskPhoneNumber();
+                if (item.PhoneNumber2 != null)
+                {
+                    item.PhoneNumber2 = item.PhoneNumber2.RemoveMaskPhoneNumber();
+                }
+                item.CPF = item.CPF.RemoveMaskCPF();
                 return clientDAO.Insert(item);
             }
             return response;
@@ -73,12 +80,12 @@ namespace BussinesLogicalLayer
             List<Client> temp = responseClients.Data;
             foreach (Client item in temp)
             {
-                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 if (item.PhoneNumber2 != null)
                 {
-                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 }
             }
             return responseClients;
@@ -89,12 +96,12 @@ namespace BussinesLogicalLayer
             List<Client> temp = responseClients.Data;
             foreach (Client item in temp)
             {
-                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 if (item.PhoneNumber2 != null)
                 {
-                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 }
             }
             return responseClients;
@@ -103,14 +110,18 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Client> responseClients = clientDAO.GetAllClientByCPF(search);
             List<Client> temp = responseClients.Data;
+            if (temp == null)
+            {
+                return responseClients;
+            }
             foreach (Client item in temp)
             {
-                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber1 = item.PhoneNumber1.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 if (item.PhoneNumber2 != null)
                 {
-                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                    item.PhoneNumber2 = item.PhoneNumber2.Insert(0, "(").Insert(3, ")").Insert(9, "-");
                 }
             }
             return responseClients;
@@ -120,18 +131,19 @@ namespace BussinesLogicalLayer
             SingleResponse<Client> responseClients = clientDAO.GetByID(id);
             Client idgerado = responseClients.Data;
 
-                idgerado.CPF = idgerado.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                idgerado.CPF = idgerado.CPF.Insert(3, ".").Insert(7, ".").Insert(11, "-");
                 idgerado.RG = idgerado.RG.Insert(1, ".").Insert(4, ".");
-                idgerado.PhoneNumber1 = idgerado.PhoneNumber1.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
-                if (idgerado.PhoneNumber2 != null)
+                idgerado.PhoneNumber1 = idgerado.PhoneNumber1.Insert(0, "(").Insert(3, ")").Insert(9, "-");
+            if (idgerado.PhoneNumber2 != null)
                 {
-                idgerado.PhoneNumber2 = idgerado.PhoneNumber2.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
-                }
+                idgerado.PhoneNumber2 = idgerado.PhoneNumber2.Insert(0, "(").Insert(3, ")").Insert(9, "-");
+            }
+            //Acredito que o erro esteja aqui
             return responseClients;
         }
         public override Response Validate(Client item)
         {
-             AddError(item.PhoneNumber1.IsValidPhoneNumber());
+            AddError(item.PhoneNumber1.IsValidPhoneNumber());
 
             AddError(item.PhoneNumber2.IsValidPhoneNumber());
 

@@ -294,32 +294,78 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-        public QueryResponse<RoomQueryModel> GetRoomTypeDescription()
+
+        public SingleResponse<Room> GetRoomTypeIDByDescription(string description)
         {
-            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
+            SingleResponse<Room> response = new SingleResponse<Room>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT DESCRICAO FROM ROOMS_TYPE";
+                "SELECT IDROOMS_TYPE WHERE DESCRICAO = @DESCRICAO";
+            command.Parameters.AddWithValue("@DESCRICAO", description);
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
+                if (reader.Read())
+                {
+                    Room room = new Room();
+
+                    room.IDRoomType = (int)reader["IDROOMS_TYPE"];
+
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = room;
+                    return response;
+                }
+                response.Message = "Quarto não encontrado.";
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        public QueryResponse<RoomType> GetRoomTypeDescription()
+        {
+            QueryResponse<RoomType> response = new QueryResponse<RoomType>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT ID, DESCRICAO FROM ROOMS_TYPE";
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<RoomType> rooms = new List<RoomType>();
 
                 while (reader.Read())
                 {
-                    RoomQueryModel room = new RoomQueryModel();
-                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    RoomType room = new RoomType();
+                    room.Description = (string)reader["DESCRICAO"];
+                    room.ID = (int)reader["ID"];
                     rooms.Add(room);
                 }
                 response.Data = rooms;
                 
-                response.Success = false;
+                response.Success = true;
                 return response;
             }
             catch (Exception ex)

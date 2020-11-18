@@ -17,14 +17,13 @@ namespace PresentationLayer {
         }
 
         Client client = new Client();
-        ClientDAO clientDAO = new ClientDAO();
 
         private void button1_Click(object sender, EventArgs e) {
-            client.Name = txtName.Text;
-            client.CPF = txtCPF.Text;
-            client.RG = txtRG.Text;
-            client.PhoneNumber1 = txtPhoneNumber1.Text;
-            client.Email = txtEmail.Text;
+            //client.Name = txtName.Text;
+            //client.CPF = txtCPF.Text;
+            //client.RG = txtRG.Text;
+            //client.PhoneNumber1 = txtPhoneNumber1.Text;
+            //client.Email = txtEmail.Text;
 
             //ClientBll
         }
