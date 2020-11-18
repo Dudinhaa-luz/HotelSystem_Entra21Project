@@ -26,7 +26,7 @@ namespace PresentationLayer {
             supplier.CNPJ = txtCNPJ.Text;
             supplier.Email = txtEmail.Text;
             supplier.PhoneNumber = txtPhoneNumber.Text;
-            supplierBLL.Insert(supplier);
+            MessageBox.Show(supplierBLL.Insert(supplier).Message);   
         }
     }
 }

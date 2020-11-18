@@ -356,8 +356,8 @@ namespace DataAccessObject {
 
         }
 
-        public SingleResponse<Supplier> GetById(int id) {
-            SingleResponse<Supplier> response = new SingleResponse<Supplier>();
+        public QueryResponse<Supplier> GetById(int id) {
+            QueryResponse<Supplier> response = new QueryResponse<Supplier>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
@@ -370,7 +370,10 @@ namespace DataAccessObject {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.Read()) {
+                List<Supplier> suppliers = new List<Supplier>();
+
+                while (reader.Read())
+                {
                     Supplier supplier = new Supplier();
                     supplier.ID = (int)reader["ID"];
                     supplier.CompanyName = (string)reader["RAZAOSOCIAL"];
@@ -379,13 +382,13 @@ namespace DataAccessObject {
                     supplier.PhoneNumber = (string)reader["TELEFONE"];
                     supplier.Email = (string)reader["EMAIL"];
                     supplier.IsActive = (bool)reader["ISATIVO"];
-                    response.Message = "Dados selecionados com sucesso.";
-                    response.Success = true;
-                    response.Data = supplier;
-                    return response;
+
+                    suppliers.Add(supplier);
+
                 }
-                response.Message = "Fornecedor não encontrado.";
-                response.Success = false;
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = suppliers;
                 return response;
             } catch (Exception ex) {
                 response.Success = false;

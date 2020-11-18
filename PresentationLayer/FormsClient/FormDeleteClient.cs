@@ -55,5 +55,6 @@ namespace PresentationLayer {
         {
             this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
         }
+
     }
 }

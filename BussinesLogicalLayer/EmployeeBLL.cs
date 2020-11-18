@@ -57,11 +57,15 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByActive();
             List<Employee> temp = responseEmployees.Data;
+            if (temp == null)
+            {
+                return responseEmployees;
+            }
             foreach (Employee item in temp)
             {
                 item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseEmployees;
         }
@@ -70,11 +74,15 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByInactive();
             List<Employee> temp = responseEmployees.Data;
+            if (temp == null)
+            {
+                return responseEmployees;
+            }
             foreach (Employee item in temp)
             {
                 item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseEmployees;
         }
@@ -83,11 +91,15 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByName(search);
             List<Employee> temp = responseEmployees.Data;
+            if (temp == null)
+            {
+                return responseEmployees;
+            }
             foreach (Employee item in temp)
             {
                 item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseEmployees;
         }
@@ -96,23 +108,33 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Employee> responseEmployees = employeeDAO.GetAllEmployeesByCPF(search);
             List<Employee> temp = responseEmployees.Data;
+            if (temp == null)
+            {
+                return responseEmployees;
+            }
             foreach (Employee item in temp)
             {
                 item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
                 item.RG = item.RG.Insert(1, ".").Insert(4, ".");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseEmployees;
         }
 
-        public SingleResponse<Employee> GetEmployeesByID(int id)
+        public QueryResponse<Employee> GetEmployeesByID(int id)
         {
-            SingleResponse<Employee> responseEmployees = employeeDAO.GetById(id);
-            Employee idgerado = responseEmployees.Data;
-
-            idgerado.CPF = idgerado.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
-            idgerado.RG = idgerado.RG.Insert(1, ".").Insert(4, ".");
-            idgerado.PhoneNumber = idgerado.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            QueryResponse<Employee> responseEmployees = employeeDAO.GetById(id);
+            List<Employee> temp = responseEmployees.Data;
+            if (temp == null)
+            {
+                return responseEmployees;
+            }
+            foreach (Employee item in temp)
+            {
+                item.CPF = item.CPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.RG = item.RG.Insert(1, ".").Insert(4, ".");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
+            }
             return responseEmployees;
         }
 
@@ -174,7 +196,6 @@ namespace BussinesLogicalLayer
         public void Hash(HashAlgorithm algoritmo) {
             _algoritmo = algoritmo;
         }
-        0
         public string EncryptPassword(string senha) {
             var encodedValue = Encoding.UTF8.GetBytes(senha);
             var encryptedPassword = _algoritmo.ComputeHash(encodedValue);

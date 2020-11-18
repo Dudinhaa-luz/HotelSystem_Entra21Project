@@ -34,8 +34,10 @@ namespace BussinesLogicalLayer {
                         }
                     }
                     if (success) {
-                        scope.Complete();
 
+                        item.CNPJ = item.CNPJ.RemoveMaskCNPJ();
+                        item.PhoneNumber = item.PhoneNumber.RemoveMaskPhoneNumber();
+                        scope.Complete();
                     }
                 }
             }
@@ -43,7 +45,7 @@ namespace BussinesLogicalLayer {
         }
 
         public Response Update(Supplier item) {
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success) {
                 return supplierDAO.Update(item);
             }
@@ -55,25 +57,28 @@ namespace BussinesLogicalLayer {
         }
 
         public Response UpdateActiveSupplier(Supplier item) {
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success) {
                 return supplierDAO.UpdateActiveSupplier(item);
             }
             return response;
         }
 
-        public QueryResponse<Supplier> GetAllSuppliersByActive() {
+        public QueryResponse<Supplier> GetAllSuppliersByActive()
+        {
 
             QueryResponse<Supplier> responseSuppliers = supplierDAO.GetAllSuppliersByActive();
 
             List<Supplier> temp = responseSuppliers.Data;
 
-            foreach (Supplier item in temp) {
+            foreach (Supplier item in temp)
+            {
 
                 item.CNPJ = item.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseSuppliers;
+
         }
 
         public QueryResponse<Supplier> GetAllSuppliersByInactive() {
@@ -85,7 +90,7 @@ namespace BussinesLogicalLayer {
             foreach (Supplier item in temp) {
 
                 item.CNPJ = item.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseSuppliers;
 
@@ -100,7 +105,7 @@ namespace BussinesLogicalLayer {
             foreach (Supplier item in temp) {
 
                 item.CNPJ = item.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseSuppliers;
         }
@@ -114,19 +119,22 @@ namespace BussinesLogicalLayer {
             foreach (Supplier item in temp) {
 
                 item.CNPJ = item.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
-                item.PhoneNumber = item.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
             }
             return responseSuppliers;
         }
 
-        public SingleResponse<Supplier> GetSuppliersById(int id) {
+        public QueryResponse<Supplier> GetSuppliersById(int id) {
 
-            SingleResponse<Supplier> responseSuppliers = supplierDAO.GetById(id);
-            Supplier idgerado = responseSuppliers.Data;
+            QueryResponse<Supplier> responseSuppliers = supplierDAO.GetById(id);
+            List<Supplier> temp = responseSuppliers.Data;
 
-            idgerado.CNPJ = idgerado.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
-            idgerado.PhoneNumber = idgerado.PhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            foreach (Supplier item in temp)
+            {
 
+                item.CNPJ = item.CNPJ.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
+                item.PhoneNumber = item.PhoneNumber.Insert(0, "(").Insert(3, ")").Insert(9, "-");
+            }
             return responseSuppliers;
         }
 
@@ -136,6 +144,7 @@ namespace BussinesLogicalLayer {
             AddError(item.PhoneNumber.IsValidPhoneNumber());
             AddError(item.Email.IsValidEmail());
             AddError(item.CNPJ.IsValidCNPJ());
+            AddError(item.Email.IsValidEmail());
 
             Response responseCNPJ = supplierDAO.IsCnpjUnique(item.CNPJ);
 
@@ -144,36 +153,23 @@ namespace BussinesLogicalLayer {
             }
 
 
-            if (string.IsNullOrWhiteSpace(item.CompanyName)) {
+            if (string.IsNullOrWhiteSpace(item.CompanyName))
+            {
                 AddError("O nome deve ser informado.");
-            } else if (item.CompanyName.Length < 3 || item.CompanyName.Length < 100) {
-                AddError("A razão social deve conter entre 3 e 100 caracteres.");
             }
-
-            if (string.IsNullOrWhiteSpace(item.ContactName)) {
-                AddError("O nome de contato deve ser informado.");
-            } else if (item.ContactName.Length < 3 || item.CompanyName.Length < 80) {
-                AddError("O nome de contato deve conter entre 3 e 80 caracteres.");
+            else if (item.CompanyName.Length < 3 || item.CompanyName.Length > 80)
+            {
+                AddError("O nome deve conter entre 3 e 80 caracteres.");
             }
-
-            if (string.IsNullOrWhiteSpace(item.Email)) {
-                AddError("O Email deve ser informado.");
-            }
-
-            if (string.IsNullOrWhiteSpace(item.PhoneNumber)) {
-                AddError("O telefone deve ser informado!");
-            } else if (item.PhoneNumber.Length < 12) {
-                AddError("O telefone deve conter 12 caracteres");
-            }
-
-            if (string.IsNullOrWhiteSpace(item.CNPJ)) {
-                AddError("O CNPJ deve ser informado!");
-            } else if (item.CNPJ.Length != 14) {
-                AddError("O CNPJ deve conter 14 caracteres.");
-            }
-            for (int i = 0; i < item.CNPJ.Length; i++) {
-                if (char.IsLetter(item.CNPJ[i])) {
-                    AddError("CNPJ deve conter apenas números.");
+            for (int i = 0; i < item.CompanyName.Length; i++)
+            {
+                if (char.IsLetter(item.CompanyName[i]) || item.CompanyName == " ")
+                {
+                    break;
+                }
+                else
+                {
+                    AddError("O nome deve contêr apenas letras.");
                 }
             }
 

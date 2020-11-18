@@ -18,8 +18,8 @@ namespace PresentationLayer {
         }
 
         EmployeeBLL employeeBLL = new EmployeeBLL();
-        Employee employee = new Employee;
-        SearchObject searchObject = new SearchObject();
+        Employee employee = new Employee();
+        SearchObject search = new SearchObject();
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -35,6 +35,26 @@ namespace PresentationLayer {
 
         private void txtSource_TextChanged(object sender, EventArgs e)
         {
+            if (cmbSearch.Text == "Nome")
+            {
+                search.SearchName = txtSource.Text;
+                dgvEmployees.DataSource = employeeBLL.GetAllEmployeesByName(search).Data;
+            }
+            else if (cmbSearch.Text == "CPF")
+            {
+                search.SearchCPF = txtSource.Text;
+                dgvEmployees.DataSource = employeeBLL.GetAllEmployeesByCPF(search).Data;
+            }
+            else
+            {
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                dgvEmployees.DataSource = employeeBLL.GetEmployeesByID(search.SearchID).Data;
+            }
+        }
+
+        private void dgvEmployees_SelectionChanged(object sender, EventArgs e)
+        {
+            this.employee.ID = Convert.ToInt32(this.dgvEmployees.CurrentRow.Cells["ID"].Value);
 
         }
     }

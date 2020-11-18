@@ -47,15 +47,29 @@ namespace PresentationLayer {
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            if (cmbSearch.Text == "Nome") {
+            if (cmbSearch.Text == "Nome") 
+            {
                 search.SearchName = txtSource.Text;
                 dgvEmployees.DataSource = employeeBLL.GetAllEmployeesByName(search).Data;
-            } else if (cmbSearch.Text == "CPF") {
+            } 
+            else if (cmbSearch.Text == "CPF") 
+            {
                 search.SearchCPF = txtSource.Text;
                 dgvEmployees.DataSource = employeeBLL.GetAllEmployeesByCPF(search).Data;
-            } else {
-                search.SearchID = Convert.ToInt32(txtSource.Text);
-                dgvEmployees.DataSource = employeeBLL.GetEmployeesByID(search.SearchID).Data;
+            } 
+            else 
+            {
+                if (txtSource.Text == "")
+                {
+                    dgvEmployees.DataSource = employeeBLL.GetAllEmployeesByActive().Data;
+                    return;
+                }
+                else
+                {
+                    search.SearchID = Convert.ToInt32(txtSource.Text);
+                    dgvEmployees.DataSource = employeeBLL.GetEmployeesByID(search.SearchID).Data;
+                }
+                
             }
         }
     }       
