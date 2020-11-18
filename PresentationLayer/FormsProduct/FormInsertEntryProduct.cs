@@ -19,15 +19,18 @@ namespace PresentationLayer
             InitializeComponent();
         }
         ProductIncome productIncome = new ProductIncome();
+        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
         ProductIncomeBLL productIncomeBLL = new ProductIncomeBLL();
+        ProductIncomeDetailBLL productIncomeDetailBLL = new ProductIncomeDetailBLL();
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
             productIncome.EntryDate = dtpEntryDate.Value;
-           // productIncome.TotalValue = Convert.ToDouble(txtTotalValue.Text);
+            productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
+            productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
             productIncomeBLL.Insert(productIncome);
         }
 
-       
+      
     }
 }
