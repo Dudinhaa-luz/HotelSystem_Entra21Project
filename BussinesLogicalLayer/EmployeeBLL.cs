@@ -190,7 +190,6 @@ namespace BussinesLogicalLayer
         public void Hash(HashAlgorithm algoritmo) {
             _algoritmo = algoritmo;
         }
-        0
         public string EncryptPassword(string senha) {
             var encodedValue = Encoding.UTF8.GetBytes(senha);
             var encryptedPassword = _algoritmo.ComputeHash(encodedValue);

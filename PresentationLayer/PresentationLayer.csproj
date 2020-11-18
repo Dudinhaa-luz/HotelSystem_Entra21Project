@@ -154,11 +154,11 @@
     <Compile Include="FormsReservation\FormLinkClient.Designer.cs">
       <DependentUpon>FormLinkClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsReservation\FormUpdateClient.cs">
+    <Compile Include="FormsReservation\FormUpdateReservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsReservation\FormUpdateClient.Designer.cs">
-      <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    <Compile Include="FormsReservation\FormUpdateReservation.Designer.cs">
+      <DependentUpon>FormUpdateReservation.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsRoom\FormInsertTypeRoom.cs">
       <SubType>Form</SubType>
@@ -258,8 +258,8 @@
     <EmbeddedResource Include="FormsReservation\FormLinkClient.resx">
       <DependentUpon>FormLinkClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsReservation\FormUpdateClient.resx">
-      <DependentUpon>FormUpdateClient.cs</DependentUpon>
+    <EmbeddedResource Include="FormsReservation\FormUpdateReservation.resx">
+      <DependentUpon>FormUpdateReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsRoom\FormInsertTypeRoom.resx">
       <DependentUpon>FormInsertTypeRoom.cs</DependentUpon>

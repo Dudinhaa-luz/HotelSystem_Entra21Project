@@ -29,7 +29,7 @@ namespace PresentationLayer {
             client.PhoneNumber1 = txtPhoneNumber1.Text;
             client.PhoneNumber2 = txtPhoneNumber2.Text;
             client.Email = txtEmail.Text;
-            clientBLL.Insert(client);
+            MessageBox.Show(clientBLL.Insert(client).Message);
         }
     }
 }

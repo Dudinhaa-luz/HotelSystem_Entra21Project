@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataAccessObject;
 using Common;
 using Entities;
 using DataAccessObject.Infrastructure;
@@ -41,7 +40,7 @@ namespace PresentationLayer {
             this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void btnUpdate_Click(object sender, EventArgs e) {
 
             client.Name = txtName.Text;
             client.PhoneNumber1 = txtPhoneNumber.Text;
@@ -52,8 +51,22 @@ namespace PresentationLayer {
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            dgvClients.DataSource = clientBLL.GetAllClientsByName(search).Data;
+            if (cmbSearch.Text == "Nome")
+            {
+                search.SearchName = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByName(search).Data;
+            }
+            else if (cmbSearch.Text == "CPF")
+            {
+                search.SearchCPF = txtSource.Text;
+                dgvClients.DataSource = clientBLL.GetAllClientsByCPF(search).Data;
+            }
+            else
+            {
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                //Não está trazendo o cliente
+                dgvClients.DataSource = clientBLL.GetClientsByID(search.SearchID).Data;
+            }
         }
     }
 }

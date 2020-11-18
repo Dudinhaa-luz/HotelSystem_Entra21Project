@@ -351,8 +351,8 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT FROM CLIENTS WHERE CPF = @CPF";
-            command.Parameters.AddWithValue("@CPF", search.SearchCPF);
+                "SELECT * FROM CLIENTS WHERE CPF LIKE @CPF";
+            command.Parameters.AddWithValue("@CPF","%" + search.SearchCPF + "%");
             command.Connection = connection;
             try
             {
@@ -402,8 +402,8 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  CLIENTS WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", id);
+                "SELECT * FROM  CLIENTS WHERE ID LIKE @ID";
+            command.Parameters.AddWithValue("@ID","%" + id + "%");
             command.Connection = connection;
             try
             {
