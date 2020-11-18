@@ -1,4 +1,5 @@
-﻿using DataAccessObject;
+﻿using BussinesLogicalLayer;
+using DataAccessObject;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,23 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
-        Client client = new Client();
+        Employee employee = new Employee();
+        EmployeeBLL employeeBLL = new EmployeeBLL();
 
         private void button1_Click(object sender, EventArgs e) {
-            client.Name = txtName.Text;
-            client.CPF = txtCPF.Text;
-            client.RG = txtRG.Text;
-            client.PhoneNumber1 = txtPhoneNumber1.Text;
-            client.Email = txtEmail.Text;
-
-            //ClientBll
+            employee.Name = txtName.Text;
+            employee.RG = txtRG.Text;
+            employee.CPF = txtCPF.Text;
+            employee.Address = txtAddress.Text;
+            employee.Email = txtEmail.Text;
+            employee.Password = txtPassword.Text;
+            employee.PhoneNumber = txtPhoneNumber1.Text;
+            if (cbAdm.Checked) {
+                employee.IsAdm = true;
+            } else {
+                employee.IsAdm = false;
+            }
+            MessageBox.Show(employeeBLL.Insert(employee).Message);
         }
 
     }

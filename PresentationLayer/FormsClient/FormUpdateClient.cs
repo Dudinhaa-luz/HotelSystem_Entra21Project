@@ -64,7 +64,6 @@ namespace PresentationLayer {
             else
             {
                 search.SearchID = Convert.ToInt32(txtSource.Text);
-                //Não está trazendo o cliente
                 dgvClients.DataSource = clientBLL.GetClientsByID(search.SearchID).Data;
             }
         }

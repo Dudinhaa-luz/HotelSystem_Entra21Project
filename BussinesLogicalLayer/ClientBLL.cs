@@ -32,16 +32,20 @@ namespace BussinesLogicalLayer
         }
         public Response Update(Client item)
         {
-            Response response = new Response();
-            if (ValidateUpdate(item).Success)
+            Response response = ValidateUpdate(item);
+            if (response.Success)
             {
+                item.PhoneNumber1 = item.PhoneNumber1.RemoveMaskPhoneNumber();
+                if (item.PhoneNumber2 != null) {
+                    item.PhoneNumber2 = item.PhoneNumber2.RemoveMaskPhoneNumber();
+                }
                 return clientDAO.Update(item);
             }
             return response;
         }
         public Response UpdateActiveClient(Client item)
         {
-            Response response = new Response();
+            Response response = ValidateUpdate(item);
             if (response.Success)
             {
                 ValidateUpdate(item);
