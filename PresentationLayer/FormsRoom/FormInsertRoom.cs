@@ -51,7 +51,6 @@ namespace PresentationLayer {
 
         private void dgvTypesRoom_SelectionChanged(object sender, EventArgs e)
         {
-            this.txtIDRoomType.Text = Convert.ToString(this.dgvTypesRoom.CurrentRow.Cells["IDROOMS_TYPE"].Value);
             this.txtDescription.Text = Convert.ToString(this.dgvTypesRoom.CurrentRow.Cells["Description"].Value);
             this.roomType.ID = Convert.ToInt32(this.dgvTypesRoom.CurrentRow.Cells["ID"].Value);
         }
