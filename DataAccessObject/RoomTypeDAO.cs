@@ -20,11 +20,12 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO ROOMS_TYPE (DESCRICAO, VALOR, VALORDIARIA, QTDHOSPEDES) VALUES(@DESCRICAO, @VALOR, @VALORDIARIA, @QTDHOSPEDES)";
+                "INSERT INTO ROOMS_TYPE (DESCRICAO, VALOR, VALORDIARIA, QTDHOSPEDES, ISATIVO) VALUES(@DESCRICAO, @VALOR, @VALORDIARIA, @QTDHOSPEDES, @ISATIVO)";
             command.Parameters.AddWithValue("@DESCRICAO", roomType.Description);
             command.Parameters.AddWithValue("@VALOR", roomType.Value);
             command.Parameters.AddWithValue("@VALORDIARIA", roomType.DailyValue);
             command.Parameters.AddWithValue("@QTDHOSPEDES", roomType.GuestNumber);
+            command.Parameters.AddWithValue("@ISATIVO", true);
 
             command.Connection = connection;
 
@@ -52,11 +53,12 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "UPDATE ROOMS_TYPE SET DESCRICAO = @DESCRICAO, VALOR = @VALOR, VALORDIARIA = @VALORDIARIA, QTDHOSPEDES = @QTDHOSPEDES WHERE ID = @ID";
+                "UPDATE ROOMS_TYPE SET DESCRICAO = @DESCRICAO, VALOR = @VALOR, VALORDIARIA = @VALORDIARIA, QTDHOSPEDES = @QTDHOSPEDES, ISATIVO = @ISATIVO WHERE ID = @ID";
             command.Parameters.AddWithValue("@DESCRICAO", roomType.Description);
             command.Parameters.AddWithValue("@VALOR", roomType.Value);
             command.Parameters.AddWithValue("@VALORDIARIA", roomType.DailyValue);
             command.Parameters.AddWithValue("@QTDHOSPEDES", roomType.GuestNumber);
+            command.Parameters.AddWithValue("@ISATIVO", roomType.Active);
             command.Parameters.AddWithValue("@ID", roomType.ID);
 
             command.Connection = connection;
@@ -66,69 +68,6 @@ namespace DataAccessObject {
                 command.ExecuteNonQuery();
                 response.Success = true;
                 response.Message = "Atualizado com sucesso.";
-            } catch (Exception ex) {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            } finally {
-                connection.Close();
-            }
-            return response;
-        }
-
-        public Response UpdateDescription(RoomType roomType) {
-            Response response = new Response();
-
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "UPDATE ROOMS_TYPE SET DESCRICAO = @DESCRICAO  WHERE ID = @ID";
-            command.Parameters.AddWithValue("@DESCRICAO", roomType.Description);
-
-            command.Connection = connection;
-
-            try {
-                connection.Open();
-                command.ExecuteNonQuery();
-                response.Success = true;
-                response.Message = "Atualizado com sucesso.";
-            } catch (Exception ex) {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            } finally {
-                connection.Close();
-            }
-            return response;
-        }
-
-        public Response Delete(RoomType roomType) {
-            Response response = new Response();
-
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "DELETE FROM ROOMS_TYPE WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", roomType.ID);
-
-            command.Connection = connection;
-
-            try {
-                connection.Open();
-                int nLinhasAfetadas = command.ExecuteNonQuery();
-                if (nLinhasAfetadas != 1) {
-                    response.Success = false;
-                    response.Message = "Registro não encontrado!";
-                    return response;
-                }
-                response.Success = true;
-                response.Message = "Excluído com sucesso.";
             } catch (Exception ex) {
                 response.Success = false;
                 response.Message = "Erro no banco de dados, contate o administrador.";
@@ -147,7 +86,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS_TYPE";
+                "SELECT * FROM ROOMS_TYPE WHERE ISATIVO = 1";
             command.Connection = connection;
             try {
                 connection.Open();
@@ -162,6 +101,7 @@ namespace DataAccessObject {
                     roomType.Value = (double)reader["VALOR"];
                     roomType.DailyValue = (double)reader["VALORDIARIA"];
                     roomType.GuestNumber = (int)reader["QTDHOSPEDES"];
+                    roomType.Active = (bool)reader["ISATIVO"];
 
                     roomsType.Add(roomType);
                 }
@@ -203,6 +143,8 @@ namespace DataAccessObject {
                     roomType.Value = (double)reader["VALOR"];
                     roomType.DailyValue = (double)reader["VALORDIARIA"];
                     roomType.GuestNumber = (int)reader["QTDHOSPEDES"];
+                    roomType.Active = (bool)reader["ISATIVO"];
+
 
                     roomsType.Add(roomType);
                 }
@@ -244,6 +186,7 @@ namespace DataAccessObject {
                     roomType.Value = (double)reader["VALOR"];
                     roomType.DailyValue = (double)reader["VALORDIARIA"];
                     roomType.GuestNumber = (int)reader["QTDHOSPEDES"];
+                    roomType.Active = (bool)reader["ISATIVO"];
 
                     roomsType.Add(roomType);
                 }
@@ -262,33 +205,37 @@ namespace DataAccessObject {
             }
         }
 
-        public SingleResponse<RoomType> GetById(int id) {
-            SingleResponse<RoomType> response = new SingleResponse<RoomType>();
+        public QueryResponse<RoomType> GetById(int id) {
+            QueryResponse<RoomType> response = new QueryResponse<RoomType>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS_TYPE WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", id);
+                "SELECT * FROM ROOMS_TYPE WHERE ID LIKE @ID";
+            command.Parameters.AddWithValue("@ID","%" + id + "%");
             command.Connection = connection;
             try {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                List<RoomType> roomsType = new List<RoomType>();
 
-                if (reader.Read()) {
+                while (reader.Read())
+                {
                     RoomType roomType = new RoomType();
                     roomType.ID = (int)reader["ID"];
                     roomType.Description = (string)reader["DESCRICAO"];
                     roomType.Value = (double)reader["VALOR"];
                     roomType.DailyValue = (double)reader["VALORDIARIA"];
-                    response.Message = "Dados selecionados com sucesso.";
-                    response.Success = true;
-                    response.Data = roomType;
-                    return response;
+                    roomType.GuestNumber = (int)reader["QTDHOSPEDES"];
+                    roomType.Active = (bool)reader["ISATIVO"];
+
+
+                    roomsType.Add(roomType);
                 }
-                response.Message = "Quarto não encontrado.";
-                response.Success = false;
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = roomsType;
                 return response;
             } catch (Exception ex) {
                 response.Success = false;

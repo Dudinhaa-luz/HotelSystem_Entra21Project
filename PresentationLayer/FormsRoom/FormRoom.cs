@@ -37,6 +37,11 @@ namespace PresentationLayer {
             OpenForm(new FormInsertRoom());
         }
 
-     
+        private void btnUpdateTypeRoom_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormUpdateTypeRoom());
+        }
+
+ 
     }
 }
