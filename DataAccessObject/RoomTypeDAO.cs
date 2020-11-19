@@ -187,8 +187,8 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM ROOMS_TYPE WHERE DESCRICAO LIKE %DESCRICAO% = @DESCRICAO";
-            command.Parameters.AddWithValue("@DESCRICAO", search.SearchDescription);
+                "SELECT * FROM ROOMS_TYPE WHERE DESCRICAO LIKE @DESCRICAO";
+            command.Parameters.AddWithValue("@DESCRICAO", "%" + search.SearchDescription + "%");
             command.Connection = connection;
             try {
                 connection.Open();

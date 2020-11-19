@@ -21,9 +21,10 @@ namespace DataAccessObject {
 
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "INSERT INTO ROOMS (ISOCUPADO, NUMEROQUARTO, IDROOMS_TYPE) VALUES(@ISOCUPADO, @NUMEROQUARTO, @IDROOMS_TYPE) SELECT SCOPE_IDENTITY()";
+                "INSERT INTO ROOMS (ISOCUPADO, NUMEROQUARTO,DESCRICAO,IDROOMS_TYPE) VALUES(@ISOCUPADO, @NUMEROQUARTO, @DESCRICAO, @IDROOMS_TYPE) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@ISOCUPADO", false);
             command.Parameters.AddWithValue("@NUMEROQUARTO", room.NumberRoom);
+            command.Parameters.AddWithValue("@DESCRICAO", room.Description);
             command.Parameters.AddWithValue("@IDROOMS_TYPE", room.IDRoomType);
 
             command.Connection = connection;
@@ -340,7 +341,6 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-
         public SingleResponse<Room> GetRoomTypeIDByDescription(string description)
         {
             SingleResponse<Room> response = new SingleResponse<Room>();
@@ -362,6 +362,7 @@ namespace DataAccessObject {
                     Room room = new Room();
 
                     room.IDRoomType = (int)reader["IDROOMS_TYPE"];
+                    room.Description = (string)reader["DESCRICAO"];
 
                     response.Message = "Dados selecionados com sucesso.";
                     response.Success = true;

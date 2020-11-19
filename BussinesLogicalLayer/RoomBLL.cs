@@ -94,7 +94,7 @@ namespace BussinesLogicalLayer {
             }
             if (string.IsNullOrWhiteSpace(item.Description)) {
                 AddError("A descrição do quarto deve ser informada.");
-            } else if (item.NumberRoom.Length < 3 || item.NumberRoom.Length > 100) {
+            } else if (item.Description.Length < 3 || item.Description.Length > 100) {
                 AddError("A descrição deve conter entre 3 e 100 caracteres");
             }
             if (item.IDRoomType == 0) {

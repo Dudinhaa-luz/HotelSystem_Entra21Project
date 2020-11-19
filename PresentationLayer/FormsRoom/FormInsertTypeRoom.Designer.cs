@@ -59,7 +59,7 @@
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsert.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsert.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnInsert.Location = new System.Drawing.Point(427, 364);
+            this.btnInsert.Location = new System.Drawing.Point(419, 343);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(296, 45);
             this.btnInsert.TabIndex = 7;
@@ -110,7 +110,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(403, 255);
+            this.label4.Location = new System.Drawing.Point(403, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(126, 21);
             this.label4.TabIndex = 23;
@@ -119,7 +119,7 @@
             // txtDailyValue
             // 
             this.txtDailyValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDailyValue.Location = new System.Drawing.Point(528, 252);
+            this.txtDailyValue.Location = new System.Drawing.Point(528, 242);
             this.txtDailyValue.Name = "txtDailyValue";
             this.txtDailyValue.Size = new System.Drawing.Size(76, 26);
             this.txtDailyValue.TabIndex = 24;
@@ -129,7 +129,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(403, 293);
+            this.label5.Location = new System.Drawing.Point(403, 283);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(213, 21);
             this.label5.TabIndex = 25;
@@ -138,7 +138,7 @@
             // txtGuestNumber
             // 
             this.txtGuestNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGuestNumber.Location = new System.Drawing.Point(616, 291);
+            this.txtGuestNumber.Location = new System.Drawing.Point(616, 281);
             this.txtGuestNumber.Name = "txtGuestNumber";
             this.txtGuestNumber.Size = new System.Drawing.Size(68, 26);
             this.txtGuestNumber.TabIndex = 26;

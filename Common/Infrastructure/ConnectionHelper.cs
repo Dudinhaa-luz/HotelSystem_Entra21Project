@@ -10,7 +10,7 @@ namespace DataAccessObject.Infrastructure
     {
         public static string GetConnectionString()
         {
-            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Dudinha\Documents\Hotel.mdf;Integrated Security=True;Connect Timeout=30";
+            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\helo_\OneDrive\Documentos\HotelDB.mdf;Integrated Security=True;Connect Timeout=30";
         }
     }
 }

@@ -457,6 +457,7 @@ namespace PresentationLayer
             this.btnStorage.TabIndex = 7;
             this.btnStorage.Text = " Estoque";
             this.btnStorage.UseVisualStyleBackColor = false;
+            this.btnStorage.Click += new System.EventHandler(this.btnStorage_Click);
             // 
             // panel10
             // 
