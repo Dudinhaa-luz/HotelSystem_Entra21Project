@@ -13,9 +13,9 @@ namespace BussinesLogicalLayer
     public class ReservationBLL : BaseValidator<Reservation>
     {
         private ReservationDAO reservationDAO = new ReservationDAO();
-        public Response Insert(Reservation item, Room room)
+        public Response Insert(Reservation item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
 
             if (response.Success)
             {
@@ -25,7 +25,8 @@ namespace BussinesLogicalLayer
         }
         public Response Update(Reservation item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
+
             if (response.Success)
             {
                 return reservationDAO.Update(item);
@@ -40,6 +41,10 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservations();
             List<ReservationQueryModel> temp = responseReservations.Data;
+
+            if (temp == null) {
+                return responseReservations;
+            }
             foreach (ReservationQueryModel item in temp)
             {
                 item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
@@ -51,6 +56,9 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyReservationDate(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            if (temp == null) {
+                return responseReservations;
+            }
             foreach (ReservationQueryModel item in temp)
             {
                 item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
@@ -61,6 +69,9 @@ namespace BussinesLogicalLayer
         public QueryResponse<ReservationQueryModel> GetAllReservationsbyExitDate(SearchObject search) {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyExitDate(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            if (temp == null) {
+                return responseReservations;
+            }
             foreach (ReservationQueryModel item in temp) {
                 item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
                 item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
@@ -72,6 +83,9 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsByRoomsNumber(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            if (temp == null) {
+                return responseReservations;
+            }
             foreach (ReservationQueryModel item in temp)
             {
                 item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
@@ -83,6 +97,9 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyClientCPF(search);
             List<ReservationQueryModel> temp = responseReservations.Data;
+            if (temp == null) {
+                return responseReservations;
+            }
             foreach (ReservationQueryModel item in temp)
             {
                 item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");

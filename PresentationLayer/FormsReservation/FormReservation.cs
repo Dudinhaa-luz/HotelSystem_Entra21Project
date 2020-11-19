@@ -24,21 +24,18 @@ namespace PresentationLayer {
                 fh.Show();
             
         }
+
         private void btnInsert_Click(object sender, EventArgs e) {
-
-            OpenForm(new FormInsertEmployee());
+            OpenForm(new FormInsertReservations());
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e) {
-            OpenForm(new FormUpdateEmployee());
+        private void btnVerifyRoom_Click(object sender, EventArgs e) {
+            OpenForm(new FormOccuppyRoom());
+
         }
 
-        private void btnDelete_Click(object sender, EventArgs e) {
-            OpenForm(new FormDeleteEmployee());
-        }
-
-        private void FormInitialScreem_Load(object sender, EventArgs e) {
-            OpenForm(new FormInsertEmployee());
+        private void FormReservation_Load(object sender, EventArgs e) {
+            OpenForm(new FormInsertReservations());
         }
     }
 }
