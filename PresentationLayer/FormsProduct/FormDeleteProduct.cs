@@ -22,7 +22,8 @@ namespace PresentationLayer {
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            productBLL.Delete(product);
+            MessageBox.Show(productBLL.Delete(product).Message);
+            dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
         }
         private void FormDeleteProduct_Load(object sender, EventArgs e)
         {
@@ -32,15 +33,20 @@ namespace PresentationLayer {
 
         private void txtSource_TextChanged(object sender, EventArgs e)
         {
-            if (cmbSearch.Text == "Nome")
+            if (txtSource.Text == "")
+            {
+                dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
+                return;
+            }
+            else if (cmbSearch.Text == "Nome")
             {
                 searchObject.SearchName = txtSource.Text;
-                dgvProducts.DataSource = productBLL.GetAllProductsByName(searchObject);
+                dgvProducts.DataSource = productBLL.GetAllProductsByName(searchObject).Data;
             }
-            else if (cmbSearch.Text == "ID")
+            else
             {
                 searchObject.SearchID = Convert.ToInt32(txtSource.Text);
-                dgvProducts.DataSource = productBLL.GetAllProductsByID(searchObject.SearchID);
+                dgvProducts.DataSource = productBLL.GetAllProductsByID(searchObject.SearchID).Data;
             }
         }
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)

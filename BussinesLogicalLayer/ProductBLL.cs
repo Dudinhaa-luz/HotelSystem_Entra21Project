@@ -23,8 +23,7 @@ namespace BussinesLogicalLayer
         }
         public Response Update(Product item)
         {
-            Validate(item);
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success)
             {
                 return producteDAO.Update(item);
@@ -90,6 +89,10 @@ namespace BussinesLogicalLayer
         {
             QueryResponse<Product> responseProducts = producteDAO.GetAllProductsByName(search);
             List<Product> temp = responseProducts.Data;
+            if (temp == null)
+            {
+                return responseProducts;
+            }
             foreach (Product item in temp)
             {
                 item.Price.ToString("C2");
@@ -97,14 +100,19 @@ namespace BussinesLogicalLayer
             }
             return responseProducts;
         }
-        public SingleResponse<Product> GetAllProductsByID(int id)
+        public QueryResponse<Product> GetAllProductsByID(int id)
         {
-            SingleResponse<Product> responseProducts = producteDAO.GetById(id);
-            Product idgerado = responseProducts.Data;
-
-            idgerado.Price.ToString("C2");
-            Convert.ToString(idgerado.ProfitMargin + "%");
-
+            QueryResponse<Product> responseProducts = producteDAO.GetById(id);
+            List<Product> temp = responseProducts.Data;
+            if (temp == null)
+            {
+                return responseProducts;
+            }
+            foreach (Product item in temp)
+            {
+                item.Price.ToString("C2");
+                Convert.ToString(item.ProfitMargin + "%");
+            }
             return responseProducts;
         }
         public SingleResponse<Product> GetPriceByID(int id)

@@ -23,7 +23,7 @@ namespace DataAccessObject
             SqlCommand command = new SqlCommand();
 
             command.CommandText =
-            "INSERT INTO PRODUCTS (NOME,DESCRICAO,ESTOQUE,MARGEMLUCRO,PRECO,VALIDADE,ISATIVO) VALUES (@NOME,@DESCRICAO,@ESTOQUE,@MARGEMLUCRO,@PRECO,@VALIDADE,@ISATIVO); SELECT SCOPE_IDENTITY()";
+            "INSERT INTO PRODUCTS (NOME,DESCRICAO,ESTOQUE,MARGEMLUCRO,PRECO,VALIDADE,ISATIVO) VALUES (@NOME,@DESCRICAO,@ESTOQUE,@MARGEMLUCRO,@PRECO,@VALIDADE,@ISATIVO) SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@NOME", product.Name);
             command.Parameters.AddWithValue("@DESCRICAO", product.Description);
             command.Parameters.AddWithValue("@ESTOQUE", product.Storage);
@@ -233,7 +233,7 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
 
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM PRODUCTS WHERE ATIVO = 1";
+            command.CommandText = "SELECT * FROM PRODUCTS WHERE ISATIVO = 1";
 
             command.Connection = connection;
 
@@ -393,8 +393,8 @@ namespace DataAccessObject
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM PRODUCTS WHERE NOME LIKE %NOME% = @NOME";
-            command.Parameters.AddWithValue("@NOME", search.SearchName);
+                "SELECT * FROM PRODUCTS WHERE NOME LIKE @NOME";
+            command.Parameters.AddWithValue("@NOME", "%" + search.SearchName + "%");
             command.Connection = connection;
             try
             {
@@ -414,7 +414,6 @@ namespace DataAccessObject
                     product.Price = (double)reader["PRECO"];
                     product.Validity = (DateTime)reader["VALIDADE"];
                     product.IsActive = (bool)reader["ISATIVO"];
-                    products.Add(product);
 
                     products.Add(product);
                 }
@@ -437,23 +436,24 @@ namespace DataAccessObject
             }
         }
 
-        public SingleResponse<Product> GetById(int id)
+        public QueryResponse<Product> GetById(int id)
         {
-            SingleResponse<Product> response = new SingleResponse<Product>();
+            QueryResponse<Product> response = new QueryResponse<Product>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  PRODUCTS WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", id);
+                "SELECT * FROM  PRODUCTS WHERE ID LIKE @ID";
+            command.Parameters.AddWithValue("@ID","%" + id + "%");
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                List<Product> products = new List<Product>();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Product product = new Product();
                     product.ID = (int)reader["ID"];
@@ -464,13 +464,12 @@ namespace DataAccessObject
                     product.Price = (double)reader["PRECO"];
                     product.Validity = (DateTime)reader["VALIDADE"];
                     product.IsActive = (bool)reader["ISATIVO"];
-                    response.Message = "Dados selecionados com sucesso.";
-                    response.Success = true;
-                    response.Data = product;
-                    return response;
+
+                    products.Add(product);
                 }
-                response.Message = "Funcionário não encontrado.";
-                response.Success = false;
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = products;
                 return response;
             }
             catch (Exception ex)
