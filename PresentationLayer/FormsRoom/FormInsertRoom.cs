@@ -33,13 +33,13 @@ namespace PresentationLayer {
         }
         private void FormInsertRoom_Load(object sender, EventArgs e)
         {
-            dgvTypesRoom.DataSource = rommBLL.GetRoomTypeDescription().Data;
+            dgvTypesRoom.DataSource = rommBLL.GetAllRoomsAvailable().Data;
         }
         private void txtSource_TextChanged(object sender, EventArgs e)
         {
             if (txtSource.Text == "")
             {
-                dgvTypesRoom.DataSource = rommBLL.GetRoomTypeDescription().Data;
+                dgvTypesRoom.DataSource = rommBLL.GetAllRoomsAvailable().Data;
                 return;
             }
             else
@@ -51,7 +51,6 @@ namespace PresentationLayer {
 
         private void dgvTypesRoom_SelectionChanged(object sender, EventArgs e)
         {
-            this.txtIDRoomType.Text = Convert.ToString(this.dgvTypesRoom.CurrentRow.Cells["ID"].Value);
             this.txtDescription.Text = Convert.ToString(this.dgvTypesRoom.CurrentRow.Cells["Description"].Value);
             this.roomType.ID = Convert.ToInt32(this.dgvTypesRoom.CurrentRow.Cells["ID"].Value);
         }

@@ -33,12 +33,17 @@ namespace PresentationLayer
         private void btnInsert_Click(object sender, EventArgs e)
         {
             productIncome.EntryDate = dtpEntryDate.Value;
+            //List<ProductIncomeDetail> items = 
             productIncome.SuppliersID = Convert.ToInt32(txtIDSupplier.Text);
             productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
             productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
             productIncomeBLL.Insert(productIncome);
             storage.Quantity = productIncomeDetail.Quantity;
             storageBLL.AddProduct(productIncomeDetail);
+        }
+        private void FormInsertEntryProduct_Load(object sender, EventArgs e)
+        {
+            dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
         }
         private void txtSource_TextChanged(object sender, EventArgs e)
         {
@@ -59,15 +64,10 @@ namespace PresentationLayer
                     dgvProducts.DataSource = productBLL.GetAllProductsByID(search.SearchID).Data;
             }
         }
-        private void FormInsertEntryProduct_Load(object sender, EventArgs e)
-        {
-            dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
-        }
+
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
             this.txtDescription.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Description"].Value);
-            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
-            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
             this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
             this.productIncome.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
             this.product.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
@@ -79,7 +79,11 @@ namespace PresentationLayer
         private void txtIDSupplier_TextChanged(object sender, EventArgs e)
         {
             search.SearchID = Convert.ToInt32(txtIDSupplier.Text);
-            //txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search).Data;
+            //txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search.SearchID).Data.ID;
+        }
+        private void dgvProductsEntry_SelectionChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

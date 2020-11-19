@@ -9,6 +9,7 @@ namespace Entities.QueryModel
     public class RoomQueryModel
     {
         public int RoomID { get; set; }
+        public int RoomTypeID { get; set; }
         public bool RoomIsOcuppy { get; set; }
         public string RoomNumber { get; set; }
         public string TypeRoomDescription { get; set; }

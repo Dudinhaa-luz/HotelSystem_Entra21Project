@@ -84,8 +84,8 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
-                "R.IDROOM_TYPE = RT.ID WHERE R.ISOCUPADO = 1";
+                "RT.QTDHOSPEDES, RT.ID FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOMS_TYPE = RT.ID WHERE R.ISOCUPADO = 0";
             command.Connection = connection;
             try {
                 connection.Open();
@@ -100,7 +100,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-
+                    room.RoomTypeID = (int)reader["ID"];
 
                     rooms.Add(room);
                 }

@@ -91,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(357, 138);
+            this.label3.Location = new System.Drawing.Point(361, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(162, 21);
             this.label3.TabIndex = 22;
@@ -109,7 +109,7 @@
             // txtSource
             // 
             this.txtSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSource.Location = new System.Drawing.Point(525, 136);
+            this.txtSource.Location = new System.Drawing.Point(529, 120);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(184, 26);
             this.txtSource.TabIndex = 24;
@@ -119,7 +119,7 @@
             // 
             this.txtIDRoomType.Enabled = false;
             this.txtIDRoomType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIDRoomType.Location = new System.Drawing.Point(525, 166);
+            this.txtIDRoomType.Location = new System.Drawing.Point(529, 150);
             this.txtIDRoomType.Name = "txtIDRoomType";
             this.txtIDRoomType.Size = new System.Drawing.Size(38, 26);
             this.txtIDRoomType.TabIndex = 25;
@@ -129,7 +129,7 @@
             // 
             this.txtDescription.Enabled = false;
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(569, 166);
+            this.txtDescription.Location = new System.Drawing.Point(573, 150);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(38, 26);
             this.txtDescription.TabIndex = 26;

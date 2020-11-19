@@ -444,35 +444,35 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
-        public QueryResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
+        public SingleResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
         {
 
-            QueryResponse<Supplier> response = new QueryResponse<Supplier>();
+            SingleResponse<Supplier> response = new SingleResponse<Supplier>();
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM SUPPLIERS WHERE ID LIKE @ID";
-            command.Parameters.AddWithValue("@ID", "%" + search.SearchID + "%");
+                "SELECT * FROM SUPPLIERS WHERE ID = @ID";
+            command.Parameters.AddWithValue("@ID", search.SearchID);
             command.Connection = connection;
             try
             {
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                List<Supplier> suppliers = new List<Supplier>();
-
-                while (reader.Read())
+                if (reader.Read())
                 {
                     Supplier supplier = new Supplier();
-                    supplier.CompanyName = (string)reader["RAZAOSOCIAL"];
 
-                    suppliers.Add(supplier);
+                    supplier.CompanyName = (string)reader["RAZAOSOCIAL"];
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = supplier;
+                    return response;
                 }
-                response.Success = true;
-                response.Message = "Dados selecionados com sucesso";
-                response.Data = suppliers;
+                response.Success = false;
+                response.Message = "Fornecedor não encontrado";
                 return response;
             }
             catch (Exception ex)
