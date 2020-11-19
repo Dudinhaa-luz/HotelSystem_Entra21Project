@@ -13,12 +13,17 @@ namespace BussinesLogicalLayer {
     public class SupplierBLL : BaseValidator<Supplier> {
 
         private SupplierDAO supplierDAO = new SupplierDAO();
+        Supplier supplier = new Supplier();
 
         public Response Insert(Supplier item) {
             Response response = Validate(item);
             bool success = true;
             if (response.Success) {
                 using (TransactionScope scope = new TransactionScope()) {
+
+                    item.CNPJ = item.CNPJ.RemoveMaskCNPJ();
+                    item.PhoneNumber = item.PhoneNumber.RemoveMaskPhoneNumber();
+
                     SingleResponse<int> responseInsert = supplierDAO.Insert(item);
                     if (responseInsert.Success) {
 
@@ -35,8 +40,6 @@ namespace BussinesLogicalLayer {
                     }
                     if (success) {
 
-                        item.CNPJ = item.CNPJ.RemoveMaskCNPJ();
-                        item.PhoneNumber = item.PhoneNumber.RemoveMaskPhoneNumber();
                         scope.Complete();
                     }
                 }
@@ -170,6 +173,13 @@ namespace BussinesLogicalLayer {
             }
 
             return base.Validate(item);
+        }
+
+        public List<Product> LinkProductToSupplier(Product product, Supplier supplier) {
+
+            supplier.Items.Add(product);
+
+            return supplier.Items;
         }
     }
 }
