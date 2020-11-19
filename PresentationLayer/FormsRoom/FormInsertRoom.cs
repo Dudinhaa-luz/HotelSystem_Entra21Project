@@ -23,11 +23,11 @@ namespace PresentationLayer {
 
         private void btnInsert_Click(object sender, EventArgs e) {
             room.NumberRoom = txtNumber.Text;
-            room.IDRoomType = (int)cbDescription.SelectedValue;
-             Response r = rommBLL.Insert(room);
+            //room.IDRoomType = cbDescription.ValueMember;
+            room.Description = cbDescription.DisplayMember;
+            Response r = rommBLL.Insert(room);
             MessageBox.Show(r.Message);
         }
-
         private void FormInsertRoom_Load(object sender, EventArgs e)
         {
             cbDescription.DataSource = rommBLL.GetRoomTypeDescription().Data;

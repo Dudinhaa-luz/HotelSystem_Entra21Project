@@ -11,9 +11,10 @@ namespace BussinesLogicalLayer {
     public class RoomTypeBLL : BaseValidator<RoomType> {
 
         RoomTypeDAO roomTypeDAO = new RoomTypeDAO();
+
         public Response Insert(RoomType item) {
-            Response response = new Response();
-            if (Validate(item).Success) {
+            Response response = Validate(item);
+            if (response.Success) {
                 return roomTypeDAO.Insert(item);
             }
             return response;

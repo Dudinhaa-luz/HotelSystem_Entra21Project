@@ -141,6 +141,23 @@ namespace BussinesLogicalLayer {
             return responseSuppliers;
         }
 
+        public SingleResponse<Supplier> GetIDSuppliersByCompanyName(SearchObject search)
+        {
+
+            SingleResponse<Supplier> responseSuppliers = supplierDAO.GetIDSuppliersByCompanyName(search);
+
+            //List<Supplier> temp = responseSuppliers.Data;
+
+            return responseSuppliers;
+        }
+        public QueryResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
+        {
+            QueryResponse<Supplier> responseSuppliers = supplierDAO.GetCompanyNameSupplierByID(search);
+            List<Supplier> temp = responseSuppliers.Data;
+
+            return responseSuppliers;
+        }
+
         public override Response Validate(Supplier item) {
 
 
