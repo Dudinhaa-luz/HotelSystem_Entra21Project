@@ -457,7 +457,6 @@ namespace PresentationLayer
             this.btnStorage.TabIndex = 7;
             this.btnStorage.Text = " Estoque";
             this.btnStorage.UseVisualStyleBackColor = false;
-            this.btnStorage.Click += new System.EventHandler(this.btnStorage_Click);
             // 
             // panel10
             // 
@@ -682,7 +681,7 @@ namespace PresentationLayer
             this.Controls.Add(this.pnlShortcutMenu);
             this.Controls.Add(this.pnlHigher);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormMainMenu";
             this.Text = "Form1";
             this.pnlHigher.ResumeLayout(false);

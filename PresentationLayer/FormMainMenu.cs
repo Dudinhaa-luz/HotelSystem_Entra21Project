@@ -87,5 +87,10 @@ namespace PresentationLayer
         {
             OpenForm(new FormSupplier());
         }
+
+        private void btnReservations_Click(object sender, EventArgs e) {
+            OpenForm(new FormReservation());
+
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace BussinesLogicalLayer {
         private SupplierDAO supplierDAO = new SupplierDAO();
         Supplier supplier = new Supplier();
 
+
         public Response Insert(Supplier item) {
             Response response = Validate(item);
             bool success = true;
@@ -191,5 +192,6 @@ namespace BussinesLogicalLayer {
 
             return base.Validate(item);
         }
+
     }
 }

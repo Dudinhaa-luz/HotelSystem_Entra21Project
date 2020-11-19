@@ -18,10 +18,10 @@ namespace PresentationLayer {
             InitializeComponent();
         }
 
+        Product product = new Product();
         public Supplier supplier = new Supplier();
         SupplierBLL supplierBLL = new SupplierBLL();
         ProductBLL productBLL = new ProductBLL();
-        Product product = new Product();
         SearchObject searchObject = new SearchObject();
 
         private void button1_Click(object sender, EventArgs e) {
@@ -53,19 +53,7 @@ namespace PresentationLayer {
             product.Price = Convert.ToDouble(txtPrice.Text);
             product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
 
-            if (supplier.Items != null) {
-                if (supplier.Items.Contains(product)) {
-                    MessageBox.Show("Produto já vinculado");
-                } 
-                else {
-                    supplier.Items = productBLL.LinkProductToSupplier(product, supplier);
-                    MessageBox.Show("Cadastrado com sucesso");
-                }
-            } else {
-                supplier.Items = productBLL.LinkProductToSupplier(product, supplier);
-                MessageBox.Show("Cadastrado com sucesso");
-            }
-
+            MessageBox.Show(productBLL.LinkProductToSupplier(product, supplier).Message);
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e) {
