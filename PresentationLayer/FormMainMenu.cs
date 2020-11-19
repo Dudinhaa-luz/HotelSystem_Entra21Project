@@ -87,5 +87,9 @@ namespace PresentationLayer
         {
             OpenForm(new FormSupplier());
         }
+        private void btnStorage_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormStorage());
+        }
     }
 }
