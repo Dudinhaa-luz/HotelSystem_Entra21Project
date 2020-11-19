@@ -150,10 +150,9 @@ namespace BussinesLogicalLayer {
 
             return responseSuppliers;
         }
-        public QueryResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
+        public SingleResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
         {
-            QueryResponse<Supplier> responseSuppliers = supplierDAO.GetCompanyNameSupplierByID(search);
-            List<Supplier> temp = responseSuppliers.Data;
+            SingleResponse<Supplier> responseSuppliers = supplierDAO.GetCompanyNameSupplierByID(search);
 
             return responseSuppliers;
         }
