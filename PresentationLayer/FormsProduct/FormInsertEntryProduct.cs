@@ -1,4 +1,5 @@
 ﻿using BussinesLogicalLayer;
+using Common.Infrastructure;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,13 @@ namespace PresentationLayer
         }
         ProductIncome productIncome = new ProductIncome();
         ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
+        Product product = new Product();
+        ProductBLL productBLL = new ProductBLL();
         ProductIncomeBLL productIncomeBLL = new ProductIncomeBLL();
         ProductIncomeDetailBLL productIncomeDetailBLL = new ProductIncomeDetailBLL();
+        Storage storage = new Storage();
+        StorageBLL storageBLL = new StorageBLL();
+        SearchObject search = new SearchObject();
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
@@ -29,8 +35,48 @@ namespace PresentationLayer
             productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
             productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
             productIncomeBLL.Insert(productIncome);
+            storage.Quantity = productIncomeDetail.Quantity;
+            storageBLL.AddProduct(productIncomeDetail);
         }
+        private void txtSource_TextChanged(object sender, EventArgs e)
+        {
+         
+             if (cmbSearch.Text == "Nome")
+            {
+                search.SearchName = txtSource.Text;
+                dgvProducts.DataSource = productBLL.GetAllProductsByName(search).Data;
+            }
+            else
+            {
+                if (txtSource.Text == "")
+                {
+                    dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
+                    return;
+                }
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                    dgvProducts.DataSource = productBLL.GetAllProductsByID(search.SearchID).Data;
+            }
+        }
+        private void FormInsertEntryProduct_Load(object sender, EventArgs e)
+        {
+            dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
+        }
+        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
+        {
+            this.txtDescription.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Description"].Value);
+            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
+            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
+            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
+            this.productIncome.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
+            this.product.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
+        }
+        private void btnFinish_Click(object sender, EventArgs e)
+        {
 
-      
+        }
+        private void btnInsertEntryProducts_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

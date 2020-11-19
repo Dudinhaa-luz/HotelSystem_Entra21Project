@@ -47,6 +47,11 @@ namespace PresentationLayer {
             }
             else
             {
+                if (txtSource.Text == "")
+                {
+                    dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
+                    return;
+                }
                 searchObject.SearchID = Convert.ToInt32(txtSource.Text);
                 dgvClients.DataSource = clientBLL.GetClientsByID(searchObject.SearchID).Data;
             }
