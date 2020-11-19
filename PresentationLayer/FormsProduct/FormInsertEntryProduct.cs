@@ -23,6 +23,7 @@ namespace PresentationLayer
         ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
         Product product = new Product();
         ProductBLL productBLL = new ProductBLL();
+        SupplierBLL supplierBLL = new SupplierBLL();
         ProductIncomeBLL productIncomeBLL = new ProductIncomeBLL();
         ProductIncomeDetailBLL productIncomeDetailBLL = new ProductIncomeDetailBLL();
         Storage storage = new Storage();
@@ -32,6 +33,7 @@ namespace PresentationLayer
         private void btnInsert_Click(object sender, EventArgs e)
         {
             productIncome.EntryDate = dtpEntryDate.Value;
+            productIncome.SuppliersID = Convert.ToInt32(txtIDSupplier.Text);
             productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
             productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
             productIncomeBLL.Insert(productIncome);
@@ -74,9 +76,10 @@ namespace PresentationLayer
         {
 
         }
-        private void btnInsertEntryProducts_Click(object sender, EventArgs e)
+        private void txtIDSupplier_TextChanged(object sender, EventArgs e)
         {
-
+            search.SearchID = Convert.ToInt32(txtIDSupplier.Text);
+            //txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search).Data;
         }
     }
 }

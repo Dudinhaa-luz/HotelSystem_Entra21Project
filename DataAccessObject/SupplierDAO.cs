@@ -273,8 +273,8 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM SUPPLIERS WHERE RAZAOSOCIAL LIKE %RAZAOSOCIAL% = @RAZAOSOCIAL";
-            command.Parameters.AddWithValue("@RAZAOSOCIAL", search.SearchCompanyName);
+                "SELECT * FROM SUPPLIERS WHERE RAZAOSOCIAL LIKE @RAZAOSOCIAL";
+            command.Parameters.AddWithValue("@RAZAOSOCIAL","%" + search.SearchCompanyName + "%");
             command.Connection = connection;
             try {
                 connection.Open();
@@ -363,8 +363,8 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM  SUPPLIERS WHERE ID = @ID";
-            command.Parameters.AddWithValue("@ID", id);
+                "SELECT * FROM  SUPPLIERS WHERE ID LIKE @ID";
+            command.Parameters.AddWithValue("@ID","%" + id + "%");
             command.Connection = connection;
             try {
                 connection.Open();
@@ -397,6 +397,94 @@ namespace DataAccessObject {
                 response.StackTrace = ex.StackTrace;
                 return response;
             } finally {
+                connection.Close();
+            }
+        }
+        public SingleResponse<Supplier> GetIDSuppliersByCompanyName(SearchObject search)
+        {
+
+            SingleResponse<Supplier> response = new SingleResponse<Supplier>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT * FROM SUPPLIERS WHERE RAZAOSOCIAL = @RAZAOSOCIAL";
+            command.Parameters.AddWithValue("@RAZAOSOCIAL",search.SearchCompanyName);
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Supplier supplier = new Supplier();
+
+                    supplier.ID = (int)reader["ID"];
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = supplier;
+                    return response;
+                }
+                response.Success = false;
+                response.Message = "Fornecedor não encontrado";
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        public QueryResponse<Supplier> GetCompanyNameSupplierByID(SearchObject search)
+        {
+
+            QueryResponse<Supplier> response = new QueryResponse<Supplier>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT * FROM SUPPLIERS WHERE ID LIKE @ID";
+            command.Parameters.AddWithValue("@ID", "%" + search.SearchID + "%");
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<Supplier> suppliers = new List<Supplier>();
+
+                while (reader.Read())
+                {
+                    Supplier supplier = new Supplier();
+                    supplier.CompanyName = (string)reader["RAZAOSOCIAL"];
+
+                    suppliers.Add(supplier);
+                }
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = suppliers;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
                 connection.Close();
             }
         }
