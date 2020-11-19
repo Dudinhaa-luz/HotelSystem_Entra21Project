@@ -1,5 +1,5 @@
 ﻿namespace PresentationLayer {
-    partial class FormLinkClient {
+    partial class FormOccuppyRoom {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -161,7 +161,7 @@
             this.dtpCheckOutDate.Size = new System.Drawing.Size(110, 26);
             this.dtpCheckOutDate.TabIndex = 61;
             // 
-            // FormLinkClient
+            // FormOccuppyRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,7 +177,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvRooms);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormLinkClient";
+            this.Name = "FormOccuppyRoom";
             this.Text = "FormUpdateClient";
             this.Load += new System.EventHandler(this.FormUpdateClient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).EndInit();

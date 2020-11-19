@@ -15,8 +15,8 @@ using Common.Infrastructure;
 using BussinesLogicalLayer;
 
 namespace PresentationLayer {
-    public partial class FormLinkClient : Form {
-        public FormLinkClient() {
+    public partial class FormOccuppyRoom : Form {
+        public FormOccuppyRoom() {
             InitializeComponent();
         }
 
@@ -57,5 +57,6 @@ namespace PresentationLayer {
 
             }
         }
+
     }
 }

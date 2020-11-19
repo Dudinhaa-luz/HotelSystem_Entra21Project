@@ -326,6 +326,7 @@ namespace PresentationLayer
             this.btnReservations.TabIndex = 17;
             this.btnReservations.Text = "   Reservas";
             this.btnReservations.UseVisualStyleBackColor = false;
+            this.btnReservations.Click += new System.EventHandler(this.btnReservations_Click);
             // 
             // panel15
             // 

@@ -154,11 +154,11 @@
     <Compile Include="FormsReservation\FormOccuppyRooms.Designer.cs">
       <DependentUpon>FormOccuppyRooms.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsReservation\InsertReservation.cs">
+    <Compile Include="FormsReservation\FormInsertReservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormsReservation\InsertReservation.Designer.cs">
-      <DependentUpon>InsertReservation.cs</DependentUpon>
+    <Compile Include="FormsReservation\FormInsertReservation.Designer.cs">
+      <DependentUpon>FormInsertReservation.cs</DependentUpon>
     </Compile>
     <Compile Include="FormsRoom\FormInsertTypeRoom.cs">
       <SubType>Form</SubType>
@@ -258,8 +258,8 @@
     <EmbeddedResource Include="FormsReservation\FormOccuppyRooms.resx">
       <DependentUpon>FormOccuppyRooms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormsReservation\InsertReservation.resx">
-      <DependentUpon>InsertReservation.cs</DependentUpon>
+    <EmbeddedResource Include="FormsReservation\FormInsertReservation.resx">
+      <DependentUpon>FormInsertReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsRoom\FormInsertTypeRoom.resx">
       <DependentUpon>FormInsertTypeRoom.cs</DependentUpon>
