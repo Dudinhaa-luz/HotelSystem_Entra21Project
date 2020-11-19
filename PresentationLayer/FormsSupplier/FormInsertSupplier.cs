@@ -53,14 +53,19 @@ namespace PresentationLayer {
             product.Price = Convert.ToDouble(txtPrice.Text);
             product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
 
-            foreach (var item in supplier.Items) {
-
-                if (item == product) {
+            if (supplier.Items != null) {
+                if (supplier.Items.Contains(product)) {
                     MessageBox.Show("Produto já vinculado");
-                    break;
+                } 
+                else {
+                    supplier.Items = productBLL.LinkProductToSupplier(product, supplier);
+                    MessageBox.Show("Cadastrado com sucesso");
                 }
-                supplier.Items.Add(product);
+            } else {
+                supplier.Items = productBLL.LinkProductToSupplier(product, supplier);
+                MessageBox.Show("Cadastrado com sucesso");
             }
+
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e) {
@@ -69,6 +74,10 @@ namespace PresentationLayer {
             this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
             this.txtProfitMargin.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["ProfitMargin"].Value);
             this.product.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
+            this.product.IsActive = Convert.ToBoolean(this.dgvProducts.CurrentRow.Cells["IsActive"].Value);
+            this.product.Storage = Convert.ToDouble(this.dgvProducts.CurrentRow.Cells["Storage"].Value);
+            this.product.Validity = (DateTime)(this.dgvProducts.CurrentRow.Cells["Validity"].Value);
+
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {

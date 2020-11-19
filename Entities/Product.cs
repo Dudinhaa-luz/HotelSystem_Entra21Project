@@ -16,7 +16,6 @@ namespace Entities
         public double Price { get; set; }
         public DateTime Validity { get; set; }
         public bool IsActive { get; set; }
-        public List<Supplier> Items { get; set; }
 
     }
 }

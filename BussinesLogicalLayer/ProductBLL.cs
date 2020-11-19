@@ -163,5 +163,12 @@ namespace BussinesLogicalLayer
 
             return base.Validate(item);
         }
+
+        public List<Product> LinkProductToSupplier(Product product, Supplier supplier) {
+
+                supplier.Items.Add(product);
+            
+            return supplier.Items;
+        }
     }
 }
