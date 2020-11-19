@@ -48,6 +48,13 @@ namespace BussinesLogicalLayer {
 
             return responseRooms;
         }
+
+        public QueryResponse<RoomQueryModel> GetAllOccuppyRoomsByNumberRoom(SearchObject search) {
+            QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllOccuppyRoomsByNumberRoom(search);
+            List<RoomQueryModel> temp = responseRooms.Data;
+
+            return responseRooms;
+        }
         public QueryResponse<RoomType> GetRoomTypeDescription()
         {
             QueryResponse<RoomType> responseRooms = roomDAO.GetRoomTypeDescription();

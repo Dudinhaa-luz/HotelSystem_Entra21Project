@@ -205,6 +205,52 @@ namespace DataAccessObject {
             }
         }
 
+        public QueryResponse<RoomQueryModel> GetAllOccuppyRoomsByNumberRoom(SearchObject search) {
+            QueryResponse<RoomQueryModel> response = new QueryResponse<RoomQueryModel>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
+                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "R.IDROOM_TYPE = RT.ID WHERE R.NUMEROQUARTO LIKE NUMEROQUARTO = @NUMEROQUARTO AND R.ISOCUPADO = 1";
+
+            command.Parameters.AddWithValue("@NUMEROQUARTO", "%" + search.SearchNumberRoom + "%");
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<RoomQueryModel> rooms = new List<RoomQueryModel>();
+
+                while (reader.Read()) {
+                    RoomQueryModel room = new RoomQueryModel();
+                    room.RoomID = (int)reader["ID"];
+                    room.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    room.RoomIsOcuppy = (bool)reader["ISOCUPADO"];
+                    room.TypeRoomDescription = (string)reader["DESCRICAO"];
+                    room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
+                    room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+
+                    rooms.Add(room);
+                }
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = rooms;
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
+
         public SingleResponse<RoomQueryModel> GetById(int id) {
             SingleResponse<RoomQueryModel> response = new SingleResponse<RoomQueryModel>();
 

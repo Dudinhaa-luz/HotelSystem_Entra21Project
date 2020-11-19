@@ -207,7 +207,7 @@ namespace DataAccessObject
             command.CommandText =
                 "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
                 "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
-                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID";
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE DATARESERVA = @DATARESERVA";
 
             command.Parameters.AddWithValue("@DATARESERVA", search.SearchDate);
             command.Connection = connection;
@@ -247,6 +247,55 @@ namespace DataAccessObject
             }
             finally
             {
+                connection.Close();
+            }
+
+        }
+
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyExitDate(SearchObject search) {
+
+            QueryResponse<ReservationQueryModel> response = new QueryResponse<ReservationQueryModel>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT R.ID, R.DATARESERVA, R.DATAPREVISAOSAIDA, RO.NUMEROQUARTO, C.NOME, C.CPF, C.TELEFONE1, C.EMAIL" +
+                "FROM RESERVATIONS R INNER JOIN ROOMS RO ON R.IDROOMS = RO.ID" +
+                "INNER JOIN CLIENTS C ON R.IDCLIENTS = C.ID WHERE DATAPREVISAOSAIDA = @DATAPREVISAOSAIDA";
+
+            command.Parameters.AddWithValue("@DATAPREVISAOSAIDA", search.SearchDate);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<ReservationQueryModel> reservations = new List<ReservationQueryModel>();
+
+                while (reader.Read()) {
+                    ReservationQueryModel reservation = new ReservationQueryModel();
+                    reservation.ReservationID = (int)reader["ID"];
+                    reservation.ReservationDate = (DateTime)reader["DATARESERVA"];
+                    reservation.ReservationExitDatePrevision = (DateTime)reader["DATAPREVISAOSAIDA"];
+                    reservation.RoomNumber = (string)reader["NUMEROQUARTO"];
+                    reservation.ClientName = (string)reader["NOME"];
+                    reservation.ClientCPF = (string)reader["CPF"];
+                    reservation.ClientPhoneNumber = (string)reader["TELEFONE"];
+                    reservation.ClientEmail = (string)reader["EMAIL"];
+
+                    reservations.Add(reservation);
+                }
+                response.Success = true;
+                response.Message = "Dados selecionados com sucesso";
+                response.Data = reservations;
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
                 connection.Close();
             }
 

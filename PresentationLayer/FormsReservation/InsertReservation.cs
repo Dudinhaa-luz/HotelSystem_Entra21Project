@@ -28,30 +28,30 @@ namespace PresentationLayer {
 
         private void FormUpdateClient_Load(object sender, EventArgs e) {
 
-            cmbSearch.SelectedIndex = 1;
-            dgvClients.DataSource = clientBLL.GetAllClientsByActive().Data;
+            cmbSearchRoom.SelectedIndex = 1;
+            dgvRooms.DataSource = clientBLL.GetAllClientsByActive().Data;
 
         }
 
         private void dgvClients_SelectionChanged_1(object sender, EventArgs e) {
-            this.txtName.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Name"].Value);
-            this.txtPhoneNumber.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["PhoneNumber1"].Value);
-            this.txtEmail.Text = Convert.ToString(this.dgvClients.CurrentRow.Cells["Email"].Value);
-            this.client.ID = Convert.ToInt32(this.dgvClients.CurrentRow.Cells["ID"].Value);
+            this.txtClient.Text = Convert.ToString(this.dgvRooms.CurrentRow.Cells["Name"].Value);
+            //this.txtPhoneNumber.Text = Convert.ToString(this.dgvRooms.CurrentRow.Cells["PhoneNumber1"].Value);
+            this.txtRoom.Text = Convert.ToString(this.dgvRooms.CurrentRow.Cells["Email"].Value);
+            this.client.ID = Convert.ToInt32(this.dgvRooms.CurrentRow.Cells["ID"].Value);
         }
 
         private void button1_Click(object sender, EventArgs e) {
 
-            client.Name = txtName.Text;
-            client.PhoneNumber1 = txtPhoneNumber.Text;
-            client.Email = txtEmail.Text;
+            client.Name = txtClient.Text;
+            //client.PhoneNumber1 = txtPhoneNumber.Text;
+            client.Email = txtRoom.Text;
 
             MessageBox.Show(clientBLL.Update(client).Message);
         }
 
         private void txtSource_TextChanged(object sender, EventArgs e) {
-            search.SearchName = txtSource.Text;
-            dgvClients.DataSource = clientBLL.GetAllClientsByName(search).Data;
+            search.SearchName = txtSourceRoom.Text;
+            dgvRooms.DataSource = clientBLL.GetAllClientsByName(search).Data;
         }
     }
 }

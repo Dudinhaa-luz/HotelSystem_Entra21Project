@@ -58,6 +58,16 @@ namespace BussinesLogicalLayer
             }
             return responseReservations;
         }
+        public QueryResponse<ReservationQueryModel> GetAllReservationsbyExitDate(SearchObject search) {
+            QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsbyExitDate(search);
+            List<ReservationQueryModel> temp = responseReservations.Data;
+            foreach (ReservationQueryModel item in temp) {
+                item.ClientCPF = item.ClientCPF.Insert(3, ".").Insert(7, ".").Insert(12, "-");
+                item.ClientPhoneNumber = item.ClientPhoneNumber.Insert(0, "+").Insert(3, "(").Insert(6, ")").Insert(12, "-");
+            }
+            return responseReservations;
+        }
+
         public QueryResponse<ReservationQueryModel> GetAllReservationsByRoomsNumber(SearchObject search)
         {
             QueryResponse<ReservationQueryModel> responseReservations = reservationDAO.GetAllReservationsByRoomsNumber(search);
