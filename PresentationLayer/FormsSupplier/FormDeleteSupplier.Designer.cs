@@ -35,7 +35,6 @@
             this.txtSource = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
-            this.oi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
@@ -89,8 +88,6 @@
             this.dgvSuppliers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSuppliers.ColumnHeadersHeight = 30;
             this.dgvSuppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvSuppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.oi});
             this.dgvSuppliers.EnableHeadersVisualStyles = false;
             this.dgvSuppliers.GridColor = System.Drawing.Color.SteelBlue;
             this.dgvSuppliers.Location = new System.Drawing.Point(49, 139);
@@ -113,13 +110,6 @@
             this.dgvSuppliers.Size = new System.Drawing.Size(947, 359);
             this.dgvSuppliers.TabIndex = 47;
             this.dgvSuppliers.SelectionChanged += new System.EventHandler(this.dgvSuppliers_SelectionChanged);
-            // 
-            // oi
-            // 
-            this.oi.HeaderText = "ytu";
-            this.oi.MinimumWidth = 6;
-            this.oi.Name = "oi";
-            this.oi.Width = 125;
             // 
             // btnDelete
             // 
@@ -178,6 +168,5 @@
         private System.Windows.Forms.DataGridView dgvSuppliers;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oi;
     }
 }
