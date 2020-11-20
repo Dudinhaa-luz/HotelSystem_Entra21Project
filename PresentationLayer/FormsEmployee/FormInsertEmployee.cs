@@ -26,7 +26,7 @@ namespace PresentationLayer {
             employee.CPF = txtCPF.Text;
             employee.Address = txtAddress.Text;
             employee.Email = txtEmail.Text;
-            employee.Password = txtPassword.Text;
+            employee.Password = employeeBLL.EncryptPassword(txtPassword.Text);
             employee.PhoneNumber = txtPhoneNumber1.Text;
             if (cbAdm.Checked) {
                 employee.IsAdm = true;

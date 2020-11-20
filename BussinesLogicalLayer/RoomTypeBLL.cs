@@ -27,22 +27,6 @@ namespace BussinesLogicalLayer {
             return response;
         }
 
-        public Response UpdateDescription(RoomType item) {
-            Response response = new Response();
-            if (response.Success) {
-                return roomTypeDAO.UpdateDescription(item);
-            }
-            return response;
-        }
-
-        public Response Delete(RoomType item) {
-            Response response = new Response();
-            if (response.Success) {
-                return roomTypeDAO.Delete(item);
-            }
-            return response;
-        }
-
         public QueryResponse<RoomType> GetAllRoomsType() {
             QueryResponse<RoomType> responseProducts = roomTypeDAO.GetAllRoomsType();
             List<RoomType> temp = responseProducts.Data;
@@ -73,14 +57,15 @@ namespace BussinesLogicalLayer {
             return responseProducts;
         }
 
-        public SingleResponse<RoomType> GetById(int id) {
-            SingleResponse<RoomType> responseProducts = roomTypeDAO.GetById(id);
+        public QueryResponse<RoomType> GetById(int id) {
+            QueryResponse<RoomType> responseProducts = roomTypeDAO.GetById(id);
 
-            RoomType room = new RoomType();
-
-            room.Value.ToString("C2");
-            room.DailyValue.ToString("C2");
-
+            List<RoomType> temp = responseProducts.Data;
+            foreach (RoomType item in temp)
+            {
+                item.Value.ToString("C2");
+                item.DailyValue.ToString("C2");
+            }
             return responseProducts;
         }
 

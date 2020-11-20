@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BussinesLogicalLayer;
+using Common;
+using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,18 +26,6 @@ namespace PresentationLayer
 
         private void btnClose_Click(object sender, EventArgs e) {
             Application.Exit();
-        }
-
-        private void btnMaximize_Click(object sender, EventArgs e) {
-            this.WindowState = FormWindowState.Maximized;
-            btnMaximize.Visible = false;
-            btnRestore.Visible = true;
-        }
-
-        private void btnRestore_Click(object sender, EventArgs e) {
-            this.WindowState = FormWindowState.Normal;
-            btnMaximize.Visible = true;
-            btnRestore.Visible = false;
         }
 
         private void btnMinimize_Click(object sender, EventArgs e) {
@@ -82,15 +73,27 @@ namespace PresentationLayer
         {
             OpenForm(new FormEmployee());
         }
-
+        
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
             OpenForm(new FormSupplier());
         }
-
-        private void btnReservations_Click(object sender, EventArgs e) {
+        private void FormMainMenu_Load(object sender, EventArgs e)
+        {
+            lblEmployeeName.Text = SystemParameters.EmployeeName;
+            if (SystemParameters.EmployeeADM)
+            {
+                this.btnEmployees.Visible = true;
+            }
+            else
+            {
+                this.panel17.Visible = false;
+                this.btnEmployees.Visible = false;
+            }
+        }
+        private void btnReservations_Click(object sender, EventArgs e)
+        {
             OpenForm(new FormReservation());
-
         }
     }
 }

@@ -35,8 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dgvTypesRoom = new System.Windows.Forms.DataGridView();
             this.txtSource = new System.Windows.Forms.TextBox();
-            this.txtIDRoomType = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypesRoom)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(361, 122);
+            this.label3.Location = new System.Drawing.Point(357, 161);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(162, 21);
             this.label3.TabIndex = 22;
@@ -109,31 +109,31 @@
             // txtSource
             // 
             this.txtSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSource.Location = new System.Drawing.Point(529, 120);
+            this.txtSource.Location = new System.Drawing.Point(525, 159);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(184, 26);
             this.txtSource.TabIndex = 24;
             this.txtSource.TextChanged += new System.EventHandler(this.txtSource_TextChanged);
             // 
-            // txtIDRoomType
-            // 
-            this.txtIDRoomType.Enabled = false;
-            this.txtIDRoomType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIDRoomType.Location = new System.Drawing.Point(529, 150);
-            this.txtIDRoomType.Name = "txtIDRoomType";
-            this.txtIDRoomType.Size = new System.Drawing.Size(38, 26);
-            this.txtIDRoomType.TabIndex = 25;
-            this.txtIDRoomType.Visible = false;
-            // 
             // txtDescription
             // 
             this.txtDescription.Enabled = false;
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(573, 150);
+            this.txtDescription.Location = new System.Drawing.Point(525, 122);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(38, 26);
-            this.txtDescription.TabIndex = 26;
-            this.txtDescription.Visible = false;
+            this.txtDescription.Size = new System.Drawing.Size(180, 26);
+            this.txtDescription.TabIndex = 25;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(432, 124);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 21);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Descrição";
             // 
             // FormInsertRoom
             // 
@@ -142,7 +142,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1040, 532);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.txtIDRoomType);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtSource);
             this.Controls.Add(this.dgvTypesRoom);
             this.Controls.Add(this.label3);
@@ -170,7 +170,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvTypesRoom;
         private System.Windows.Forms.TextBox txtSource;
-        private System.Windows.Forms.TextBox txtIDRoomType;
         private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.Label label4;
     }
 }

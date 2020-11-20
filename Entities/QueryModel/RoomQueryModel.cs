@@ -15,6 +15,7 @@ namespace Entities.QueryModel
         public string TypeRoomDescription { get; set; }
         public double TypeRoomDailyValue { get; set; }
         public int TypeRoomGuestNumber { get; set; }
+        public int TypeRoomIsActive { get; set; }
 
     }
 }

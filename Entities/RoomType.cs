@@ -11,5 +11,7 @@ namespace Entities {
         public double Value { get; set; }
         public double DailyValue { get; set; }
         public int GuestNumber { get; set; }
+        public bool Active { get; set; }
+
     }
 }
