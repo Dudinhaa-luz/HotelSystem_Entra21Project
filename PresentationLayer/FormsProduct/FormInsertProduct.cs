@@ -22,9 +22,11 @@ namespace PresentationLayer {
         {
             product.Name = txtName.Text;
             product.Description = txtDescription.Text;
-            product.Price = Convert.ToDouble(txtPrice.Text);
             product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
             product.Validity = dtpValidity.Value;
+            product.Price = Convert.ToDouble(txtPrice.Text);
+            product.Price = productBLL.ProfitMarginCalculation(product);
+
             MessageBox.Show(productBLL.Insert(product).Message);
         }
     }

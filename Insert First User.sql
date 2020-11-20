@@ -1,0 +1,2 @@
+﻿INSERT INTO EMPLOYEES (NOME, CPF, RG, ENDERECO, TELEFONE, EMAIL, SENHA, ISADM, ISATIVO)
+VALUES ('Administrador', '99999999999', '9999999', 'Usuário Teste', '9999999999', 'adm@administrador.com', '123456', 1, 1)

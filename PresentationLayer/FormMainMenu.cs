@@ -95,5 +95,9 @@ namespace PresentationLayer
         {
             OpenForm(new FormReservation());
         }
+
+        private void btnCheckin_Click(object sender, EventArgs e) {
+            OpenForm(new FormCheckIn());
+        }
     }
 }

@@ -41,27 +41,6 @@ namespace BussinesLogicalLayer
             return base.Validate(item);
         }
 
-        public QueryResponse<ProductIncomeDetail> LinkProductIncomeDetailToProductIncome(ProductIncomeDetail productIncomeDetail, ProductIncome productIncome) {
-
-            QueryResponse<ProductIncomeDetail> response = new QueryResponse<ProductIncomeDetail>();
-
-            if (productIncome.Items.Count > 0) {
-
-                foreach (var item in productIncome.Items) {
-
-                    if (item.IDProductIncome == productIncome.ID) {
-                        response.Success = false;
-                        response.Message = "Produto já vinculado";
-                        return response;
-                    }
-                }
-            }
-            productIncome.Items.Add(productIncomeDetail);
-            response.Success = true;
-            response.Message = "Produto vinculado com sucesso!";
-
-            return response;
-        }
 
     }
 }

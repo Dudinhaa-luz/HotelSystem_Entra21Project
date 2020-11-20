@@ -50,8 +50,6 @@ namespace PresentationLayer
             this.btnCheckout = new System.Windows.Forms.Button();
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnCheckin = new System.Windows.Forms.Button();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.btnSales = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnSuppliers = new System.Windows.Forms.Button();
@@ -157,8 +155,6 @@ namespace PresentationLayer
             this.panel7.Controls.Add(this.btnCheckout);
             this.panel7.Controls.Add(this.panel14);
             this.panel7.Controls.Add(this.btnCheckin);
-            this.panel7.Controls.Add(this.panel12);
-            this.panel7.Controls.Add(this.btnSales);
             this.panel7.Controls.Add(this.panel10);
             this.panel7.Controls.Add(this.panel9);
             this.panel7.Controls.Add(this.btnSuppliers);
@@ -219,7 +215,7 @@ namespace PresentationLayer
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel2.Location = new System.Drawing.Point(0, 500);
+            this.panel2.Location = new System.Drawing.Point(0, 453);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(8, 45);
             this.panel2.TabIndex = 20;
@@ -235,7 +231,7 @@ namespace PresentationLayer
             this.btnFilter.ForeColor = System.Drawing.Color.White;
             this.btnFilter.Image = global::PresentationLayer.Properties.Resources.simbolo_de_ferramenta_preenchido_com_filtro;
             this.btnFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFilter.Location = new System.Drawing.Point(6, 500);
+            this.btnFilter.Location = new System.Drawing.Point(6, 453);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(208, 45);
             this.btnFilter.TabIndex = 19;
@@ -245,7 +241,7 @@ namespace PresentationLayer
             // panel17
             // 
             this.panel17.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel17.Location = new System.Drawing.Point(0, 553);
+            this.panel17.Location = new System.Drawing.Point(0, 506);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(8, 45);
             this.panel17.TabIndex = 18;
@@ -253,7 +249,7 @@ namespace PresentationLayer
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel1.Location = new System.Drawing.Point(0, 454);
+            this.panel1.Location = new System.Drawing.Point(0, 407);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(8, 38);
             this.panel1.TabIndex = 18;
@@ -269,7 +265,7 @@ namespace PresentationLayer
             this.btnEmployees.ForeColor = System.Drawing.Color.White;
             this.btnEmployees.Image = global::PresentationLayer.Properties.Resources.Funcionário;
             this.btnEmployees.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEmployees.Location = new System.Drawing.Point(6, 553);
+            this.btnEmployees.Location = new System.Drawing.Point(6, 506);
             this.btnEmployees.Name = "btnEmployees";
             this.btnEmployees.Size = new System.Drawing.Size(214, 45);
             this.btnEmployees.TabIndex = 17;
@@ -288,7 +284,7 @@ namespace PresentationLayer
             this.btnReservations.ForeColor = System.Drawing.Color.White;
             this.btnReservations.Image = global::PresentationLayer.Properties.Resources.Reservas1;
             this.btnReservations.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReservations.Location = new System.Drawing.Point(6, 454);
+            this.btnReservations.Location = new System.Drawing.Point(6, 407);
             this.btnReservations.Name = "btnReservations";
             this.btnReservations.Size = new System.Drawing.Size(214, 38);
             this.btnReservations.TabIndex = 17;
@@ -299,7 +295,7 @@ namespace PresentationLayer
             // panel15
             // 
             this.panel15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel15.Location = new System.Drawing.Point(0, 409);
+            this.panel15.Location = new System.Drawing.Point(0, 362);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(8, 38);
             this.panel15.TabIndex = 16;
@@ -315,7 +311,7 @@ namespace PresentationLayer
             this.btnCheckout.ForeColor = System.Drawing.Color.White;
             this.btnCheckout.Image = global::PresentationLayer.Properties.Resources.Checkout;
             this.btnCheckout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCheckout.Location = new System.Drawing.Point(6, 409);
+            this.btnCheckout.Location = new System.Drawing.Point(6, 362);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(214, 38);
             this.btnCheckout.TabIndex = 15;
@@ -325,7 +321,7 @@ namespace PresentationLayer
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel14.Location = new System.Drawing.Point(0, 365);
+            this.panel14.Location = new System.Drawing.Point(0, 318);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(8, 38);
             this.panel14.TabIndex = 14;
@@ -341,38 +337,13 @@ namespace PresentationLayer
             this.btnCheckin.ForeColor = System.Drawing.Color.White;
             this.btnCheckin.Image = global::PresentationLayer.Properties.Resources.CheckinCerto;
             this.btnCheckin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCheckin.Location = new System.Drawing.Point(6, 365);
+            this.btnCheckin.Location = new System.Drawing.Point(6, 318);
             this.btnCheckin.Name = "btnCheckin";
             this.btnCheckin.Size = new System.Drawing.Size(214, 38);
             this.btnCheckin.TabIndex = 13;
             this.btnCheckin.Text = "   Check-In";
             this.btnCheckin.UseVisualStyleBackColor = false;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.panel12.Location = new System.Drawing.Point(0, 319);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(8, 38);
-            this.panel12.TabIndex = 10;
-            // 
-            // btnSales
-            // 
-            this.btnSales.BackColor = System.Drawing.Color.Black;
-            this.btnSales.FlatAppearance.BorderSize = 0;
-            this.btnSales.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnSales.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnSales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSales.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSales.ForeColor = System.Drawing.Color.White;
-            this.btnSales.Image = global::PresentationLayer.Properties.Resources.Vendas1;
-            this.btnSales.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSales.Location = new System.Drawing.Point(6, 319);
-            this.btnSales.Name = "btnSales";
-            this.btnSales.Size = new System.Drawing.Size(214, 38);
-            this.btnSales.TabIndex = 9;
-            this.btnSales.Text = "Vendas";
-            this.btnSales.UseVisualStyleBackColor = false;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
             // 
             // panel10
             // 
@@ -632,8 +603,6 @@ namespace PresentationLayer
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Button btnCheckin;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Button btnSales;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button btnSuppliers;

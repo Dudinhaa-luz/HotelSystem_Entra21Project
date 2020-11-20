@@ -129,30 +129,6 @@ namespace BussinesLogicalLayer
             return base.Validate(item);
         }
 
-        public QueryResponse<Product> LinkProductToSupplier(Product product, Supplier supplier) {
-
-            QueryResponse<Product> response = new QueryResponse<Product>();
-
-            if (supplier.Items.Count > 0) 
-            {
-
-                foreach (var item in supplier.Items) 
-                {
-
-                    if (item.ID == product.ID) 
-                    {
-                        response.Success = false;
-                        response.Message = "Produto já vinculado";
-                        return response;
-                    } 
-                }
-            } 
-                supplier.Items.Add(product);
-                response.Success = true;
-                response.Message = "Produto vinculado com sucesso!";
-
-            return response;
-        }
 
     }
 }

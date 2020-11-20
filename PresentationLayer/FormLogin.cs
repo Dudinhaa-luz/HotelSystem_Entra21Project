@@ -81,16 +81,23 @@ namespace PresentationLayer {
         }
         private void btnAccess_Click(object sender, EventArgs e)
         {
-            
-            Response response = employeeBLL.CheckPassword(txtUser.Text, employeeBLL.EncryptPassword(txtPassword.Text));
-            if (response.Success)
-            {
-                OpenForm(new FormMainMenu());
-                this.Visible = false;
-            }
-            else
-            {
-                MessageBox.Show(response.Message);
+            if (txtUser.Text == "adm@administrador.com") {
+                Response response = employeeBLL.CheckPassword(txtUser.Text, txtPassword.Text);
+                if (response.Success) {
+                    OpenForm(new FormMainMenu());
+                    this.Visible = false;
+                } else {
+                    MessageBox.Show(response.Message);
+                }
+            } 
+            else {
+                Response response = employeeBLL.CheckPassword(txtUser.Text, employeeBLL.EncryptPassword(txtPassword.Text));
+                if (response.Success) {
+                    OpenForm(new FormMainMenu());
+                    this.Visible = false;
+                } else {
+                    MessageBox.Show(response.Message);
+                }
             }
         }
     }
