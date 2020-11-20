@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.btnInsertProductsIncomeDetail = new System.Windows.Forms.Button();
-            this.dgvProductsLink = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
@@ -50,14 +49,12 @@
             this.txtIDSupplier = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.txtNameProduct = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductsLink)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertProduct)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,17 +84,6 @@
             this.btnInsertProductsIncomeDetail.Text = "INSERIR";
             this.btnInsertProductsIncomeDetail.UseVisualStyleBackColor = false;
             this.btnInsertProductsIncomeDetail.Click += new System.EventHandler(this.btnInsertProductsIncomeDetail_Click);
-            // 
-            // dgvProductsLink
-            // 
-            this.dgvProductsLink.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductsLink.Location = new System.Drawing.Point(15, 348);
-            this.dgvProductsLink.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvProductsLink.Name = "dgvProductsLink";
-            this.dgvProductsLink.RowHeadersWidth = 51;
-            this.dgvProductsLink.RowTemplate.Height = 24;
-            this.dgvProductsLink.Size = new System.Drawing.Size(500, 395);
-            this.dgvProductsLink.TabIndex = 38;
             // 
             // label4
             // 
@@ -163,7 +149,7 @@
             // dgvInsertProduct
             // 
             this.dgvInsertProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInsertProduct.Location = new System.Drawing.Point(601, 348);
+            this.dgvInsertProduct.Location = new System.Drawing.Point(612, 326);
             this.dgvInsertProduct.Margin = new System.Windows.Forms.Padding(2);
             this.dgvInsertProduct.Name = "dgvInsertProduct";
             this.dgvInsertProduct.RowHeadersWidth = 51;
@@ -180,7 +166,7 @@
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFinish.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnFinish.Location = new System.Drawing.Point(743, 698);
+            this.btnFinish.Location = new System.Drawing.Point(735, 680);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(296, 45);
             this.btnFinish.TabIndex = 47;
@@ -196,7 +182,7 @@
             this.cmbSearch.Items.AddRange(new object[] {
             "Nome",
             "ID"});
-            this.cmbSearch.Location = new System.Drawing.Point(940, 315);
+            this.cmbSearch.Location = new System.Drawing.Point(955, 293);
             this.cmbSearch.Name = "cmbSearch";
             this.cmbSearch.Size = new System.Drawing.Size(186, 28);
             this.cmbSearch.TabIndex = 50;
@@ -204,7 +190,7 @@
             // txtSource
             // 
             this.txtSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSource.Location = new System.Drawing.Point(772, 317);
+            this.txtSource.Location = new System.Drawing.Point(783, 295);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(166, 26);
             this.txtSource.TabIndex = 48;
@@ -215,7 +201,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(619, 319);
+            this.label3.Location = new System.Drawing.Point(630, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 21);
             this.label3.TabIndex = 49;
@@ -299,17 +285,6 @@
             this.label10.TabIndex = 58;
             this.label10.Text = "Fornecedor";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(125, 304);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(253, 36);
-            this.label11.TabIndex = 60;
-            this.label11.Text = "Itens no carrinho";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -386,7 +361,6 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtIDSupplier);
@@ -406,14 +380,12 @@
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dgvProductsLink);
             this.Controls.Add(this.btnInsertProductsIncomeDetail);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "txtName";
             this.Text = "2";
             this.Load += new System.EventHandler(this.FormInsertEntryProduct_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductsLink)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInsertProduct)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -424,7 +396,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnInsertProductsIncomeDetail;
-        private System.Windows.Forms.DataGridView dgvProductsLink;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPrice;
@@ -444,7 +415,6 @@
         private System.Windows.Forms.TextBox txtIDSupplier;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;

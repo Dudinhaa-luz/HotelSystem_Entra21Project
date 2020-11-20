@@ -142,7 +142,7 @@ namespace DataAccessObject
 
             SqlCommand command = new SqlCommand();
             command.CommandText = "SELECT PI.ID, PI.DATAENTRADA, PI.VALORTOTAL, E.ID, E.NOME, E.CPF, S.RAZAOSOCIAL," +
-                                  "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID" +
+                                  "S.CNPJ FROM PRODUCTS_INCOME PI INNER JOIN EMPLOYEES E ON PI.IDFUNCIONARIO = E.ID, " +
                                   "INNER JOIN SUPPLIERS S ON PI.IDFORNECEDOR = S.ID";
 
             command.Connection = connection;

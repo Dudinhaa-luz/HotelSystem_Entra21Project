@@ -24,7 +24,6 @@ namespace PresentationLayer
         ProductBLL productBLL = new ProductBLL();
         ProductIncome productIncome = new ProductIncome();
         ProductIncomeBLL productIncomeBLL = new ProductIncomeBLL();
-        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
         ProductIncomeDetailBLL productIncomeDetailBLL = new ProductIncomeDetailBLL();
         SearchObject search = new SearchObject();
 
@@ -32,10 +31,6 @@ namespace PresentationLayer
             cmbSearch.SelectedIndex = 1;
             if (!(productBLL.GetAllProductsByActive() == null)) {
                 dgvInsertProduct.DataSource = productBLL.GetAllProductsByActive().Data;
-            }
-
-            if (!(productIncome.Items == null)) {
-                dgvProductsLink.DataSource = productIncome.Items;
             }
         }
 
@@ -91,15 +86,14 @@ namespace PresentationLayer
         }
 
         private void btnInsertProductsIncomeDetail_Click(object sender, EventArgs e) {
+            ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
+
             productIncomeDetail.IDProduct = product.ID;
             productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
             productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
 
             productIncome.Items.Add(productIncomeDetail);
-
-            if (productIncomeBLL.GetAllProductIncome().Data != null) {
-                dgvProductsLink.DataSource = productIncomeBLL.GetAllProductIncome().Data;
-            }
+            MessageBox.Show("Produto vinculado com sucesso!");
 
             if (productIncome.Items.Count == 0) {
                 MessageBox.Show("É necessário vincular produtos.");
