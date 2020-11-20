@@ -8,6 +8,9 @@ namespace Entities
 {
     public class ProductIncome
     {
+        public ProductIncome() {
+            Items = new List<ProductIncomeDetail>();
+        }
         public int ID { get; set; }
         public DateTime EntryDate { get; set; }
         public int EmployeesID { get; set; }

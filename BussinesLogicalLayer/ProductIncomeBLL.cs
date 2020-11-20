@@ -29,6 +29,7 @@ namespace BussinesLogicalLayer
 
                 using (TransactionScope scope = new TransactionScope()) {
                     SingleResponse<int> responseInsert = productsIncomeDAO.Insert(item);
+
                     if (responseInsert.Success) {
 
                         for (int i = 0; i < item.Items.Count; i++) {
@@ -66,6 +67,9 @@ namespace BussinesLogicalLayer
             QueryResponse<ProductIncomeQueryModel> responseProductsIncome = productsIncomeDAO.GetAllProductIncome();
 
             List<ProductIncomeQueryModel> temp = responseProductsIncome.Data;
+            if (temp == null) {
+                return responseProductsIncome;
+            }
             foreach (ProductIncomeQueryModel item in temp)
             {
                 item.ProductIncomeTotalValue.ToString("C2");
@@ -79,6 +83,9 @@ namespace BussinesLogicalLayer
             QueryResponse<ProductIncomeQueryModel> responseProductsIncome = productsIncomeDAO.GetAllProductIncomebyEntryDate(search);
 
             List<ProductIncomeQueryModel> temp = responseProductsIncome.Data;
+            if (temp == null) {
+                return responseProductsIncome;
+            }
             foreach (ProductIncomeQueryModel item in temp)
             {
                 item.ProductIncomeTotalValue.ToString("C2");
@@ -92,6 +99,9 @@ namespace BussinesLogicalLayer
             QueryResponse<ProductIncomeQueryModel> responseProductsIncome = productsIncomeDAO.GetAllProductIncomebyEmployeeID(search);
 
             List<ProductIncomeQueryModel> temp = responseProductsIncome.Data;
+            if (temp == null) {
+                return responseProductsIncome;
+            }
             foreach (ProductIncomeQueryModel item in temp)
             {
                 item.ProductIncomeTotalValue.ToString("C2");
@@ -105,6 +115,9 @@ namespace BussinesLogicalLayer
             QueryResponse<ProductIncomeQueryModel> responseProductsIncome = productsIncomeDAO.GetAllProductIncomebySupplierID(search);
 
             List<ProductIncomeQueryModel> temp = responseProductsIncome.Data;
+            if (temp == null) {
+                return responseProductsIncome;
+            }
             foreach (ProductIncomeQueryModel item in temp)
             {
                 item.ProductIncomeTotalValue.ToString("C2");
@@ -129,5 +142,7 @@ namespace BussinesLogicalLayer
             }
             return base.Validate(item);
         }
+
+
     }
 }

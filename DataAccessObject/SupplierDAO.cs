@@ -453,7 +453,7 @@ namespace DataAccessObject {
             connection.ConnectionString = ConnectionHelper.GetConnectionString();
             SqlCommand command = new SqlCommand();
             command.CommandText =
-                "SELECT * FROM SUPPLIERS WHERE ID = @ID";
+                "SELECT RAZAOSOCIAL FROM SUPPLIERS WHERE ID = @ID";
             command.Parameters.AddWithValue("@ID", search.SearchID);
             command.Connection = connection;
             try
