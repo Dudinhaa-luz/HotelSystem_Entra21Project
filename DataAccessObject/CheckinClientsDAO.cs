@@ -29,7 +29,6 @@ namespace DataAccessObject
             command.Parameters.AddWithValue("@IDCLIENTS", checkinClient.ClientID);
             command.Parameters.AddWithValue("@IDROOMS", checkinClient.RoomID);
             command.Parameters.AddWithValue("@IDEMPLOYEES", checkinClient.EmployeesID);
-            command.Parameters.AddWithValue("@ATIVO", true);
 
             command.Connection = connection;
 
@@ -39,50 +38,6 @@ namespace DataAccessObject
                 command.ExecuteNonQuery();
                 response.Success = true;
                 response.Message = "Cadastrado com sucesso.";
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = "Erro no banco de dados, contate o administrador.";
-                response.StackTrace = ex.StackTrace;
-                response.ExceptionError = ex.Message;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return response;
-        }
-
-        public Response Update(CheckinClient checkinClient)
-        {
-            Response response = new Response();
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = ConnectionHelper.GetConnectionString();
-
-            SqlCommand command = new SqlCommand();
-            command.CommandText =
-                "UPDATE CHECKIN_CLIENTS SET IDCLIENTS = @IDCLIENTS, IDROOMS = @IDROOMS, IDEMPLOYEES = @IDEMPLOYEES WHERE ID = @ID";
-            command.Parameters.AddWithValue("@IDCLIENTS", checkinClient.ClientID);
-            command.Parameters.AddWithValue("@IDROOMS", checkinClient.RoomID);
-            command.Parameters.AddWithValue("@IDEMPLOYEES", checkinClient.EmployeesID);
-            command.Parameters.AddWithValue("@ID", checkinClient.ID);
-
-            command.Connection = connection;
-
-            try
-            {
-                connection.Open();
-                int nLinhasAfetadas = command.ExecuteNonQuery();
-                if (nLinhasAfetadas != 1)
-                {
-                    response.Success = false;
-                    response.Message = "Registro não encontrado!";
-                    return response;
-                }
-
-                response.Success = true;
-                response.Message = "Atualizado com sucesso.";
             }
             catch (Exception ex)
             {
