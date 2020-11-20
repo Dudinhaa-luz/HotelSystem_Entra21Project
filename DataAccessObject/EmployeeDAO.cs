@@ -410,10 +410,15 @@ namespace DataAccessObject {
                     employee.PhoneNumber = (string)reader["TELEFONE"];
                     employee.Email = (string)reader["EMAIL"];
                     employee.Address = (string)reader["ENDERECO"];
+                    employee.IsAdm = (bool)reader["ISADM"];
+
+                    response.Success = true;
+                    response.Message = "Dados selecionados com sucesso";
+                    response.Data = employee;
+                    return response;
                 }
-                response.Success = true;
-                response.Message = "Dados selecionados com sucesso";
-                response.Data = employee;
+                response.Success = false;
+                response.Message = "Senha incorreta!";
                 return response;
 
             } catch (Exception ex) {

@@ -191,14 +191,9 @@ namespace BussinesLogicalLayer
             return base.Validate(item);
         }
 
-        private HashAlgorithm _algoritmo;
-
-        public void Hash(HashAlgorithm algoritmo) {
-            _algoritmo = algoritmo;
-        }
-        public string EncryptPassword(string senha) {
-            var encodedValue = Encoding.UTF8.GetBytes(senha);
-            var encryptedPassword = _algoritmo.ComputeHash(encodedValue);
+        public string EncryptPassword(string password) {
+            var encodedValue = Encoding.UTF8.GetBytes(password);
+            var encryptedPassword = MD5.Create().ComputeHash(encodedValue);
 
             var sb = new StringBuilder();
             foreach (var caracter in encryptedPassword) {
@@ -208,31 +203,22 @@ namespace BussinesLogicalLayer
             return sb.ToString();
         }
 
-        public QueryResponse<Employee> CheckPassword(string senha, string email) {
+        public SingleResponse<Employee> CheckPassword(string email, string senha) {
 
-            QueryResponse<Employee> response = new QueryResponse<Employee>();
-            EmployeeDAO employee = new EmployeeDAO();
-
-            if (string.IsNullOrEmpty(senha))
-                throw new NullReferenceException("Cadastre uma senha.");
-
-            var encryptedPassword = _algoritmo.ComputeHash(Encoding.UTF8.GetBytes(senha));
-
-            var sb = new StringBuilder();
-
-            foreach (var caractere in encryptedPassword) {
-                sb.Append(caractere.ToString("X2"));
+            SingleResponse<Employee> response = employeeDAO.GetEmployeeByLogin(email, senha);
+            if (!response.Success)
+            {
+                response.Message = "Email ou senha incorreta";
+                response.Success = false;
             }
-
-
-            if (employee.GetEmployeeByLogin(email, senha).Success) {
-
-                SystemParameter.CurrentEmploye = employee.GetEmployeeByLogin(email, senha).Data;
+            else
+            {
+                SystemParameters.EmployeeName = response.Data.Name;
+                SystemParameters.EmployeeADM = response.Data.IsAdm;
+                response.Success = true;
             }
-            response.Message = "Senha incorreta";
-
             return response;
+
         }
     }
-
 }

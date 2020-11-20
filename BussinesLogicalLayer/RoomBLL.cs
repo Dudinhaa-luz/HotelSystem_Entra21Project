@@ -12,11 +12,20 @@ namespace BussinesLogicalLayer {
     public class RoomBLL : BaseValidator<Room> {
 
         private RoomDAO roomDAO = new RoomDAO();
-
-        public Response Insert(Room item) {
+        public Response Insert(Room item, SearchObject search) {
             Response response = Validate(item);
             if (response.Success) {
-                return roomDAO.Insert(item);
+                {
+                    SingleResponse<Room> responseRooms = GetNumbersRooms(search);
+                    if (responseRooms.Success)
+                    {
+                        response.Message = "Número do quarto já cadastrado!";
+                    }
+                    else
+                    {
+                        return roomDAO.Insert(item);
+                    }
+                }
             }
             return response;
         }
@@ -27,28 +36,24 @@ namespace BussinesLogicalLayer {
             }
             return response;
         }
-
         public QueryResponse<RoomQueryModel> GetAllRoomsAvailable() {
             QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsAvailable();
             List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
-
         public QueryResponse<RoomQueryModel> GetAllRoomsOccupy() {
             QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsOccupy();
             List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
-
         public QueryResponse<RoomQueryModel> GetAllRoomsByNumberRoom(SearchObject search) {
             QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllRoomsByNumberRoom(search);
             List<RoomQueryModel> temp = responseRooms.Data;
 
             return responseRooms;
         }
-
         public QueryResponse<RoomQueryModel> GetAllOccuppyRoomsByNumberRoom(SearchObject search) {
             QueryResponse<RoomQueryModel> responseRooms = roomDAO.GetAllOccuppyRoomsByNumberRoom(search);
             List<RoomQueryModel> temp = responseRooms.Data;
@@ -62,14 +67,12 @@ namespace BussinesLogicalLayer {
             
             return responseRooms;
         }
-
         public SingleResponse<RoomQueryModel> GetById(int id) {
 
             SingleResponse<RoomQueryModel> responseRooms = roomDAO.GetById(id);
 
             return responseRooms;
         }
-
         public SingleResponse<Room> GetRoomTypeIDByRoomID(int id)
         {
 
@@ -82,6 +85,11 @@ namespace BussinesLogicalLayer {
 
             SingleResponse<Room> responseRooms = roomDAO.GetRoomTypeIDByDescription(description);
 
+            return responseRooms;
+        }
+        public SingleResponse<Room> GetNumbersRooms(SearchObject search)
+        {
+            SingleResponse<Room> responseRooms = roomDAO.GetNumbersRooms(search);
             return responseRooms;
         }
 
@@ -100,7 +108,7 @@ namespace BussinesLogicalLayer {
             if (item.IDRoomType == 0) {
                 AddError("O tipo do quarto deve ser informado");
             }
-
+            
             return base.Validate(item);
         }
 

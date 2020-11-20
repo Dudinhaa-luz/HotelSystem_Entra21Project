@@ -26,18 +26,19 @@ namespace PresentationLayer {
 
         private void btnInsert_Click(object sender, EventArgs e) {
             room.NumberRoom = txtNumber.Text;
-            Response r = rommBLL.Insert(room);
-            MessageBox.Show(r.Message);
+            searchObject.SearchNumberRoom = room.NumberRoom;
+            Response response = rommBLL.Insert(room, searchObject);
+            MessageBox.Show(response.Message);
         }
         private void FormInsertRoom_Load(object sender, EventArgs e)
         {
-            dgvTypesRoom.DataSource = roomTypeBLL.GetAllRoomsTypeByDescription(searchObject).Data;
+            dgvTypesRoom.DataSource = roomTypeBLL.GetAllRoomsType().Data;
         }
         private void txtSource_TextChanged(object sender, EventArgs e)
         {
             if (txtSource.Text == "")
             {
-                dgvTypesRoom.DataSource = roomTypeBLL.GetAllRoomsTypeByDescription(searchObject).Data;
+                dgvTypesRoom.DataSource = roomTypeBLL.GetAllRoomsType().Data;
                 return;
             }
             else

@@ -84,7 +84,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES, RT.ID FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "RT.QTDHOSPEDES, RT.ISATIVO, RT.ID FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
                 "R.IDROOMS_TYPE = RT.ID WHERE R.ISOCUPADO = 0";
             command.Connection = connection;
             try {
@@ -100,6 +100,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
                     room.RoomTypeID = (int)reader["ID"];
 
                     rooms.Add(room);
@@ -127,7 +128,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "RT.QTDHOSPEDES, RT.ISATIVO FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
                 "R.IDROOM_TYPE = RT.ID WHERE R.ISOCUPADO = 0";
             command.Connection = connection;
             try {
@@ -143,6 +144,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -169,7 +171,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "RT.QTDHOSPEDES, RT.ISATIVO FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
                 "R.IDROOM_TYPE = RT.ID WHERE R.NUMEROQUARTO LIKE %NUMEROQUARTO% = @NUMEROQUARTO";
 
             command.Parameters.AddWithValue("@NUMEROQUARTO", search.SearchNumberRoom);
@@ -188,6 +190,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -214,7 +217,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "RT.QTDHOSPEDES, RT.ISATIVO FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
                 "R.IDROOM_TYPE = RT.ID WHERE R.NUMEROQUARTO LIKE NUMEROQUARTO = @NUMEROQUARTO AND R.ISOCUPADO = 1";
 
             command.Parameters.AddWithValue("@NUMEROQUARTO", "%" + search.SearchNumberRoom + "%");
@@ -233,6 +236,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -251,7 +255,6 @@ namespace DataAccessObject {
             }
         }
 
-
         public SingleResponse<RoomQueryModel> GetById(int id) {
             SingleResponse<RoomQueryModel> response = new SingleResponse<RoomQueryModel>();
 
@@ -260,7 +263,7 @@ namespace DataAccessObject {
             SqlCommand command = new SqlCommand();
             command.CommandText =
                 "SELECT R.ID, R.NUMEROQUARTO, R.ISOCUPADO, RT.DESCRICAO, RT.VALORDIARIA, " +
-                "RT.QTDHOSPEDES FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
+                "RT.QTDHOSPEDES, RT.ISATIVO FROM ROOMS R INNER JOIN ROOMS_TYPE RT ON " +
                 "R.IDROOM_TYPE = RT.ID WHERE R.ID = @ID";
             command.Parameters.AddWithValue("@ID", id);
             command.Connection = connection;
@@ -277,6 +280,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
+                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
 
                     response.Message = "Dados selecionados com sucesso.";
                     response.Success = true;
@@ -341,6 +345,52 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
+        public SingleResponse<Room> GetNumbersRooms(SearchObject search)
+        {
+            SingleResponse<Room> response = new SingleResponse<Room>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT * FROM ROOMS WHERE NUMEROQUARTO = @NUMEROQUARTO";
+            command.Parameters.AddWithValue("@NUMEROQUARTO", search.SearchNumberRoom);
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Room room = new Room();
+
+                    room.NumberRoom = (string)reader["NUMEROQUARTO"];
+
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = room;
+                    return response;
+                }
+                response.Message = "Número do quarto não encontrado.";
+                response.Success = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public SingleResponse<Room> GetRoomTypeIDByDescription(string description)
         {
             SingleResponse<Room> response = new SingleResponse<Room>();
@@ -386,6 +436,7 @@ namespace DataAccessObject {
                 connection.Close();
             }
         }
+
         public QueryResponse<RoomType> GetRoomTypeDescription()
         {
             QueryResponse<RoomType> response = new QueryResponse<RoomType>();
