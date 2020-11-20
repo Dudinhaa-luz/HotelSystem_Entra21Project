@@ -138,6 +138,18 @@ namespace BussinesLogicalLayer
             return responseEmployees;
         }
 
+        public SingleResponse<Employee> GetNameByEmployeeID(SearchObject search) {
+            SingleResponse<Employee> responseEmployees = employeeDAO.GetNameByEmployeeID(search);
+
+            return responseEmployees;
+        }
+
+        public SingleResponse<Employee> GetIDByEmployeeName(SearchObject search) {
+            SingleResponse<Employee> responseEmployees = employeeDAO.GetIDByEmployeeName(search);
+
+            return responseEmployees;
+        }
+
         public Response IsADM(Employee item)
         {
             Response response = new Response();

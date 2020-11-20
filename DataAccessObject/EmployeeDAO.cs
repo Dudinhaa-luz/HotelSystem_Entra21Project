@@ -497,6 +497,83 @@ namespace DataAccessObject {
             }
         }
 
+        public SingleResponse<Employee> GetNameByEmployeeID(SearchObject search) {
+
+            SingleResponse<Employee> response = new SingleResponse<Employee>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT NOME FROM EMPLOYEES WHERE ID = @ID";
+            command.Parameters.AddWithValue("@ID", search.SearchID);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    Employee employee = new Employee();
+
+                    employee.Name = (string)reader["NOME"];
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = employee;
+                    return response;
+                }
+                response.Success = false;
+                response.Message = "Fornecedor não encontrado";
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
+        public SingleResponse<Employee> GetIDByEmployeeName(SearchObject search) {
+
+            SingleResponse<Employee> response = new SingleResponse<Employee>();
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = ConnectionHelper.GetConnectionString();
+            SqlCommand command = new SqlCommand();
+            command.CommandText =
+                "SELECT ID FROM EMPLOYEES WHERE NOME = @NOME";
+            command.Parameters.AddWithValue("@NOME", search.SearchID);
+            command.Connection = connection;
+            try {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read()) {
+                    Employee employee = new Employee();
+
+                    employee.Name = (string)reader["ID"];
+                    response.Message = "Dados selecionados com sucesso.";
+                    response.Success = true;
+                    response.Data = employee;
+                    return response;
+                }
+                response.Success = false;
+                response.Message = "Fornecedor não encontrado";
+                return response;
+            } catch (Exception ex) {
+                response.Success = false;
+                response.Message = "Erro no banco de dados, contate o adm.";
+                response.ExceptionError = ex.Message;
+                response.StackTrace = ex.StackTrace;
+                return response;
+            } finally {
+                connection.Close();
+            }
+        }
+
+
     }
 
 }

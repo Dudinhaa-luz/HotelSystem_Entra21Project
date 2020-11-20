@@ -13,77 +13,103 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class FormInsertEntryProduct : Form
-    {
-        public FormInsertEntryProduct()
-        {
+    public partial class txtName : Form {
+        public txtName() {
             InitializeComponent();
         }
-        ProductIncome productIncome = new ProductIncome();
-        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
+
+        EmployeeBLL employeeBLL = new EmployeeBLL();
+        SupplierBLL supplierBLL = new SupplierBLL();
         Product product = new Product();
         ProductBLL productBLL = new ProductBLL();
-        SupplierBLL supplierBLL = new SupplierBLL();
+        ProductIncome productIncome = new ProductIncome();
         ProductIncomeBLL productIncomeBLL = new ProductIncomeBLL();
+        ProductIncomeDetail productIncomeDetail = new ProductIncomeDetail();
         ProductIncomeDetailBLL productIncomeDetailBLL = new ProductIncomeDetailBLL();
-        Storage storage = new Storage();
-        StorageBLL storageBLL = new StorageBLL();
         SearchObject search = new SearchObject();
 
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            productIncome.EntryDate = dtpEntryDate.Value;
-            //List<ProductIncomeDetail> items = 
-            productIncome.SuppliersID = Convert.ToInt32(txtIDSupplier.Text);
+        private void FormInsertEntryProduct_Load(object sender, EventArgs e) {
+            cmbSearch.SelectedIndex = 1;
+            if (!(productBLL.GetAllProductsByActive() == null)) {
+                dgvInsertProduct.DataSource = productBLL.GetAllProductsByActive().Data;
+            }
+
+            if (!(productIncome.Items == null)) {
+                dgvProductsLink.DataSource = productIncome.Items;
+            }
+        }
+
+        private void txtIDEmployee_Leave(object sender, EventArgs e) {
+            if (txtIDEmployee.Text != "") {
+                search.SearchID = Convert.ToInt32(txtIDEmployee.Text);
+                txtNameEmployee.Text = employeeBLL.GetNameByEmployeeID(search).Data.Name;
+            }
+        }
+
+        private void txtIDSupplier_Leave(object sender, EventArgs e) {
+            if (txtIDSupplier.Text != "") {
+                search.SearchID = Convert.ToInt32(txtIDSupplier.Text);
+                txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search).Data.CompanyName;
+            }
+        }
+
+
+        private void txtNameSupplier_Leave(object sender, EventArgs e) {
+
+            if (txtNameSupplier.Text != "") {
+                search.SearchName = txtNameSupplier.Text;
+                txtIDSupplier.Text = Convert.ToString(supplierBLL.GetIDSuppliersByCompanyName(search).Data.ID);
+            }
+        }
+
+        private void txtNameEmployee_TextChanged(object sender, EventArgs e) {
+            if (txtNameEmployee.Text != "") {
+                search.SearchName = txtNameEmployee.Text;
+                txtIDEmployee.Text = Convert.ToString(employeeBLL.GetIDByEmployeeName(search).Data.ID);
+            }
+        }
+
+        private void dgvInsertProduct_SelectionChanged(object sender, EventArgs e) {
+            this.txtNameProduct.Text = Convert.ToString(this.dgvInsertProduct.CurrentRow.Cells["Name"].Value);
+            this.txtDescription.Text = Convert.ToString(this.dgvInsertProduct.CurrentRow.Cells["Description"].Value);
+            this.txtPrice.Text = Convert.ToString(this.dgvInsertProduct.CurrentRow.Cells["Price"].Value);
+            this.product.ProfitMargin = Convert.ToDouble(this.dgvInsertProduct.CurrentRow.Cells["ProfitMargin"].Value);
+            this.product.ID = Convert.ToInt32(this.dgvInsertProduct.CurrentRow.Cells["ID"].Value);
+        }
+
+        private void txtSource_TextChanged(object sender, EventArgs e) {
+            if (txtSource.Text == "") {
+                dgvInsertProduct.DataSource = productBLL.GetAllProductsByActive().Data;
+                return;
+            } else if (cmbSearch.Text == "Nome") {
+                search.SearchName = txtSource.Text;
+                dgvInsertProduct.DataSource = productBLL.GetAllProductsByName(search).Data;
+            } else {
+                search.SearchID = Convert.ToInt32(txtSource.Text);
+                dgvInsertProduct.DataSource = productBLL.GetAllProductsByID(search.SearchID).Data;
+            }
+        }
+
+        private void btnInsertProductsIncomeDetail_Click(object sender, EventArgs e) {
+            productIncomeDetail.IDProduct = product.ID;
             productIncomeDetail.Price = Convert.ToDouble(txtPrice.Text);
             productIncomeDetail.Quantity = Convert.ToDouble(txtQuantity.Text);
+
+            productIncome.Items.Add(productIncomeDetail);
+
+            if (productIncomeBLL.GetAllProductIncome().Data != null) {
+                dgvProductsLink.DataSource = productIncomeBLL.GetAllProductIncome().Data;
+            }
+
+            if (productIncome.Items.Count == 0) {
+                MessageBox.Show("É necessário vincular produtos.");
+            }
+        }
+
+        private void btnFinish_Click(object sender, EventArgs e) {
+            productIncome.SuppliersID = Convert.ToInt32(txtIDSupplier.Text);
+
             productIncomeBLL.Insert(productIncome);
-            storage.Quantity = productIncomeDetail.Quantity;
-            storageBLL.AddProduct(productIncomeDetail);
-        }
-        private void FormInsertEntryProduct_Load(object sender, EventArgs e)
-        {
-            dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
-        }
-        private void txtSource_TextChanged(object sender, EventArgs e)
-        {
-         
-             if (cmbSearch.Text == "Nome")
-            {
-                search.SearchName = txtSource.Text;
-                dgvProducts.DataSource = productBLL.GetAllProductsByName(search).Data;
-            }
-            else
-            {
-                if (txtSource.Text == "")
-                {
-                    dgvProducts.DataSource = productBLL.GetAllProductsByActive().Data;
-                    return;
-                }
-                search.SearchID = Convert.ToInt32(txtSource.Text);
-                    dgvProducts.DataSource = productBLL.GetAllProductsByID(search.SearchID).Data;
-            }
-        }
-
-        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
-        {
-            this.txtDescription.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Description"].Value);
-            this.txtPrice.Text = Convert.ToString(this.dgvProducts.CurrentRow.Cells["Price"].Value);
-            this.productIncome.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
-            this.product.ID = Convert.ToInt32(this.dgvProducts.CurrentRow.Cells["ID"].Value);
-        }
-        private void btnFinish_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void txtIDSupplier_TextChanged(object sender, EventArgs e)
-        {
-            search.SearchID = Convert.ToInt32(txtIDSupplier.Text);
-            //txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search.SearchID).Data.ID;
-        }
-        private void dgvProductsEntry_SelectionChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

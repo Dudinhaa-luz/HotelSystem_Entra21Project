@@ -1,4 +1,5 @@
 ﻿using BussinesLogicalLayer;
+using Common;
 using Common.Infrastructure;
 using DataAccessObject;
 using Entities;
@@ -53,7 +54,10 @@ namespace PresentationLayer {
             product.Price = Convert.ToDouble(txtPrice.Text);
             product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
 
-            MessageBox.Show(productBLL.LinkProductToSupplier(product, supplier).Message);
+            List<Product> list = supplier.Items;
+
+            list.Add(product);
+
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e) {
