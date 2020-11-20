@@ -58,6 +58,18 @@
     <Compile Include="FormMainMenu.designer.cs">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsCheckIn\FormCheckIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCheckIn\FormCheckIn.Designer.cs">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCheckIn\FormInsertCheckIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCheckIn\FormInsertCheckIn.Designer.cs">
+      <DependentUpon>FormInsertCheckIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormsClient\FormClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +227,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMainMenu.resx">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCheckIn\FormCheckIn.resx">
+      <DependentUpon>FormCheckIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCheckIn\FormInsertCheckIn.resx">
+      <DependentUpon>FormInsertCheckIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsClient\FormClient.resx">
       <DependentUpon>FormClient.cs</DependentUpon>
@@ -384,8 +402,6 @@
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FormsCheckIn\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

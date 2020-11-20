@@ -100,7 +100,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
+                    room.TypeRoomIsActive = (bool)reader["ISATIVO"];
                     room.RoomTypeID = (int)reader["ID"];
 
                     rooms.Add(room);
@@ -144,7 +144,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
+                    room.TypeRoomIsActive = (bool)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -190,7 +190,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
+                    room.TypeRoomIsActive = (bool)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -236,7 +236,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
+                    room.TypeRoomIsActive = (bool)reader["ISATIVO"];
 
                     rooms.Add(room);
                 }
@@ -280,7 +280,7 @@ namespace DataAccessObject {
                     room.TypeRoomDescription = (string)reader["DESCRICAO"];
                     room.TypeRoomDailyValue = (double)reader["VALORDIARIA"];
                     room.TypeRoomGuestNumber = (int)reader["QTDHOSPEDES"];
-                    room.TypeRoomIsActive = (int)reader["ISATIVO"];
+                    room.TypeRoomIsActive = (bool)reader["ISATIVO"];
 
                     response.Message = "Dados selecionados com sucesso.";
                     response.Success = true;

@@ -15,19 +15,10 @@ namespace BussinesLogicalLayer
         private CheckinClientsDAO checkinClientsDAO = new CheckinClientsDAO();
         public Response Insert(CheckinClient item)
         {
-            Response response = new Response();
+            Response response = Validate(item);
             if (response.Success)
             {
                 return checkinClientsDAO.Insert(item);
-            }
-            return response;
-        }
-        public Response Update(CheckinClient item)
-        {
-            Response response = new Response();
-            if (response.Success)
-            {
-                return checkinClientsDAO.Update(item);
             }
             return response;
         }
