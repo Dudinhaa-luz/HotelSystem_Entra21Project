@@ -38,6 +38,7 @@ namespace PresentationLayer
             if (txtIDEmployee.Text != "") {
                 search.SearchID = Convert.ToInt32(txtIDEmployee.Text);
                 txtNameEmployee.Text = employeeBLL.GetNameByEmployeeID(search).Data.Name;
+                MessageBox.Show(employeeBLL.GetNameByEmployeeID(search).Message);
             }
         }
 
@@ -45,6 +46,8 @@ namespace PresentationLayer
             if (txtIDSupplier.Text != "") {
                 search.SearchID = Convert.ToInt32(txtIDSupplier.Text);
                 txtNameSupplier.Text = supplierBLL.GetCompanyNameSupplierByID(search).Data.CompanyName;
+                MessageBox.Show(supplierBLL.GetCompanyNameSupplierByID(search).Message);
+
             }
         }
 
@@ -54,6 +57,8 @@ namespace PresentationLayer
             if (txtNameSupplier.Text != "") {
                 search.SearchName = txtNameSupplier.Text;
                 txtIDSupplier.Text = Convert.ToString(supplierBLL.GetIDSuppliersByCompanyName(search).Data.ID);
+                MessageBox.Show(supplierBLL.GetIDSuppliersByCompanyName(search).Message);
+                
             }
         }
 
@@ -61,6 +66,7 @@ namespace PresentationLayer
             if (txtNameEmployee.Text != "") {
                 search.SearchName = txtNameEmployee.Text;
                 txtIDEmployee.Text = Convert.ToString(employeeBLL.GetIDByEmployeeName(search).Data.ID);
+                MessageBox.Show(employeeBLL.GetIDByEmployeeName(search).Message);
             }
         }
 

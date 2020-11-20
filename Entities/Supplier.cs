@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Entities {
     public class Supplier {
 
-        //public Supplier() {
-        //    Items = new List<Product>();
-        //}
+        public Supplier() {
+            Items = new List<Product>();
+        }
         public int ID { get; set; }
         public string CompanyName { get; set; }
         public string CNPJ { get; set; }

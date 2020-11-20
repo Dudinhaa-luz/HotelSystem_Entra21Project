@@ -20,7 +20,7 @@ namespace PresentationLayer {
         }
 
         Product product = new Product();
-        public Supplier supplier = new Supplier();
+        Supplier supplier = new Supplier();
         SupplierBLL supplierBLL = new SupplierBLL();
         ProductBLL productBLL = new ProductBLL();
         SearchObject searchObject = new SearchObject();
@@ -49,15 +49,16 @@ namespace PresentationLayer {
         }
 
         private void btnLink_Click(object sender, EventArgs e) {
-            product.Name = txtName.Text;
-            product.Description = txtDescription.Text;
-            product.Price = Convert.ToDouble(txtPrice.Text);
-            product.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
+            Product p = new Product();
 
-            List<Product> list = supplier.Items;
+            p.Name = txtName.Text;
+            p.Description = txtDescription.Text;
+            p.Price = Convert.ToDouble(txtPrice.Text);
+            p.ProfitMargin = Convert.ToDouble(txtProfitMargin.Text);
+            p.ID = product.ID;
 
-            list.Add(product);
-
+                supplier.Items.Add(product);
+                MessageBox.Show("Produto vinculado com sucesso!");
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e) {
